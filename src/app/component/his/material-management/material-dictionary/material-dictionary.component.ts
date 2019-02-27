@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { MaterialDictionaryService } from './material-dictionary.service';
+import { ApiService } from 'src/app/config/api.service';
+
 @Component({
   selector: 'app-material-dictionary',
   templateUrl: './material-dictionary.component.html',
@@ -79,14 +81,6 @@ export class MaterialDictionaryComponent implements OnInit {
       zt: '4'
     }
   ];
-  /** 表单提交时 */
-  onSubmit(): void {
-    console.warn(this.conditionForm.value)
-  }
-  /** 查询表格List数据 */
-  getTableList(): void {
-    this.page
-  }
   /** 弹出新入库弹出框 */
   showAddModal(): void {
     this.addIsVisible = true;
@@ -105,11 +99,15 @@ export class MaterialDictionaryComponent implements OnInit {
   }
   /** 获取材料字典数据 */
   getdrugmaterial(): void {
-    this.materialDictionaryService.getdrugmaterial().subscribe(
-      data => this.dataSet = { ...data }
-    );
+    this.materialDictionaryService.getdrugmaterial(
+      this.apiService.materialUrl['drugmaterial/list']
+    ).subscribe(
+      data => {
+        this.dataSet = data['data'] == null ? [] : data['data']
+      }
+    )
   }
-  constructor(private fb: FormBuilder, private materialDictionaryService: MaterialDictionaryService) { }
+  constructor(private apiService: ApiService, private fb: FormBuilder, private materialDictionaryService: MaterialDictionaryService) { }
 
   ngOnInit(): void {
     this.getdrugmaterial();

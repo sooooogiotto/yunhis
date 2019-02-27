@@ -17,7 +17,7 @@
 
     <nz-form-item>
       <nz-form-control>
-        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+        <button class="blueDefaultBtn" nz-button nzType="default" (click)="getdrugmaterial()">查询</button>
       </nz-form-control>
     </nz-form-item>
 
@@ -44,16 +44,16 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of basicTable.data">
-        <td>{{data.djh}}</td>
-        <td>{{data.rkrq}}</td>
-        <td>{{data.ghs}}</td>
-        <td>{{data.rkzl}}</td>
-        <td>{{data.zbje}}</td>
-        <td>{{data.lsje}}</td>
-        <td>{{data.rkr}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.code}}</td>
+        <td>{{data.specifications}}</td>
+        <td>{{data.licensenumber}}</td>
+        <td>{{data.unit}}</td>
+        <td>{{data.originplace}}</td>
+        <td>{{data.expenseaccount}}</td>
         <td>
-          <div *ngIf="data.zt == '1'" class="status gray">启用</div>
-          <div *ngIf="data.zt == '2'" class="status gray">不启用</div>
+          <div *ngIf="data.status == '1'" class="status gray">启用</div>
+          <div *ngIf="data.status == '2'" class="status gray">不启用</div>
         </td>
         <td>
           <a (click)="showAddModal()">修改</a>
@@ -69,5 +69,5 @@
   </app-material-add-dictionary>
   <app-material-detail-dictionary [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
   </app-material-detail-dictionary>
-  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+  <app-page [page]="page" (changePage)="getdrugmaterial()"></app-page>
 </div>

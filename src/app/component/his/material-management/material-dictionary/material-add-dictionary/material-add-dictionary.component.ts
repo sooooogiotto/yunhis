@@ -15,29 +15,7 @@ export class MaterialAddDictionaryComponent implements OnInit {
     pageSize: 10
   }
   /** confirm */
-  isCheck: boolean = false;
   checkIsVisible: boolean = false;
-
-  dataSet: object = [
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    }
-  ]
 
   constructor() { }
 
@@ -48,12 +26,9 @@ export class MaterialAddDictionaryComponent implements OnInit {
     this.closeAddModal.emit(this.addIsVisible);
   }
   showConfirm(flag: boolean): void {
-    this.isCheck = flag;
-    this.checkIsVisible = true;
   }
 
   closeConfirm(isVisible: boolean): void {
-    this.isCheck = isVisible;
     this.checkIsVisible = isVisible;
   }
 
