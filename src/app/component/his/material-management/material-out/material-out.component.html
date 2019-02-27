@@ -1,0 +1,72 @@
+<div class="childrenContainer">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label>出库日期</nz-form-label>
+      <nz-form-control>
+        <nz-date-picker formControlName="ckrqs"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <span class="formDateCenterSpan">至</span>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-date-picker formControlName="ckrqe"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>领取科室</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="lqks">
+          <nz-option nzValue="请选择" nzLabel="请选择"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="float:right">
+      <nz-form-control>
+        <button nz-button nzType="primary" type="button" (click)="showAddModal()"><i nz-icon type="plus-circle"
+            theme="fill"></i>新出库单</button>
+        <button nz-button nzType="primary" type="button" (click)="showOutOfStockModal()" style="margin-left:12px;"><i
+            nz-icon type="plus-circle" theme="fill"></i>申领出库</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>单据号</th>
+        <th>出库日期</th>
+        <th>领取科室</th>
+        <th>领取人</th>
+        <th>出库人</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.djh}}</td>
+        <td>{{data.ckrq}}</td>
+        <td>{{data.lqks}}</td>
+        <td>{{data.lqr}}</td>
+        <td>{{data.ckr}}</td>
+        <td>
+          <a>修改</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="showDetailModal()">查看</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-material-out-add-modal [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
+  </app-material-out-add-modal>
+  <app-material-out-detail-modal [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
+  </app-material-out-detail-modal>
+  <app-material-out-of-stock-modal [outIsVisible]="outIsVisible" (closeOutModal)="closeOutModal()">
+  </app-material-out-of-stock-modal>
+  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+</div>

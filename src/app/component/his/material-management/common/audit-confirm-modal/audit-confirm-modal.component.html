@@ -1,0 +1,26 @@
+<nz-modal [(nzVisible)]="auditConfirmIsVisible" nzWrapClassName="vertical-center-modal confirm" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="350">
+  <ng-template #modalTitle>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div *ngIf="isPass" style="margin-bottom: 8px;"><i class="orange-icon" nz-icon="" theme="fill"
+        type="exclamation-circle"></i><span class="content">确定通过吗？</span></div>
+    <div *ngIf="isBack" style="margin-bottom: 8px;"><span class="content">请填写驳回原因</span></div>
+    <div *ngIf="isBack && !isSelectedBack"><input type="text" nz-input></div>
+    <div *ngIf="isSelectedBack">
+      <nz-select style="width:100%;">
+        <nz-option nzLabel="缺货" nzValue="1"></nz-option>
+        <nz-option nzLabel="申请错误" nzValue="2"></nz-option>
+        <nz-option nzLabel="重复申领" nzValue="3"></nz-option>
+        <nz-option nzLabel="其他" nzValue="4"></nz-option>
+      </nz-select>
+    </div>
+    <div *ngIf="isPrint" style="margin-left: 31px;"><label nz-checkbox>同时打印入库单</label></div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()">确认</button>
+    <button nz-button nzType="default" (click)="handleCancel()" class="blueDefaultBtn">取消</button>
+  </ng-template>
+</nz-modal>

@@ -1,0 +1,206 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="outIsVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    申领出库
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="materialOutOfStockModal">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+        <nz-form-item>
+          <nz-form-label>出库日期</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>药品名称</nz-form-label>
+          <nz-form-control>
+            <input nz-input type="text">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <nz-tabset [nzTabPosition]="'left'" [nzType]="'line'" nzSelectedIndex="1">
+        <nz-tab [nzTitle]="'申领科室'" [nzDisabled]="true">
+        </nz-tab>
+        <nz-tab [nzTitle]="'门诊药房'">
+          <div>
+            <div class="topButnGroup">
+              <button nz-button nzType="primary">批量发放</button>
+              <button class="orangePrimaryBtn" nz-button nzType="primary" style="margin-left:12px;">批量驳回</button>
+            </div>
+            <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered
+              [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th><label nz-checkbox></label></th>
+                  <th>申领时间</th>
+                  <th>药品名称</th>
+                  <th>规格</th>
+                  <th>单位</th>
+                  <th>库存数</th>
+                  <th>申领数量</th>
+                  <th>发放数量</th>
+                  <th>申领人</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                  <td>
+                    <label nz-checkbox></label>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                    <a>发放</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="showAuditConfirm()" class="back">驳回</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </nz-tab>
+        <nz-tab [nzTitle]="'急诊药房'">
+          <div>
+            <div class="topButnGroup">
+              <button nz-button nzType="primary">批量发放</button>
+              <button class="orangePrimaryBtn" nz-button nzType="primary" style="margin-left:12px;">批量驳回</button>
+            </div>
+            <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered
+              [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th><label nz-checkbox></label></th>
+                  <th>申领时间</th>
+                  <th>药品名称</th>
+                  <th>规格</th>
+                  <th>单位</th>
+                  <th>库存数</th>
+                  <th>申领数量</th>
+                  <th>发放数量</th>
+                  <th>申领人</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                  <td>
+                    <label nz-checkbox></label>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                    <a>发放</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="showAuditConfirm()" class="back">驳回</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </nz-tab>
+        <nz-tab [nzTitle]="'住院药房'">
+          <div>
+            <div class="topButnGroup">
+              <button nz-button nzType="primary">批量发放</button>
+              <button class="orangePrimaryBtn" nz-button nzType="primary" style="margin-left:12px;">批量驳回</button>
+            </div>
+            <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered
+              [nzShowPagination]="false">
+              <thead>
+                <tr>
+                  <th><label nz-checkbox></label></th>
+                  <th>申领时间</th>
+                  <th>药品名称</th>
+                  <th>规格</th>
+                  <th>单位</th>
+                  <th>库存数</th>
+                  <th>申领数量</th>
+                  <th>发放数量</th>
+                  <th>申领人</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let data of basicTable.data">
+                  <td>
+                    <label nz-checkbox></label>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                  </td>
+                  <td>
+                    <a>发放</a>
+                    <nz-divider nzType="vertical"></nz-divider>
+                    <a (click)="showAuditConfirm()" class="back">驳回</a>
+                  </td>
+                </tr>
+              </tbody>
+            </nz-table>
+          </div>
+        </nz-tab>
+      </nz-tabset>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+  </ng-template>
+  <app-audit-confirm-modal [auditConfirmIsVisible]="auditConfirmIsVisible" [isSelectedBack]="isSelectedBack"
+    [isBack]="isBack" (closeConfirm)="closeConfirm()">
+  </app-audit-confirm-modal>
+</nz-modal>

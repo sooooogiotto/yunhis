@@ -1,0 +1,27 @@
+.status {
+  border-radius: 1em;
+  float: left;
+  font-size: 12px;
+  padding: 1px 8px;
+  width: 3em;
+  box-sizing: content-box;
+  text-align: center;
+  margin-left: 0.5rem;
+}
+
+.gray {
+  background: rgba(115, 128, 152, 1);
+  color: #fff;
+}
+.orange {
+  background: rgba(255, 153, 0, 1);
+  color: #fff;
+}
+.green {
+  background: rgba(26, 188, 156, 1);
+  color: #fff;
+}
+.blue {
+  background: #2881d4;
+  color: #fff;
+}

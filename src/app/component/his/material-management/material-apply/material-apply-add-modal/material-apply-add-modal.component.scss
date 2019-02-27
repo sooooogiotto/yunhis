@@ -1,0 +1,25 @@
+nz-form-label {
+  width: 6em;
+}
+.bold {
+  font-weight: bold;
+  span {
+    color: #ff9900;
+    font-size: 1.2rem;
+  }
+}
+::ng-deep .ant-modal-footer {
+  padding-bottom: 2rem;
+}
+.tableInputDiv {
+  text-align: center;
+  width: 100px;
+  input {
+    width: 100%;
+  }
+}
+
+
+::ng-deep .ant-modal-body .ant-table-wrapper {
+  height: 350px;
+}

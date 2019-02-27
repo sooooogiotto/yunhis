@@ -1,0 +1,73 @@
+<div class="childrenContainer">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label>材料名称</nz-form-label>
+      <nz-form-control>
+        <input nz-input type="text" formControlName="ghs">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>状态</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="zt">
+          <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="float:right">
+      <nz-form-control>
+        <button type="button" nz-button nzType="primary" (click)="showAddModal()"><i nz-icon type="plus-circle"
+            theme="fill"></i>新建</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>材料名称</th>
+        <th>材料编码</th>
+        <th>材料规格</th>
+        <th>批准文号</th>
+        <th>生产厂家</th>
+        <th>生产地址</th>
+        <th>费用科目</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.djh}}</td>
+        <td>{{data.rkrq}}</td>
+        <td>{{data.ghs}}</td>
+        <td>{{data.rkzl}}</td>
+        <td>{{data.zbje}}</td>
+        <td>{{data.lsje}}</td>
+        <td>{{data.rkr}}</td>
+        <td>
+          <div *ngIf="data.zt == '1'" class="status gray">启用</div>
+          <div *ngIf="data.zt == '2'" class="status gray">不启用</div>
+        </td>
+        <td>
+          <a (click)="showAddModal()">修改</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="showDetailModal()">查看</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a>删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-material-add-dictionary [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
+  </app-material-add-dictionary>
+  <app-material-detail-dictionary [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
+  </app-material-detail-dictionary>
+  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+</div>

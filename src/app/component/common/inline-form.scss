@@ -1,0 +1,18 @@
+.inline-form-row {
+  margin-bottom: 1rem;
+  label {
+    line-height: 1.9rem;
+    height: 1.9rem;
+    text-align: right;
+    width: 5em;
+    display: inline-block;
+  }
+  .inlineFormGroup {
+    position: absolute;
+    padding-left: 6.5em;
+    width: 100%;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+  }
+}

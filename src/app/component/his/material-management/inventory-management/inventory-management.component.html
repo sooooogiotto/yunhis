@@ -1,0 +1,76 @@
+<div class="childrenContainer">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label>材料名称</nz-form-label>
+      <nz-form-control>
+        <input nz-input type="text" formControlName="ghs">
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>库存状态</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="zt">
+          <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label>排序</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="zt">
+          <nz-option nzValue="库存数量" nzLabel="库存数量" nzSelected></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="bold">
+      材料种类总数&nbsp;<span>102</span>
+    </nz-form-item>
+
+    <nz-form-item class="bold">
+      中标总额&nbsp;<span>10222元</span>
+    </nz-form-item>
+
+    <nz-form-item class="bold">
+      零售总额&nbsp;<span>10222元</span>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+  <nz-table nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>材料名称</th>
+        <th>规格</th>
+        <th>单位</th>
+        <th>库存数量</th>
+        <th>零售金额</th>
+        <th>零售单价</th>
+        <th>中标金额</th>
+        <th>中标单价</th>
+        <th>生产厂商</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.djh}}</td>
+        <td>{{data.rkrq}}</td>
+        <td>{{data.ghs}}</td>
+        <td>{{data.rkzl}}</td>
+        <td>{{data.zbje}}</td>
+        <td>{{data.lsje}}</td>
+        <td>{{data.rkr}}</td>
+        <td>{{data.rkr}}</td>
+        <td>{{data.rkr}}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+</div>

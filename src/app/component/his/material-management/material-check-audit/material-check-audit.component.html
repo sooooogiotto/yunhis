@@ -1,0 +1,129 @@
+<div class="childrenContainer">
+  <nz-tabset>
+    <nz-tab nzTitle="待审核(12)">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="auditConditionForm" (ngSubmit)="onSubmit()">
+        <nz-form-item>
+          <nz-form-label>提交日期</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker formControlName="rkrqs"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker formControlName="rkrqe"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+          </nz-form-control>
+        </nz-form-item>
+
+      </form>
+      <nz-table #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>单据号</th>
+            <th>入库日期</th>
+            <th>供货商</th>
+            <th>入库种类</th>
+            <th>中标金额</th>
+            <th>零售金额</th>
+            <th>入库人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>{{data.djh}}</td>
+            <td>{{data.rkrq}}</td>
+            <td>{{data.ghs}}</td>
+            <td>{{data.rkzl}}</td>
+            <td>{{data.zbje}}</td>
+            <td>{{data.lsje}}</td>
+            <td>{{data.rkr}}</td>
+            <td>
+              <div *ngIf="data.zt == '1'" class="status gray">未审核</div>
+              <div *ngIf="data.zt == '1' || data.zt == '2'" class="status gray">未提交</div>
+            </td>
+            <td>
+              <a (click)="showAuditDialog(true)">审核</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <app-page [page]="page" (changePage)="getTableList()"></app-page>
+    </nz-tab>
+    <nz-tab nzTitle="已审核">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="auditedConditionForm" (ngSubmit)="findAudited()">
+        <nz-form-item>
+          <nz-form-label>入库日期</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker formControlName="rkrqs"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker formControlName="rkrqe"></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>状态</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 177px;" formControlName="zt">
+              <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <nz-table #basicTable1 [nzData]="dataSet1" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>单据号</th>
+            <th>入库日期</th>
+            <th>供货商</th>
+            <th>入库种类</th>
+            <th>中标金额</th>
+            <th>零售金额</th>
+            <th>入库人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable1.data">
+            <td>{{data.djh}}</td>
+            <td>{{data.rkrq}}</td>
+            <td>{{data.ghs}}</td>
+            <td>{{data.rkzl}}</td>
+            <td>{{data.zbje}}</td>
+            <td>{{data.lsje}}</td>
+            <td>{{data.rkr}}</td>
+            <td>
+              <div *ngIf="data.zt == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>驳回
+              </div>
+              <div *ngIf="data.zt == '4'" class="status blue">通过</div>
+            </td>
+            <td>
+              <a (click)="showAuditDialog(false)">查看</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <app-page [page]="page" (changePage)="getTableList()"></app-page>
+    </nz-tab>
+  </nz-tabset>
+  <app-material-check-audit-modal [isAudit]="isAudit" [isVisible]="isVisible" (closeModal)="closeModal()">
+  </app-material-check-audit-modal>
+
+</div>

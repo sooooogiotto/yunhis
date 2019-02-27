@@ -1,0 +1,77 @@
+<nz-layout class="layout">
+  <nz-header>
+    <i nz-icon type="bars" theme="outline" class="slideMenuIcon" (click)="isCollapsed=!isCollapsed"></i>
+    <div class="logo">
+      <!-- <img class="logoImg" src="../../../../assets/images/u13.png" alt="">
+      <div class="logoTitle">延华医院HIS系统</div>
+      <div class="logoDes">Hospital Information System Of YANHUA HOSPITAL</div> -->
+      <img class="logoImg" src="../../../../assets/images/logo.jpg" alt="">
+    </div>
+    <div class="userModule">
+      <i nz-icon type="bell" theme="fill"></i>
+      <i nz-icon type="lock" theme="fill"></i>
+      <img src="../../../../assets/images/photo.png" class="userImg" alt="">
+      <div class="userDetail">
+        <span>朱军·呼吸内科</span>
+        <i nz-icon type="caret-down" theme="fill"></i>
+      </div>
+    </div>
+  </nz-header>
+  <nz-layout>
+    <nz-sider [nzCollapsedWidth]="48" nzCollapsedWidth [(nzCollapsed)]="isCollapsed" [nzWidth]="200">
+      <ul nz-menu nzTheme="dark" [nzInlineIndent]="12" [nzMode]="'vertical'" class="menu"
+        [nzInlineCollapsed]="isCollapsed" style="border-right:none;">
+        <li nz-submenu class="menuList">
+          <span title><i nz-icon type="hdd" theme="fill"></i><span class="nav-text">材料管理</span></span>
+          <ul>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialInComponent')">材料入库</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialInAuditComponent')">材料入库审核</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialOutComponent')">材料出库</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialPriceComponent')">材料调价</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialPriceAuditComponent')">材料调价审核</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/InventoryManagementComponent')">库存管理</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialReceiveComponent')">材料领取确认</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialApplyComponent')">材料申领</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialCheckComponent')">材料盘点</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialCheckAuditComponent')">材料盘点审核</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialDictionaryComponent')">材料字典</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialSupplierComponent')">供应商设置</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/MaterialManufactureronaryComponent')">生产厂商维护</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    <div *ngIf="menuList.length == 0" style="margin: auto;width:240px;">
+      <div><img src="../../../../assets/images/none.png" alt="" style="width:240px;"></div>
+      <div style="text-align:center;font-size: 18px">什么也没有，请点击左侧菜单进行操作</div>
+    </div>
+    <nz-layout style="padding: 8px 12px;" *ngIf="menuList.length != 0">
+      <div class="card-container">
+        <nz-tabset style="margin-left: 12px;margin-bottom:0;" [nzTabPosition]="'top'"
+          (nzSelectChange)="nzSelectChange($event)" [nzType]="'card'" [nzAnimated]="true"
+          [nzSelectedIndex]="currentIndex">
+          <nz-tab *ngFor="let menu of menuList" [nzTitle]="nzTabHeading">
+            <ng-template #nzTabHeading>
+              <div>
+                {{menu.title}}
+                <i nz-icon *ngIf="menu.isRemove" (click)="closeUrl(menu.url)" type="close-circle" theme="fill"></i>
+              </div>
+            </ng-template>
+          </nz-tab>
+        </nz-tabset>
+      </div>
+      <!-- <nz-tabset style="margin-left: 0.5rem;margin-bottom:0;" [nzAnimated]="true" [nzSelectedIndex]="currentIndex"
+        [nzShowPagination]="true" (nzSelectChange)="nzSelectChange($event)" [nzType]="'card'">
+        <nz-tab *ngFor="let menu of menuList" [nzTitle]="nzTabHeading">
+          <ng-template #nzTabHeading>
+            <div>
+              {{menu.title}}
+              <i nz-icon *ngIf="menu.isRemove" (click)="closeUrl(menu.url)" type="close"></i>
+            </div>
+          </ng-template>
+        </nz-tab>
+      </nz-tabset> -->
+      <router-outlet class="homeRouter"></router-outlet>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>

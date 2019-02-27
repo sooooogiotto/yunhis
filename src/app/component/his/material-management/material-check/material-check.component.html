@@ -1,0 +1,80 @@
+<div class="childrenContainer">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+    <nz-form-item>
+      <nz-form-label>出库日期</nz-form-label>
+      <nz-form-control>
+        <nz-date-picker formControlName="rkrqs"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <span class="formDateCenterSpan">至</span>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-date-picker formControlName="rkrqe"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>状态</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="zt">
+          <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="float:right">
+      <nz-form-control>
+        <button type="button" nz-button nzType="primary" (click)="showCheckConfirm()"><i nz-icon type="plus-circle"
+            theme="fill"></i>启动新盘点</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>单据号</th>
+        <th>盘点日期</th>
+        <th>盘点科室</th>
+        <th>材料种数</th>
+        <th>中标金额差</th>
+        <th>零售金额差</th>
+        <th>盘点人</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of basicTable.data">
+        <td>{{data.djh}}</td>
+        <td>{{data.rkrq}}</td>
+        <td>{{data.ghs}}</td>
+        <td>{{data.rkzl}}</td>
+        <td>{{data.zbje}}</td>
+        <td>{{data.lsje}}</td>
+        <td>{{data.rkr}}</td>
+        <td>
+          <div *ngIf="data.zt == '1'" class="status gray">未审核</div>
+          <div *ngIf="data.zt == '1' || data.zt == '2'" class="status gray">未提交</div>
+          <div *ngIf="data.zt == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>驳回
+          </div>
+          <div *ngIf="data.zt == '4'" class="status blue">通过</div>
+        </td>
+        <td>
+          <a (click)="showDetailModal()">查看</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-material-check-add-modal [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
+  </app-material-check-add-modal>
+  <app-material-check-audit-modal [isVisible]="isVisible" (closeDetailModal)="closeDetailModal()">
+  </app-material-check-audit-modal>
+  <app-material-check-confirm [isCheckVisible]="isCheckVisible" (closeCheckConfirm)="closeCheckConfirm()" (showAddModal)="showAddModal()">
+  </app-material-check-confirm>
+  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+</div>

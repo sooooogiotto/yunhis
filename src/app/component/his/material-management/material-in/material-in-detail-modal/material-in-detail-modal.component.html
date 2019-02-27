@@ -1,0 +1,98 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="detailIsVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    入库详情
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>基本信息
+      </div>
+      <table class="modalTbale">
+        <tr>
+          <th>单据号</th>
+          <td></td>
+          <th>科室</th>
+          <td></td>
+          <th>入库日期</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>入库类别</th>
+          <td></td>
+          <th>供货商</th>
+          <td></td>
+          <th>合计发票额</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>备注</th>
+          <td colspan="5"></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>材料明细
+      </div>
+      <div style="margin-bottom: 0.8rem;">
+        <button type="button" nz-button nzType="primary">导出</button>
+        <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button>
+      </div>
+      <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>发票号</th>
+            <th>发票额</th>
+            <th>材料名称</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>数量</th>
+            <th>中标金额</th>
+            <th>中标单价</th>
+            <th>零售金额</th>
+            <th>零售单价</th>
+            <th>有效期</th>
+            <th>生产批号</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>
+              {{data.fph}}
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
+    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">关闭</button>
+  </ng-template>
+</nz-modal>

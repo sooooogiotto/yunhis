@@ -1,0 +1,110 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="addIsVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    新出库单
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>基本信息
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="6">
+          <label>单据号</label>
+          <div class="inlineFormGroup">
+            <input nz-input [disabled]="true" disabled="disabled">
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>科室</label>
+          <div class="inlineFormGroup">
+            <input nz-input [disabled]="true" disabled="disabled">
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>出库日期</label>
+          <div class="inlineFormGroup">
+            <input nz-input [disabled]="true" disabled="disabled">
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>出库目的</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+      </div>
+
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="6">
+          <label>领取科室</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>领取人</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>材料明细
+      </div>
+      <div style="margin-bottom: 0.8rem;">
+        <button type="button" nz-button nzType="primary" (click)="showAddModal()"><i nz-icon type="plus-circle"
+            theme="fill"></i>新增</button>
+      </div>
+      <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>材料名称</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>数量</th>
+            <th>库存量</th>
+            <th>可用库存量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>
+              <div class="tableInputDiv">
+                <input nz-input>
+              </div>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="tableInputDiv">
+                <input nz-input>
+              </div>
+            </td>
+            <td></td>
+            <td>
+
+              <div class="tableInputDiv">
+                <input nz-input>
+              </div>
+            </td>
+            <td>
+              <a>删除</a>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()">确认</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+  </ng-template>
+</nz-modal>

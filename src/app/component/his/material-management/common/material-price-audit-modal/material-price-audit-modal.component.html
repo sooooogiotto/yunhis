@@ -1,0 +1,97 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="isVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    出库详情
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="materialPriceAuditModal">
+      <div>
+        <div class="modalTitle">
+          <div class="titleTab"></div>基本信息
+        </div>
+        <table class="modalTbale">
+          <tr>
+            <th>单据号</th>
+            <td></td>
+            <th>调价人</th>
+            <td></td>
+            <th>执行时间</th>
+            <td></td>
+          </tr>
+          <tr>
+            <th>提交时间</th>
+            <td></td>
+            <th>调价依据</th>
+            <td colspan="3"></td>
+          </tr>
+        </table>
+      </div>
+      <div>
+        <div class="modalTitle">
+          <div class="titleTab"></div>材料明细
+        </div>
+        <div style="margin-bottom: 0.8rem;">
+          <button type="button" nz-button nzType="primary">导出</button>
+          <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button>
+        </div>
+        <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+          <thead>
+            <tr>
+              <th>材料名称</th>
+              <th>规格</th>
+              <th>单位</th>
+              <th>库存量</th>
+              <th>原中标价</th>
+              <th>现中标价</th>
+              <th>中标盈亏差</th>
+              <th>原零售价</th>
+              <th>现零售价</th>
+              <th>零售盈亏差</th>
+              <th>生产厂商</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of basicTable.data">
+              <td>
+                {{data.fph}}
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <div *ngIf="isAudit">
+      <button nz-button nzType="primary" (click)="pass()">通过</button>
+      <button class="orangePrimaryBtn" nz-button nzType="default" (click)="back()">驳回</button>
+      <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+    </div>
+  </ng-template>
+
+  <app-audit-confirm-modal [auditConfirmIsVisible]="auditConfirmIsVisible" [isPrint]="isPrint" [isPass]="isPass"
+    [isBack]="isBack" (closeConfirm)="closeConfirm()">
+  </app-audit-confirm-modal>
+</nz-modal>

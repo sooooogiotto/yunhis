@@ -1,0 +1,15 @@
+.orange-icon {
+    color: #ff9900;
+    font-size: 20px;
+    margin-right: 12px;
+    position: relative;
+    top: 2px;
+  }
+  .content {
+    font-weight: bold;
+  }
+  
+  ::ng-deep .confirm .ant-modal-footer {
+    padding-bottom: 0.5rem;
+  }
+  

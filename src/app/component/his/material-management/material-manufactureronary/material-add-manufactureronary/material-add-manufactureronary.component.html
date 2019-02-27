@@ -1,0 +1,78 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="addIsVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    新建生产厂商
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="materialAddDictionary">
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="6">
+          <label>企业名称</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>联系人</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>联系电话</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+        <div nz-col nzSpan="6">
+          <label>邮箱</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="6">
+          <label>传真</label>
+          <div class="inlineFormGroup">
+            <nz-select>
+              <nz-option nz-label="" nz-value=""></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-col nzSpan="18">
+          <label>企业地址</label>
+          <div class="inlineFormGroup">
+            <nz-select style="width:150px;">
+              <nz-option nz-label="" nz-value=""></nz-option>
+            </nz-select>
+            <nz-select style="width:150px;margin-left:12px;">
+              <nz-option nz-label="" nz-value=""></nz-option>
+            </nz-select>
+            <nz-select style="width:150px;margin-left:12px;">
+              <nz-option nz-label="" nz-value=""></nz-option>
+            </nz-select>
+            <input nz-input style="width:305px;margin-left:12px;">
+          </div>
+        </div>
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="6">
+          <label>状态</label>
+          <div class="inlineFormGroup">
+            <nz-radio-group>
+              <label nz-radio nzValue="A">启用</label>
+              <label nz-radio nzValue="B">不启用</label>
+            </nz-radio-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()">保存</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+  </ng-template>
+</nz-modal>

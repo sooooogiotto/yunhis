@@ -1,0 +1,17 @@
+<nz-modal [(nzVisible)]="checkIsVisible" nzWrapClassName="vertical-center-modal confirm" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="350">
+  <ng-template #modalTitle>
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div *ngIf="isCheck" style="margin-bottom: 8px;"><i class="orange-icon" nz-icon="" theme="fill"
+        type="exclamation-circle"></i><span class="content">确认盘点全部完成了吗？</span></div>
+    <div *ngIf="!isCheck" style="margin-bottom: 8px;"><i class="orange-icon" nz-icon="" theme="fill"
+        type="exclamation-circle"></i><span class="content">确定要放弃这次盘点吗？</span></div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button nz-button nzType="primary" (click)="handleCancel()">确认</button>
+    <button nz-button nzType="default" (click)="handleCancel()" class="blueDefaultBtn">取消</button>
+  </ng-template>
+</nz-modal>

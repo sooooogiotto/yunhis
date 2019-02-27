@@ -1,0 +1,77 @@
+<nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="detailIsVisible" [nzTitle]="modalTitle"
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    申领详情
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>基本信息
+      </div>
+      <table class="modalTbale">
+        <tr>
+          <th>单据号</th>
+          <td></td>
+          <th>申领库房</th>
+          <td></td>
+          <th>申领人</th>
+          <td></td>
+        </tr>
+        <tr>
+          <th>申领时间</th>
+          <td></td>
+          <th>备注</th>
+          <td colspan="3"></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>材料明细
+      </div>
+      <div style="margin-bottom: 0.8rem;">
+        <button type="button" nz-button nzType="primary">导出</button>
+      </div>
+      <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>材料名称</th>
+            <th>规格</th>
+            <th>单位</th>
+            <th>申领数量</th>
+            <th>发放数量</th>
+            <th>库存量</th>
+            <th>状态</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of basicTable.data">
+            <td>
+              {{data.fph}}
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>驳回</div>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
+    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">关闭</button>
+  </ng-template>
+</nz-modal>
