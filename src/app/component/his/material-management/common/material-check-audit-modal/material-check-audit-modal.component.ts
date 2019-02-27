@@ -6,22 +6,22 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-check-audit-modal.component.scss', '../../material-check/material-check-add-modal/material-check-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
 })
 export class MaterialCheckAuditModalComponent implements OnInit {
-  @Input() isVisible: Boolean;
-  @Input() isAudit: Boolean;
-  @Output() closeModal: EventEmitter<Boolean> = new EventEmitter;
+  @Input() isVisible: boolean;
+  @Input() isAudit: boolean;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter;
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** 控制弹出框 */
-  auditConfirmIsVisible: Boolean = false;
-  isPass: Boolean = false;
-  isPrint: Boolean = false;
-  isBack: Boolean = false;
+  auditConfirmIsVisible: boolean = false;
+  isPass: boolean = false;
+  isPrint: boolean = false;
+  isBack: boolean = false;
   /** 表格数据 */
-  dataSet: Object = [
+  dataSet: object = [
     {
       'fph': '22323232'
     }
@@ -48,7 +48,7 @@ export class MaterialCheckAuditModalComponent implements OnInit {
     this.isBack = true;
     this.auditConfirmIsVisible = true;
   }
-  closeConfirm(isVisible: Boolean): void {
+  closeConfirm(isVisible: boolean): void {
     this.auditConfirmIsVisible = isVisible;
     this.isPass = isVisible;
     this.isPrint = isVisible;

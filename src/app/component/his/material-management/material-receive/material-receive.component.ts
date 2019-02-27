@@ -8,13 +8,13 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 })
 export class MaterialReceiveComponent implements OnInit {
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** 弹出框开关 */
-  detailIsVisible: Boolean = false;
+  detailIsVisible: boolean = false;
   /** 构造form表单对象 */
   receiveConditionForm: FormGroup = this.fb.group({
     rkrqs: [''],
@@ -47,7 +47,7 @@ export class MaterialReceiveComponent implements OnInit {
     ])
   })
   /** 静态数据 */
-  dataSet: Object = [
+  dataSet: object = [
     {
       key: '1',
       djh: '2233222',
@@ -71,7 +71,7 @@ export class MaterialReceiveComponent implements OnInit {
       zt: '2'
     }
   ];
-  dataSet1: Object = [
+  dataSet1: object = [
     {
       key: '1',
       djh: '2233222',
@@ -112,7 +112,7 @@ export class MaterialReceiveComponent implements OnInit {
     this.detailIsVisible = true;
   }
   /** 关闭审核弹出框 */
-  closeDetailModal(isVisible: Boolean): void {
+  closeDetailModal(isVisible: boolean): void {
     this.detailIsVisible = isVisible
   }
 

@@ -9,15 +9,15 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 })
 export class MaterialCheckComponent implements OnInit {
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** 控制模态窗属性 */
-  addIsVisible: Boolean = false;
-  isCheckVisible: Boolean = false;
-  isVisible: Boolean = false;
+  addIsVisible: boolean = false;
+  isCheckVisible: boolean = false;
+  isVisible: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
     rkrqs: [''],
@@ -35,7 +35,7 @@ export class MaterialCheckComponent implements OnInit {
     ])
   })
   /** 静态数据 */
-  dataSet: Object = [
+  dataSet: object = [
     {
       key: '1',
       djh: '2233222',
@@ -90,7 +90,7 @@ export class MaterialCheckComponent implements OnInit {
     this.page
   }
   /** 弹出新入库弹出框 */
-  showAddModal(isVisible: Boolean): void {
+  showAddModal(isVisible: boolean): void {
     this.addIsVisible = !isVisible
     this.isCheckVisible = isVisible
   }
@@ -103,15 +103,15 @@ export class MaterialCheckComponent implements OnInit {
     this.isVisible = true;
   }
   /** 关闭新入库弹出框 */
-  closeAddModal(isVisible: Boolean): void {
+  closeAddModal(isVisible: boolean): void {
     this.addIsVisible = isVisible
   }
   /** 关闭详情弹出框 */
-  closeModal(isVisible: Boolean): void {
+  closeModal(isVisible: boolean): void {
     this.isVisible = isVisible
   }
   /** 关闭详情弹出框 */
-  closeCheckConfirm(isVisible: Boolean): void {
+  closeCheckConfirm(isVisible: boolean): void {
     this.isCheckVisible = isVisible
   }
   constructor(private fb: FormBuilder, private modalService: NzModalService) { }

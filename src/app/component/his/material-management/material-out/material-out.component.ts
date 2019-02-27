@@ -14,9 +14,9 @@ export class MaterialOutComponent implements OnInit {
     pageSize: 10
   }
   /** 控制模态窗属性 */
-  addIsVisible: Boolean = false;
-  detailIsVisible: Boolean = false;
-  outIsVisible: Boolean = false;
+  addIsVisible: boolean = false;
+  detailIsVisible: boolean = false;
+  outIsVisible: boolean = false;
   /** 构造form表单对象 */
   conditionForm = this.fb.group({
     ckrqs: [''],
@@ -89,15 +89,15 @@ export class MaterialOutComponent implements OnInit {
     this.outIsVisible = true;
   }
   /** 关闭新入库弹出框 */
-  closeAddModal(isVisible: Boolean): void {
+  closeAddModal(isVisible: boolean): void {
     this.addIsVisible = isVisible
   }
   /** 关闭详情弹出框 */
-  closeDetailModal(isVisible: Boolean): void {
+  closeDetailModal(isVisible: boolean): void {
     this.detailIsVisible = isVisible
   }
   /** 关闭申领出库弹出框 */
-  closeOutModal(isVisible: Boolean): void {
+  closeOutModal(isVisible: boolean): void {
     this.outIsVisible = isVisible
   }
 

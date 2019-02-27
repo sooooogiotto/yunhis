@@ -6,12 +6,12 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./audit-confirm-modal.component.scss', '../../../../common/form.scss']
 })
 export class AuditConfirmModalComponent implements OnInit {
-  @Input() auditConfirmIsVisible: Boolean;
-  @Input() isPrint: Boolean = false;
-  @Input() isPass: Boolean = false;
-  @Input() isBack: Boolean = false;
-  @Input() isSelectedBack: Boolean = false;
-  @Output() closeConfirm: EventEmitter<Object> = new EventEmitter;
+  @Input() auditConfirmIsVisible: boolean;
+  @Input() isPrint: boolean = false;
+  @Input() isPass: boolean = false;
+  @Input() isBack: boolean = false;
+  @Input() isSelectedBack: boolean = false;
+  @Output() closeConfirm: EventEmitter<boolean> = new EventEmitter;
 
   constructor() { }
 

@@ -13,17 +13,17 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   ]
 })
 export class MaterialInAuditModalComponent implements OnInit {
-  @Input() auditIsVisible: Boolean;
-  @Output() closeModal: EventEmitter<Boolean> = new EventEmitter;
+  @Input() auditIsVisible: boolean;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter;
 
-  auditConfirmIsVisible: Boolean = false;
+  auditConfirmIsVisible: boolean = false;
 
   /** 控制弹出框 */
-  isPass: Boolean = false;
-  isPrint: Boolean = false;
-  isBack: Boolean = false;
+  isPass: boolean = false;
+  isPrint: boolean = false;
+  isBack: boolean = false;
 
-  dataSet: Object = [
+  dataSet: object = [
     {
       'fph': '22323232'
     }
@@ -37,7 +37,7 @@ export class MaterialInAuditModalComponent implements OnInit {
     this.auditIsVisible = false;
     this.closeModal.emit(this.auditIsVisible);
   }
-  closeConfirm(isVisible: Boolean): void {
+  closeConfirm(isVisible: boolean): void {
     this.auditConfirmIsVisible = isVisible;
     this.isPass = isVisible;
     this.isPrint = isVisible;

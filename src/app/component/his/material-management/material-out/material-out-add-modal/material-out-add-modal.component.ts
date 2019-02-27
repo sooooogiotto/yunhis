@@ -6,10 +6,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-out-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
 })
 export class MaterialOutAddModalComponent implements OnInit {
-  @Input() addIsVisible: Boolean;
-  @Output() closeAddModal: EventEmitter<Boolean> = new EventEmitter;
+  @Input() addIsVisible: boolean;
+  @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
 
-  dataSet: Object = [
+  dataSet: object = [
     {
       'fph': '22323232'
     }

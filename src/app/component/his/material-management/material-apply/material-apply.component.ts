@@ -8,14 +8,14 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 })
 export class MaterialApplyComponent implements OnInit {
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** 控制模态窗属性 */
-  addIsVisible: Boolean = false;
-  detailIsVisible: Boolean = false;
+  addIsVisible: boolean = false;
+  detailIsVisible: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
     rkrqs: [''],
@@ -33,7 +33,7 @@ export class MaterialApplyComponent implements OnInit {
     ])
   })
   /** 静态数据 */
-  dataSet: Object = [
+  dataSet: object = [
     {
       key: '1',
       djh: '2233222',
@@ -96,11 +96,11 @@ export class MaterialApplyComponent implements OnInit {
     this.detailIsVisible = true;
   }
   /** 关闭新入库弹出框 */
-  closeAddModal(isVisible: Boolean): void {
+  closeAddModal(isVisible: boolean): void {
     this.addIsVisible = isVisible
   }
   /** 关闭详情弹出框 */
-  closeDetailModal(isVisible: Boolean): void {
+  closeDetailModal(isVisible: boolean): void {
     this.detailIsVisible = isVisible
   }
   constructor(private fb: FormBuilder) { }

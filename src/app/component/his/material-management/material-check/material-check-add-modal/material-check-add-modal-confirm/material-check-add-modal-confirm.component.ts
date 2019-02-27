@@ -6,10 +6,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-check-add-modal-confirm.component.scss', '../../../../../common/form.scss']
 })
 export class MaterialCheckAddModalConfirmComponent implements OnInit {
-  @Input() isCheck: Boolean;
-  @Input() checkIsVisible: Boolean;
+  @Input() isCheck: boolean;
+  @Input() checkIsVisible: boolean;
 
-  @Output() closeConfirm: EventEmitter<Object> = new EventEmitter;
+  @Output() closeConfirm: EventEmitter<boolean> = new EventEmitter;
 
   constructor() { }
 

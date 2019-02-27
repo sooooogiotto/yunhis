@@ -8,7 +8,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 })
 export class MaterialPriceComponent implements OnInit {
   /** 弹出框 */
-  addIsVisible: Boolean = false;
+  addIsVisible: boolean = false;
   /** 分页对象 */
   page = {
     curPage: 1,
@@ -91,7 +91,7 @@ export class MaterialPriceComponent implements OnInit {
     this.addIsVisible = true;
   }
 
-  closeAddModal(isVisible: Boolean): void {
+  closeAddModal(isVisible: boolean): void {
     this.addIsVisible = isVisible;
   }
 

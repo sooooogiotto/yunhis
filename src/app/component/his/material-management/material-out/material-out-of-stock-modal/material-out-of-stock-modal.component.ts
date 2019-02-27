@@ -7,15 +7,15 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
   styleUrls: ['./material-out-of-stock-modal.component.scss', '../../../../common/form.scss']
 })
 export class MaterialOutOfStockModalComponent implements OnInit {
-  @Input() outIsVisible: Boolean;
-  @Output() closeOutModal: EventEmitter<Boolean> = new EventEmitter;
-  auditConfirmIsVisible: Boolean = false;
-  isPrint: Boolean = false;
-  isPass: Boolean = false;
-  isBack: Boolean = false;
-  isSelectedBack: Boolean = false;
+  @Input() outIsVisible: boolean;
+  @Output() closeOutModal: EventEmitter<boolean> = new EventEmitter;
+  auditConfirmIsVisible: boolean = false;
+  isPrint: boolean = false;
+  isPass: boolean = false;
+  isBack: boolean = false;
+  isSelectedBack: boolean = false;
 
-  dataSet: Object = [
+  dataSet: object = [
     {
       'fph': '22323232'
     }
@@ -42,7 +42,7 @@ export class MaterialOutOfStockModalComponent implements OnInit {
   handleCancel(): void {
     this.closeOutModal.emit(false);
   }
-  closeConfirm(isVisible: Boolean): void {
+  closeConfirm(isVisible: boolean): void {
     this.auditConfirmIsVisible = isVisible;
     this.isSelectedBack = isVisible;
     this.isBack = isVisible;

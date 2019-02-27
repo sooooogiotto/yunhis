@@ -6,19 +6,19 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-add-supplier.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
 })
 export class MaterialAddSupplierComponent implements OnInit {
-  @Input() addIsVisible: Boolean;
-  @Output() closeAddModal: EventEmitter<Boolean> = new EventEmitter;
+  @Input() addIsVisible: boolean;
+  @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** confirm */
-  isCheck: Boolean = false;
-  checkIsVisible: Boolean = false;
+  isCheck: boolean = false;
+  checkIsVisible: boolean = false;
 
-  dataSet: Object = [
+  dataSet: object = [
     {
       'fph': '22323232'
     },
@@ -47,12 +47,12 @@ export class MaterialAddSupplierComponent implements OnInit {
     this.addIsVisible = false;
     this.closeAddModal.emit(this.addIsVisible);
   }
-  showConfirm(flag: Boolean): void {
+  showConfirm(flag: boolean): void {
     this.isCheck = flag;
     this.checkIsVisible = true;
   }
 
-  closeConfirm(isVisible: Boolean): void {
+  closeConfirm(isVisible: boolean): void {
     this.isCheck = isVisible;
     this.checkIsVisible = isVisible;
   }

@@ -8,14 +8,14 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 })
 export class MaterialPriceAuditComponent implements OnInit {
   /** 分页对象 */
-  page: Object = {
+  page: object = {
     curPage: 1,
     totalPage: 50,
     pageSize: 10
   }
   /** 弹出框开关 */
-  isVisible: Boolean = false;
-  isAudit: Boolean = false;
+  isVisible: boolean = false;
+  isAudit: boolean = false;
   /** 构造form表单对象 */
   auditConditionForm: FormGroup = this.fb.group({
     rkrqs: [''],
@@ -48,7 +48,7 @@ export class MaterialPriceAuditComponent implements OnInit {
     ])
   })
   /** 静态数据 */
-  dataSet: Object = [
+  dataSet: object = [
     {
       key: '1',
       djh: '2233222',
@@ -72,7 +72,7 @@ export class MaterialPriceAuditComponent implements OnInit {
       zt: '2'
     }
   ];
-  dataSet1: Object = [
+  dataSet1: object = [
     {
       key: '1',
       djh: '2233222',
@@ -109,12 +109,12 @@ export class MaterialPriceAuditComponent implements OnInit {
     this.page
   }
   /** 弹出审核弹出框 */
-  showAuditDialog(flag: Boolean): void {
+  showAuditDialog(flag: boolean): void {
     this.isAudit = flag;
     this.isVisible = true;
   }
   /** 关闭审核弹出框 */
-  closeModal(isVisible: Boolean): void {
+  closeModal(isVisible: boolean): void {
     this.isVisible = isVisible
   }
 

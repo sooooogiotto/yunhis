@@ -7,13 +7,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PageComponent implements OnInit {
   @Input() page: any;
-  @Output() changePage: EventEmitter<Number> = new EventEmitter;
+  @Output() changePage: EventEmitter<number> = new EventEmitter;
 
   constructor() { }
 
   ngOnInit() {
   }
-  nzPageIndexChange(curPage: Number): void {
+  nzPageIndexChange(curPage: number): void {
     this.page.curPage = curPage;
     this.changePage.emit(curPage);
   }

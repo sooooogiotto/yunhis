@@ -36,7 +36,72 @@ import { MaterialSupplierComponent } from "./component/his/material-management/m
 const routes: Routes = [
   {
     path: 'home', component: HomePageComponent, children: [
-
+      {
+        path: 'MaterialInComponent', component: MaterialInComponent, data: {
+          title: '材料入库',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialOutComponent', component: MaterialOutComponent, data: {
+          title: '材料出库',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialInAuditComponent', component: MaterialInAuditComponent, data: {
+          title: '材料入库审核',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialPriceComponent', component: MaterialPriceComponent, data: {
+          title: '材料调价',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialPriceAuditComponent', component: MaterialPriceAuditComponent, data: {
+          title: '材料调价审核',
+          isRemove: true
+        }
+      }, {
+        path: 'InventoryManagementComponent', component: InventoryManagementComponent, data: {
+          title: '库存管理',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialReceiveComponent', component: MaterialReceiveComponent, data: {
+          title: '材料领取确认',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialApplyComponent', component: MaterialApplyComponent, data: {
+          title: '材料申领',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialCheckComponent', component: MaterialCheckComponent, data: {
+          title: '材料盘点',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialCheckAuditComponent', component: MaterialCheckAuditComponent, data: {
+          title: '材料盘点审核',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialDictionaryComponent', component: MaterialDictionaryComponent, data: {
+          title: '材料字典',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialManufactureronaryComponent', component: MaterialManufactureronaryComponent, data: {
+          title: '生产厂商维护',
+          isRemove: true
+        }
+      }, {
+        path: 'MaterialSupplierComponent', component: MaterialSupplierComponent, data: {
+          title: '供应商维护',
+          isRemove: true
+        }
+      }
     ]
   }, {
     path: 'MaterialInComponent', component: MaterialInComponent, data: {
