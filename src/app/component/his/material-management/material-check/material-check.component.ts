@@ -11,7 +11,7 @@ export class MaterialCheckComponent implements OnInit {
   /** 分页对象 */
   page: object = {
     curPage: 1,
-    totalPage: 50,
+    pageCount: 50,
     pageSize: 10
   }
   /** 控制模态窗属性 */

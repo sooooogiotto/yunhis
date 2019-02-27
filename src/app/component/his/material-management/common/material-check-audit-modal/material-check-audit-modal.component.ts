@@ -12,7 +12,7 @@ export class MaterialCheckAuditModalComponent implements OnInit {
   /** 分页对象 */
   page: object = {
     curPage: 1,
-    totalPage: 50,
+    pageCount: 50,
     pageSize: 10
   }
   /** 控制弹出框 */

@@ -12,7 +12,7 @@ export class MaterialDictionaryComponent implements OnInit {
   /** 分页对象 */
   page: object = {
     curPage: 1,
-    totalPage: 50,
+    pageCount: 50,
     pageSize: 10
   }
   /** 控制模态窗属性 */
@@ -103,7 +103,8 @@ export class MaterialDictionaryComponent implements OnInit {
       this.apiService.materialUrl['drugmaterial/list']
     ).subscribe(
       data => {
-        this.dataSet = data['data'] == null ? [] : data['data']
+        this.dataSet = data['data'] == null ? [] : data['data'];
+        this.page['pageCount'] = data['count']
       }
     )
   }

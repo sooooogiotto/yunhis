@@ -10,7 +10,7 @@ export class InventoryManagementComponent implements OnInit {
   /** 分页对象 */
   page = {
     curPage: 1,
-    totalPage: 50,
+    pageCount: 50,
     pageSize: 10
   }
   /** 构造form表单对象 */
