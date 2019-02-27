@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HttpService {
-  public get(path: String) {
+  public get(path: string) {
     this.http.get(path).pipe(
 
     )
