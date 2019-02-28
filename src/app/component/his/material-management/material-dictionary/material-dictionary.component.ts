@@ -70,11 +70,10 @@ export class MaterialDictionaryComponent implements OnInit {
     )
   }
   /** 删除(逻辑) */
-  putDrugmaterial(data): void {
-    this.mdService.putDrugmaterial(new HttpParams({ fromObject: data })
-    ).subscribe(data => {
-      debugger
-      data
+  putDrugmaterial(data: object): void {
+    this.mdService.putDrugmaterial(data
+    ).subscribe(res => {
+      this.dataSet.filter(item => item['id'] == data['id'])
     })
   }
 

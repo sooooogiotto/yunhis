@@ -46,9 +46,8 @@ export class MaterialDictionaryService {
     )
   }
 
-  putDrugmaterial(param: HttpParams): Observable<any> {
-    debugger
-    return this.http.put(this.drugmateriallUrl['putdrugmaterial'] + `/${param.get('id')}`, { params: param }, httpOptions).pipe(
+  putDrugmaterial(param: object): Observable<any> {
+    return this.http.put(this.drugmateriallUrl['putdrugmaterial'] + `/${param['id']}`, param, httpOptions).pipe(
       catchError(this.handleError('putdrugmaterial'))
     )
   }
