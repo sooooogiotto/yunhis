@@ -1,16 +1,18 @@
 <div class="childrenContainer">
-  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm">
     <nz-form-item>
       <nz-form-label>材料名称</nz-form-label>
       <nz-form-control>
-        <input nz-input type="text" formControlName="ghs">
+        <input nz-input type="text" formControlName="clmc">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>状态</nz-form-label>
       <nz-form-control>
         <nz-select style="width: 177px;" formControlName="zt">
-          <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+          <nz-option nzValue="" nzLabel="全部" nzSelected></nz-option>
+          <nz-option nzValue="1" nzLabel="已启用" nzSelected></nz-option>
+          <nz-option nzValue="0" nzLabel="未启用" nzSelected></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>

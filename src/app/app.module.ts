@@ -12,6 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 registerLocaleData(zh);
+/** 拦截器、错误处理 */
+import { httpInterceptorProviders } from "./http-interceptors/index";
+import { RequestCache, RequestCacheWithMap } from './request-cache.service';
+import { HttpErrorHandler } from "./http-error-handler.service";
 /** Cookie */
 import { CookieService } from "ngx-cookie-service";
 /** 复用路由 */
@@ -108,7 +112,13 @@ import { MaterialCheckConfirmComponent } from './component/his/material-manageme
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [CookieService, { provide: NZ_I18N, useValue: zh_CN }, { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
+  providers: [
+    HttpErrorHandler,
+    httpInterceptorProviders,
+    CookieService,
+    { provide: NZ_I18N, useValue: zh_CN },
+    { provide: RequestCache, useClass: RequestCacheWithMap },
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
