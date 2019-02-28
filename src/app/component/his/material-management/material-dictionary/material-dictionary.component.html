@@ -3,13 +3,13 @@
     <nz-form-item>
       <nz-form-label>材料名称</nz-form-label>
       <nz-form-control>
-        <input nz-input type="text" formControlName="clmc">
+        <input nz-input type="text" formControlName="name">
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>状态</nz-form-label>
       <nz-form-control>
-        <nz-select style="width: 177px;" formControlName="zt">
+        <nz-select style="width: 177px;" formControlName="state">
           <nz-option nzValue="" nzLabel="全部" nzSelected></nz-option>
           <nz-option nzValue="1" nzLabel="已启用" nzSelected></nz-option>
           <nz-option nzValue="0" nzLabel="未启用" nzSelected></nz-option>
@@ -50,7 +50,7 @@
         <td>{{data.code}}</td>
         <td>{{data.specifications}}</td>
         <td>{{data.licensenumber}}</td>
-        <td>{{data.unit}}</td>
+        <td>{{data.mname}}</td>
         <td>{{data.originplace}}</td>
         <td>{{data.expenseaccount}}</td>
         <td>
@@ -60,16 +60,17 @@
         <td>
           <a (click)="showAddModal()">修改</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="showDetailModal()">查看</a>
+          <a (click)="showDetailModal(data)">查看</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a>删除</a>
+          <a (click)="putDrugmaterial(data)">删除</a>
         </td>
       </tr>
     </tbody>
   </nz-table>
   <app-material-add-dictionary [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
   </app-material-add-dictionary>
-  <app-material-detail-dictionary [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
+  <app-material-detail-dictionary [manufactureronary]="manufactureronary" [drugmaterial]="drugmaterial" [detailIsVisible]="detailIsVisible"
+    (closeDetailModal)="closeDetailModal()">
   </app-material-detail-dictionary>
   <app-page [page]="page" (changePage)="getdrugmaterial()"></app-page>
 </div>

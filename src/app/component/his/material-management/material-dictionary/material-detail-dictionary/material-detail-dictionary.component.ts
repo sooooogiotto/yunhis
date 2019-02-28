@@ -7,6 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MaterialDetailDictionaryComponent implements OnInit {
   @Input() detailIsVisible: boolean;
+  @Input() drugmaterial: object;
+  @Input() manufactureronary: object[];
   @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
   /** 分页对象 */
   page: object = {
@@ -18,31 +20,11 @@ export class MaterialDetailDictionaryComponent implements OnInit {
   isCheck: boolean = false;
   checkIsVisible: boolean = false;
 
-  dataSet: object = [
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    }
-  ]
-
   constructor() { }
 
   ngOnInit() {
   }
+
   handleCancel(): void {
     this.detailIsVisible = false;
     this.closeDetailModal.emit(this.detailIsVisible);

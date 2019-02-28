@@ -5,34 +5,34 @@
   </ng-template>
 
   <ng-template #modalContent>
-    <table class="modalTbale">
+    <table class="modalTbale" *ngIf="drugmaterial">
       <tr>
         <th>材料名称</th>
-        <td></td>
+        <td>{{drugmaterial.name}}</td>
         <th>材料编码</th>
-        <td></td>
+        <td>{{drugmaterial.code}}</td>
         <th>批准文号</th>
-        <td></td>
+        <td>{{drugmaterial.licensenumber}}</td>
       </tr>
       <tr>
         <th>规格</th>
-        <td></td>
+        <td>{{drugmaterial.specifications}}</td>
         <th>单位</th>
-        <td></td>
+        <td>{{drugmaterial.unit}}</td>
         <th>费用科目</th>
-        <td></td>
+        <td>{{drugmaterial.expenseaccount}}</td>
       </tr>
       <tr>
         <th>生产厂商</th>
-        <td></td>
+        <td>{{drugmaterial.mname}}</td>
         <th>产地</th>
-        <td></td>
+        <td>{{drugmaterial.originplace}}</td>
         <th>拼音码</th>
-        <td></td>
+        <td>{{drugmaterial.pinyincode}}</td>
       </tr>
       <tr>
         <th>状态</th>
-        <td colspan="5"></td>
+        <td colspan="5">{{drugmaterial.status === '0'?'无效':'有效'}}</td>
       </tr>
     </table>
   </ng-template>
