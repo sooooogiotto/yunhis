@@ -3,21 +3,23 @@
       <nz-form-item>
         <nz-form-label>材料名称</nz-form-label>
         <nz-form-control>
-          <input nz-input type="text" formControlName="ghs">
+          <input nz-input type="text" formControlName="name">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label>状态</nz-form-label>
         <nz-form-control>
-          <nz-select style="width: 177px;" formControlName="zt">
-            <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+          <nz-select style="width: 177px;" formControlName="state">
+            <nz-option nzValue="" nzLabel="全部" nzSelected></nz-option>
+             <nz-option nzValue="1" nzLabel="已启用" nzSelected></nz-option>
+            <nz-option nzValue="0" nzLabel="未启用" nzSelected></nz-option>
           </nz-select>
         </nz-form-control>
       </nz-form-item>
   
       <nz-form-item>
         <nz-form-control>
-          <button class="blueDefaultBtn" nz-button nzType="default" >查询</button>
+          <button class="blueDefaultBtn" nz-button nzType="default" (click)="getTableList()" >查询</button>
         </nz-form-control>
       </nz-form-item>
   
@@ -54,9 +56,9 @@
             <div *ngIf="data.state == '2'" class="status gray">不启用</div>
           </td>
           <td>
-            <a (click)="showAddModal()">修改</a>
+            <a (click)="showAddModal(data)">修改</a>
             <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="showDetailModal()">查看</a>
+            <a (click)="showDetailModal(data)">查看</a>
             <nz-divider nzType="vertical"></nz-divider>
             <a>删除</a>
           </td>
@@ -65,7 +67,7 @@
     </nz-table>
     <app-material-add-manufactureronary [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
     </app-material-add-manufactureronary>
-    <app-material-detail-manufactureronary [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
+    <app-material-detail-manufactureronary [manufacturer]="manufacturer" [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal($event)">
     </app-material-detail-manufactureronary>
     <app-page [page]="page" (changePage)="getTableList()"></app-page>
   </div>

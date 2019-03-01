@@ -6,8 +6,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-detail-manufactureronary.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
 })
 export class MaterialDetailManufactureronaryComponent implements OnInit {
-
+   
   @Input() detailIsVisible: boolean;
+  @Input() manufacturer: object;
   @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
   /** 分页对象 */
   page: object = {
@@ -19,26 +20,7 @@ export class MaterialDetailManufactureronaryComponent implements OnInit {
   isCheck: boolean = false;
   checkIsVisible: boolean = false;
 
-  dataSet: object = [
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    }
-  ]
+  dataSet: object = []
 
   constructor() { }
 
