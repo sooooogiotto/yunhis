@@ -90,6 +90,7 @@ export class MaterialOutComponent implements OnInit {
   }
   /** 关闭新入库弹出框 */
   closeAddModal(isVisible: boolean): void {
+    debugger
     this.addIsVisible = isVisible
   }
   /** 关闭详情弹出框 */

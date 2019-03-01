@@ -5,30 +5,30 @@
   </ng-template>
 
   <ng-template #modalContent>
-    <div class="materialAddDictionary">
+    <div class="materialAddDictionary" *ngIf="drugmaterial">
       <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
         <div nz-col nzSpan="6">
           <label>材料名称</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true">
+            <input nz-input [disabled]="true" [(ngModel)]="drugmaterial.name">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>材料编码</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true">
+            <input nz-input [disabled]="true" [(ngModel)]="drugmaterial.code">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>批准文号</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true">
+            <input nz-input [disabled]="true" [(ngModel)]="drugmaterial.licensenumber">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>规格</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="drugmaterial.specifications">
           </div>
         </div>
       </div>
@@ -36,7 +36,7 @@
         <div nz-col nzSpan="6">
           <label>单位</label>
           <div class="inlineFormGroup">
-            <nz-select>
+            <nz-select [(ngModel)]="drugmaterial.unit">
               <nz-option nz-label="" nz-value=""></nz-option>
             </nz-select>
           </div>
@@ -44,7 +44,7 @@
         <div nz-col nzSpan="6">
           <label>费用科目</label>
           <div class="inlineFormGroup">
-            <nz-select>
+            <nz-select [(ngModel)]="drugmaterial.expenseaccount">
               <nz-option nz-label="" nz-value=""></nz-option>
             </nz-select>
           </div>
@@ -52,7 +52,7 @@
         <div nz-col nzSpan="6">
           <label>生产厂商</label>
           <div class="inlineFormGroup">
-            <nz-select>
+            <nz-select [(ngModel)]="drugmaterial.mname">
               <nz-option nz-label="" nz-value=""></nz-option>
             </nz-select>
           </div>
@@ -60,7 +60,7 @@
         <div nz-col nzSpan="6">
           <label>产地</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="drugmaterial.originplace">
           </div>
         </div>
       </div>
@@ -68,15 +68,15 @@
         <div nz-col nzSpan="6">
           <label>拼音码</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true">
+            <input nz-input [disabled]="true" [(ngModel)]="drugmaterial.pinyincode">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>状态</label>
           <div class="inlineFormGroup">
             <nz-radio-group>
-              <label nz-radio nzValue="A">启用</label>
-              <label nz-radio nzValue="B">不启用</label>
+              <label nz-radio nzValue="1">启用</label>
+              <label nz-radio nzValue="0">不启用</label>
             </nz-radio-group>
           </div>
         </div>
@@ -85,7 +85,7 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <button nz-button nzType="primary" (click)="showConfirm(true)">保存</button>
-    <button class="blueDefaultBtn" nz-button nzType="default" (click)="showConfirm(false)">取消</button>
+    <button nz-button nzType="primary" (click)="handleCancel(true)">保存</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(false)">取消</button>
   </ng-template>
 </nz-modal>

@@ -7,15 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MaterialAddDictionaryComponent implements OnInit {
   @Input() addIsVisible: boolean;
+  @Input() drugmaterial: object;
+
   @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
-  /** 分页对象 */
-  page: object = {
-    curPage: 1,
-    pageCount: 50,
-    pageSize: 10
-  }
-  /** confirm */
-  checkIsVisible: boolean = false;
 
   constructor() { }
 
@@ -25,12 +19,4 @@ export class MaterialAddDictionaryComponent implements OnInit {
     this.addIsVisible = false;
     this.closeAddModal.emit(this.addIsVisible);
   }
-  showConfirm(flag: boolean): void {
-  }
-
-  closeConfirm(isVisible: boolean): void {
-    this.checkIsVisible = isVisible;
-  }
-
-
 }

@@ -15,7 +15,17 @@ export class MaterialOutOfStockModalComponent implements OnInit {
   isBack: boolean = false;
   isSelectedBack: boolean = false;
 
-  dataSet: object = [
+  dataSet: object[] = [
+    {
+      'fph': '22323232'
+    }
+  ]
+  dataSet1: object[] = [
+    {
+      'fph': '22323232'
+    }
+  ]
+  dataSet2: object[] = [
     {
       'fph': '22323232'
     }

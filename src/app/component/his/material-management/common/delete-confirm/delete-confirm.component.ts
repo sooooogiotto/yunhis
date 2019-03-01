@@ -8,14 +8,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 export class DeleteConfirmComponent implements OnInit {
   @Input() deleteIsVisible: boolean;
-  @Output() isDelete: EventEmitter<boolean> = new EventEmitter;
+  @Output() isDelete = new EventEmitter;
   constructor() { }
 
   ngOnInit() {
   }
 
-  handleCancel(flag: boolean): void {
-    this.deleteIsVisible = false;
+  handleCancel(flag: boolean) {
     this.isDelete.emit(flag);
+    this.deleteIsVisible = false;
   }
 }

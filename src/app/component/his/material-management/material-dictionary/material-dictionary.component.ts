@@ -4,10 +4,11 @@ import { MaterialDictionaryService } from './material-dictionary.service';
 import { MaterialManufactureronaryService } from '../material-manufactureronary/material-manufactureronary.service';
 import { HttpParams } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-material-dictionary',
   templateUrl: './material-dictionary.component.html',
-  providers: [MaterialDictionaryService],
+  providers: [MaterialDictionaryService, MaterialManufactureronaryService],
   styleUrls: ['./material-dictionary.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
 })
 export class MaterialDictionaryComponent implements OnInit {
@@ -24,6 +25,7 @@ export class MaterialDictionaryComponent implements OnInit {
   addIsVisible: boolean = false;
   detailIsVisible: boolean = false;
   deleteIsVisible: boolean = false;
+  isEdit: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
     status: ['1'],
@@ -31,12 +33,12 @@ export class MaterialDictionaryComponent implements OnInit {
     mid: [''],
     name: ['']
   })
-  stype: '5';
-  filter: '1';
   /** list数据 */
   dataSet: object[] = []
   /** 弹出新入库弹出框 */
-  showAddModal(): void {
+  showAddModal(drugmaterial: object): void {
+    this.drugmaterial = drugmaterial;
+    debugger
     this.addIsVisible = true;
   }
   /** 关闭新入库弹出框 */
