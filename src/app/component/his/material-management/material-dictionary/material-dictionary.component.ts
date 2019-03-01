@@ -3,16 +3,18 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { MaterialDictionaryService } from './material-dictionary.service';
 import { MaterialManufactureronaryService } from '../material-manufactureronary/material-manufactureronary.service';
 import { HttpParams } from '@angular/common/http';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-material-dictionary',
   templateUrl: './material-dictionary.component.html',
-  providers: [MaterialDictionaryService],
+  providers: [MaterialDictionaryService, MaterialManufactureronaryService],
   styleUrls: ['./material-dictionary.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
 })
 export class MaterialDictionaryComponent implements OnInit {
   /** 数据对象 */
   drugmaterial: object;
+  drugmaterialClone: object;
   manufactureronary: object[];
   /** 分页对象 */
   page: object = {
@@ -24,6 +26,7 @@ export class MaterialDictionaryComponent implements OnInit {
   addIsVisible: boolean = false;
   detailIsVisible: boolean = false;
   deleteIsVisible: boolean = false;
+  isEdit: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
     status: ['1'],
@@ -31,17 +34,20 @@ export class MaterialDictionaryComponent implements OnInit {
     mid: [''],
     name: ['']
   })
-  stype: '5';
-  filter: '1';
   /** list数据 */
   dataSet: object[] = []
   /** 弹出新入库弹出框 */
-  showAddModal(): void {
+  showAddModal(drugmaterial: object): void {
+    this.drugmaterialClone = Object.assign({}, drugmaterial ? drugmaterial : {});
     this.addIsVisible = true;
   }
   /** 关闭新入库弹出框 */
-  closeAddModal(isVisible: boolean): void {
-    this.addIsVisible = isVisible
+  closeAddModal(flag: boolean): void {
+    this.addIsVisible = false
+    if (flag) this.mdService.putDrugmaterial(this.drugmaterialClone).subscribe((res: any) => {
+      0 < +res['count'] && this.message.create('success', '删除成功！');
+      this.getdrugmaterial();
+    })
   }
   /** 弹出详情弹出框 */
   showDetailModal(drugmaterial: object): void {  	
@@ -69,10 +75,13 @@ export class MaterialDictionaryComponent implements OnInit {
   }
   /** 获取材料字典数据 */
   getdrugmaterial(): void {
+    // this.conditionForm.patchValue({ status: '0' })
+
     this.mdService.getDrugmaterialList(new HttpParams({ fromObject: this.conditionForm.value })
     ).subscribe(
       data => {
         if (data['data']) {
+          data['data'] = (data['data'].filter((item: object) => item['status'] !== '0'))
           data['data'].map((item: object) => item['mname'] = this.manufactureronary.find(m => item['manufacturerid'] === m['id'])['name'])
           this.dataSet = data['data'];    
           this.page['pageCount'] = this.dataSet.length;
@@ -84,19 +93,24 @@ export class MaterialDictionaryComponent implements OnInit {
   }
   /** 删除(逻辑) */
   putDrugmaterial(data: object): void {
+    //data['status'] = '1';
     this.mdService.putDrugmaterial(data
     ).subscribe(res => {
-      this.dataSet.filter(item => item['id'] == data['id'])
+      if (0 < +res['count']) {
+        this.message.create('success', '删除成功！');
+      }
     })
   }
 
   constructor(
     private fb: FormBuilder,
     private mdService: MaterialDictionaryService,
-    private mmService: MaterialManufactureronaryService
+    private mmService: MaterialManufactureronaryService,
+    private message: NzMessageService
   ) { }
 
   ngOnInit(): void {
+
     this.mmService.getManufacturerList(new HttpParams({ fromObject: this.conditionForm.value })
     ).subscribe(
       data => {
