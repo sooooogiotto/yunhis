@@ -60,6 +60,7 @@ import { MaterialSupplierComponent } from './component/his/material-management/m
 import { MaterialAddSupplierComponent } from './component/his/material-management/material-supplier/material-add-supplier/material-add-supplier.component';
 import { MaterialDetailSupplierComponent } from './component/his/material-management/material-supplier/material-detail-supplier/material-detail-supplier.component';
 import { MaterialCheckConfirmComponent } from './component/his/material-management/material-check/material-check-confirm/material-check-confirm.component';
+import { DeleteConfirmComponent } from './component/his/material-management/common/delete-confirm/delete-confirm.component';
 
 @NgModule({
   declarations: [
@@ -101,7 +102,8 @@ import { MaterialCheckConfirmComponent } from './component/his/material-manageme
     MaterialSupplierComponent,
     MaterialAddSupplierComponent,
     MaterialDetailSupplierComponent,
-    MaterialCheckConfirmComponent
+    MaterialCheckConfirmComponent,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,

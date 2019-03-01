@@ -23,6 +23,7 @@ export class MaterialDictionaryComponent implements OnInit {
   /** 控制模态窗 */
   addIsVisible: boolean = false;
   detailIsVisible: boolean = false;
+  deleteIsVisible: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
     status: ['1'],
@@ -38,6 +39,10 @@ export class MaterialDictionaryComponent implements OnInit {
   showAddModal(): void {
     this.addIsVisible = true;
   }
+  /** 关闭新入库弹出框 */
+  closeAddModal(isVisible: boolean): void {
+    this.addIsVisible = isVisible
+  }
   /** 弹出详情弹出框 */
   showDetailModal(drugmaterial: object): void {
     //查询详情接口
@@ -48,13 +53,19 @@ export class MaterialDictionaryComponent implements OnInit {
       this.drugmaterial = data['data'][0];
     })
   }
-  /** 关闭新入库弹出框 */
-  closeAddModal(isVisible: boolean): void {
-    this.addIsVisible = isVisible
-  }
   /** 关闭详情弹出框 */
   closeDetailModal(isVisible: boolean): void {
     this.detailIsVisible = isVisible
+  }
+  /** 显示删除弹出框 */
+  showDeleteConfirm(data: object): void {
+    this.deleteIsVisible = true;
+    this.drugmaterial = data;
+  }
+  /** 关闭删除弹出框，并判断是否执行删除方法 close delete confirm window also judge is execute delete() */
+  isDelete(flag: boolean): void {
+    this.deleteIsVisible = false;
+    if (flag) this.putDrugmaterial(this.drugmaterial)
   }
   /** 获取材料字典数据 */
   getdrugmaterial(): void {
@@ -65,6 +76,8 @@ export class MaterialDictionaryComponent implements OnInit {
           data['data'].map((item: object) => item['mname'] = this.manufactureronary.find(m => item['manufacturerid'] === m['id'])['name'])
           this.dataSet = data['data'];
           this.page['pageCount'] = this.dataSet.length;
+        } else {
+          this.dataSet = [];
         }
       }
     )

@@ -23,6 +23,7 @@ export class MaterialDictionaryService {
     "drugmaterial/list": `${ip}/service/560/drugmaterial/list${this.fixedParam}`,
     /** 材料字典列表 */
     "drugmaterial": `${ip}/service/560/drugmaterial`,
+    /** 材料字典列表 */
     "putdrugmaterial": `${ip}/service/560/drugmaterial`
   }
   constructor(
@@ -34,7 +35,6 @@ export class MaterialDictionaryService {
   }
 
   getDrugmaterialList(param: HttpParams): Observable<any> {
-    debugger
     return this.http.get(this.drugmateriallUrl['drugmaterial/list'], { params: param }).pipe(
       catchError(this.handleError('getDrugmaterialList'))
     )

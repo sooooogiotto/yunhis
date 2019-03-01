@@ -62,15 +62,16 @@
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="showDetailModal(data)">查看</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="putDrugmaterial(data)">删除</a>
+          <a (click)="showDeleteConfirm(data)">删除</a>
         </td>
       </tr>
     </tbody>
   </nz-table>
   <app-material-add-dictionary [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
   </app-material-add-dictionary>
-  <app-material-detail-dictionary [manufactureronary]="manufactureronary" [drugmaterial]="drugmaterial" [detailIsVisible]="detailIsVisible"
-    (closeDetailModal)="closeDetailModal()">
+  <app-material-detail-dictionary [manufactureronary]="manufactureronary" [drugmaterial]="drugmaterial"
+    [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
   </app-material-detail-dictionary>
+  <app-delete-confirm [deleteIsVisible]="deleteIsVisible" (isDelete)="isDelete()"></app-delete-confirm>
   <app-page [page]="page" (changePage)="getdrugmaterial()"></app-page>
 </div>
