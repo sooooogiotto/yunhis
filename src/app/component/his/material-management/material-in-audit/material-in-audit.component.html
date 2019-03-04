@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="dataSet">
+          <tr *ngFor="let data of dataSet">
             <td>{{data.djh}}</td>
             <td>{{data.rkrq}}</td>
             <td>{{data.ghs}}</td>
@@ -99,7 +99,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable1.data">
+          <tr *ngFor="let data of dataSet1">
             <td>{{data.djh}}</td>
             <td>{{data.rkrq}}</td>
             <td>{{data.ghs}}</td>
