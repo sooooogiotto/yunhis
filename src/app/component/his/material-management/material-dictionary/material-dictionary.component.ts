@@ -95,7 +95,7 @@ export class MaterialDictionaryComponent implements OnInit {
     }
   }
   /** 弹出详情弹出框 */
-  showDetailModal(drugmaterial: object): void {
+  showDetailModal(drugmaterial: object): void {  	
     //查询详情接口
     this.mdService.getDrugmaterial(new HttpParams({ fromObject: { "id": drugmaterial['id'] } })
     ).subscribe(data => {
@@ -128,7 +128,7 @@ export class MaterialDictionaryComponent implements OnInit {
         if (data['data']) {
           data['data'] = (data['data'].filter((item: object) => item['status'] !== '0'))
           data['data'].map((item: object) => item['mname'] = this.manufactureronary.find(m => item['manufacturerid'] === m['id'])['name'])
-          this.dataSet = data['data'];
+          this.dataSet = data['data'];    
           this.page['pageCount'] = this.dataSet.length;
         } else {
           this.dataSet = [];

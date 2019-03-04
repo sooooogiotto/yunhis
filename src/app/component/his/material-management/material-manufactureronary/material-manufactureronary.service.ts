@@ -13,9 +13,11 @@ export class MaterialManufactureronaryService {
 
   fixedParam: string = `?site=${this.configService.config.site}&appid=${this.configService.config.appid}&token=${this.configService.config.token}`
 
-  drugmateriallUrl = {
-    /** 生产厂商列表 */
-    "manufacturer/list": `${ip}/service/560/manufacturer/list${this.fixedParam}`
+ drugmateriallUrl = {
+    /** 生产厂商维护 */
+    "manufacturer/list": `${ip}/service/560/manufacturer/list${this.fixedParam}`,
+    /** 生产厂商详情 */
+    "manufacturer": `${ip}/service/560/manufacturer`,
   }
   constructor(httpErrorHandler: HttpErrorHandler, private http: HttpClient, private configService: ConfigService) {
     this.handleError = httpErrorHandler.createHandleError('MaterialDictionaryService');
@@ -23,7 +25,12 @@ export class MaterialManufactureronaryService {
 
   getManufacturerList(param: HttpParams): Observable<any> {
     return this.http.get(this.drugmateriallUrl['manufacturer/list'], { params: param }).pipe(
-      catchError(this.handleError('getDrugmaterialList'))
+      catchError(this.handleError('getManufacturerList'))
+    )
+  } 
+   getManufacturer(param: HttpParams): Observable<any> {
+    return this.http.get(this.drugmateriallUrl['manufacturer'] + `/${param.get('id')}`).pipe(
+      catchError(this.handleError('getManufacturer'))
     )
   }
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { MaterialManufactureronaryService} from './material-manufactureronary.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-material-manufactureronary',
@@ -7,6 +9,8 @@ import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
   styleUrls: ['./material-manufactureronary.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
 })
 export class MaterialManufactureronaryComponent implements OnInit {
+	/** 数据对象 */
+  manufacturer: object;
   /** 分页对象 */
   page: object = {
     curPage: 1,
@@ -18,82 +22,45 @@ export class MaterialManufactureronaryComponent implements OnInit {
   detailIsVisible: boolean = false;
   /** 构造form表单对象 */
   conditionForm: FormGroup = this.fb.group({
-    rkrqs: [''],
-    rkrqe: [''],
-    ghs: [''],
-    zt: [''],
-    address: this.fb.group({
-      street: [''],
-      city: [''],
-      state: [''],
-      zip: ['']
-    }),
-    aliases: this.fb.array([
-      this.fb.control('')
-    ])
+     status: ['1'],
+    state: [''],
+    mid: [''],
+    name: [''],
   })
   /** 静态数据 */
-  dataSet: object = [
-    {
-      key: '1',
-      djh: '2233222',
-      rkrq: '2018.10.11',
-      ghs: '中大医疗器械',
-      zbje: '3000',
-      rkzl: '新增入库',
-      lsje: '3200',
-      rkr: '张',
-      zt: '1'
-    },
-    {
-      key: '1',
-      djh: '2233222',
-      rkrq: '2018.10.11',
-      ghs: '中大医疗器械',
-      zbje: '3000',
-      rkzl: '新增入库',
-      lsje: '3200',
-      rkr: '张',
-      zt: '2'
-    },
-    {
-      key: '1',
-      djh: '2233222',
-      rkrq: '2018.10.11',
-      ghs: '中大医疗器械',
-      zbje: '3000',
-      rkzl: '新增入库',
-      lsje: '3200',
-      rkr: '张',
-      zt: '3'
-    },
-    {
-      key: '1',
-      djh: '2233222',
-      rkrq: '2018.10.11',
-      ghs: '中大医疗器械',
-      zbje: '3000',
-      rkzl: '新增入库',
-      lsje: '3200',
-      rkr: '张',
-      zt: '4'
-    }
-  ];
+  dataSet: object[] = []
   /** 表单提交时 */
   onSubmit(): void {
     console.warn(this.conditionForm.value)
   }
   /** 查询表格List数据 */
   getTableList(): void {
+  	this.mdService.getManufacturerList(new HttpParams({fromObject:this.conditionForm.value})).subscribe(
+  		data=>{
+  			if(data['data']){
+  				this.dataSet=data['data'];
+  				this.page['pageCount'] = this.dataSet.length;
+  			}
+  			else{
+  				this.dataSet=[];
+  			}
+  		}
+  	)
     this.page
   }
+  
   /** 弹出新入库弹出框 */
   showAddModal(): void {
     this.addIsVisible = true;
   }
   /** 弹出详情弹出框 */
-  showDetailModal(): void {
-    this.detailIsVisible = true;
+  showDetailModal(manufacturer: object): void {
+  	this.mdService.getManufacturer(new HttpParams({fromObject:{"id":manufacturer["id"]}}))
+  	.subscribe(data=>{
+  		this.detailIsVisible = true;
+  		this.manufacturer=data["data"][0]
+  	})
+    
   }
   /** 关闭新入库弹出框 */
   closeAddModal(isVisible: boolean): void {
@@ -103,8 +70,9 @@ export class MaterialManufactureronaryComponent implements OnInit {
   closeDetailModal(isVisible: boolean): void {
     this.detailIsVisible = isVisible
   }
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private mdService: MaterialManufactureronaryService) { }
 
   ngOnInit(): void {
+  	this.getTableList()
   }
 }
