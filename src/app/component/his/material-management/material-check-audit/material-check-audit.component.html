@@ -22,7 +22,7 @@
         </nz-form-item>
 
       </form>
-      <nz-table #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+      <nz-table [nzData]="dataSet" nzBordered [nzShowPagination]="false">
         <thead>
           <tr>
             <th>单据号</th>
@@ -37,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data">
+          <tr *ngFor="dataSet">
             <td>{{data.djh}}</td>
             <td>{{data.rkrq}}</td>
             <td>{{data.ghs}}</td>

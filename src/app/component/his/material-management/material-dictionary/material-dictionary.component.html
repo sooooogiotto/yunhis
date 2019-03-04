@@ -30,7 +30,7 @@
       </nz-form-control>
     </nz-form-item>
   </form>
-  <nz-table nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+  <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
     <thead>
       <tr>
         <th>材料名称</th>
@@ -45,7 +45,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of basicTable.data">
+      <tr *ngFor="let data of dataSet">
         <td>{{data.name}}</td>
         <td>{{data.code}}</td>
         <td>{{data.specifications}}</td>
@@ -54,11 +54,11 @@
         <td>{{data.originplace}}</td>
         <td>{{data.expenseaccount}}</td>
         <td>
-          <div *ngIf="data.status == '1'" class="status gray">启用</div>
-          <div *ngIf="data.status == '2'" class="status gray">不启用</div>
+          <div *ngIf="data.state == '1'" class="status gray">启用</div>
+          <div *ngIf="data.state == '0'" class="status gray">不启用</div>
         </td>
         <td>
-          <a (click)="showAddModal(data)">修改</a>
+          <a (click)="showUpdateModal(data)">修改</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="showDetailModal(data)">查看</a>
           <nz-divider nzType="vertical"></nz-divider>
@@ -67,8 +67,8 @@
       </tr>
     </tbody>
   </nz-table>
-  <app-material-add-dictionary [manufactureronary]="manufactureronary" [drugmaterialClone]="drugmaterialClone" [addIsVisible]="addIsVisible"
-    (closeAddModal)="closeAddModal($event)">
+  <app-material-add-dictionary [isEdit]="isEdit" [manufactureronary]="manufactureronary" [drugmaterial]="drugmaterial"
+    [addIsVisible]="addIsVisible" (closeModal)="closeModal($event)">
   </app-material-add-dictionary>
   <app-material-detail-dictionary [manufactureronary]="manufactureronary" [drugmaterial]="drugmaterial"
     [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal($event)">

@@ -59,7 +59,7 @@
         <button type="button" nz-button nzType="primary" (click)="showAddModal()"><i nz-icon type="plus-circle"
             theme="fill"></i>新增</button>
       </div>
-      <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+      <nz-table [nzNoResult]="" nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
         <thead>
           <tr>
             <th>材料名称</th>
@@ -72,7 +72,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of basicTable.data">
+          <tr *ngFor="dataSet">
             <td>
               <div class="tableInputDiv">
                 <input nz-input>

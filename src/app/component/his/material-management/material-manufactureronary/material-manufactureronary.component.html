@@ -28,7 +28,7 @@
         </nz-form-control>
       </nz-form-item>
     </form>
-    <nz-table nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
       <thead>
         <tr>
           <th>企业名称</th>
@@ -42,7 +42,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of basicTable.data">
+        <tr *ngFor="dataSet">
           <td>{{data.name}}</td>
           <td>{{data.companyaddr}}</td>
           <td>{{data.contactpeople}}</td>

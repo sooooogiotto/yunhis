@@ -7,17 +7,18 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MaterialAddDictionaryComponent implements OnInit {
   @Input() addIsVisible: boolean;
-  @Input() drugmaterialClone: object;
+  @Input() drugmaterial: object;
   @Input() manufactureronary: object[];
+  @Input() isEdit: boolean;
 
-  @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter;
 
   constructor() { }
 
   ngOnInit() {
   }
-  handleCancel(flag:boolean): void {
+  handleCancel(flag: boolean): void {
     this.addIsVisible = false;
-    this.closeAddModal.emit(flag);
+    this.closeModal.emit(flag);
   }
 }

@@ -14,7 +14,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class MaterialDictionaryComponent implements OnInit {
   /** 数据对象 */
   drugmaterial: object;
-  drugmaterialClone: object;
+  //drugmaterialClone: object;
   manufactureronary: object[];
   /** 分页对象 */
   page: object = {
@@ -37,17 +37,62 @@ export class MaterialDictionaryComponent implements OnInit {
   /** list数据 */
   dataSet: object[] = []
   /** 弹出新入库弹出框 */
-  showAddModal(drugmaterial: object): void {
-    this.drugmaterialClone = Object.assign({}, drugmaterial ? drugmaterial : {});
+  showAddModal(): void {
+    this.drugmaterial = {};
+    this.isEdit = false;
     this.addIsVisible = true;
   }
-  /** 关闭新入库弹出框 */
-  closeAddModal(flag: boolean): void {
-    this.addIsVisible = false
-    if (flag) this.mdService.putDrugmaterial(this.drugmaterialClone).subscribe((res: any) => {
-      0 < +res['count'] && this.message.create('success', '删除成功！');
-      this.getdrugmaterial();
+  /** 弹出修改弹出框 */
+  showUpdateModal(drugmaterial: object): void {
+    this.isEdit = true
+    this.drugmaterial = drugmaterial ? drugmaterial : {};
+    this.addIsVisible = true;
+    this.mdService.getDrugmaterial(new HttpParams({ fromObject: { "id": drugmaterial['id'] } })
+    ).subscribe(data => {
+      this.drugmaterial = data['data'][0]
     })
+  }
+  /** 关闭新入库弹出框 */
+  closeModal(flag: boolean): void {
+    this.addIsVisible = false
+    /**是否点击保存 */
+    if (flag) {
+      /**是否点击修改 */
+      if (this.isEdit) {
+        this.mdService.putDrugmaterial(this.drugmaterial).subscribe((res: any) => {
+          /**后台是否有修改条数 */
+          if (0 < +res['count']) {
+            this.message.create('success', '操作成功！');
+            /**根据id匹配到现有表格的数据  */
+            this.dataSet.map((item, index) => {
+              if (item['id'] === this.drugmaterial['id']) {
+                /**手动遍历对象赋值  */
+                for (let i in this.dataSet[index]) {
+                  this.dataSet[index][i] = this.drugmaterial[i]
+                  /**是否等于生产厂商名字 */
+                  if (i === 'mname') {
+                    this.dataSet[index][i] = this.manufactureronary.find(m => this.dataSet[index]['manufacturerid'] === m['id'])['name']
+                  }
+                }
+              }
+            });
+          } else {
+            this.message.create('error', '操作失败！');
+          }
+        })
+      } else {
+        this.mdService.postdrugmaterial(this.drugmaterial).subscribe((res: any) => {
+          /**后台是否有新增条数 */
+          if (res) {
+            this.message.create('success', '操作成功！');
+            /**添加到当前的list数据中 */
+            this.dataSet.push(this.drugmaterial);
+          } else {
+            this.message.create('error', '操作失败！');
+          }
+        })
+      }
+    }
   }
   /** 弹出详情弹出框 */
   showDetailModal(drugmaterial: object): void {

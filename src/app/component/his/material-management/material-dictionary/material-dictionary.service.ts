@@ -24,7 +24,9 @@ export class MaterialDictionaryService {
     /** 材料字典列表 */
     "drugmaterial": `${ip}/service/560/drugmaterial`,
     /** 材料字典列表 */
-    "putdrugmaterial": `${ip}/service/560/drugmaterial`
+    "putdrugmaterial": `${ip}/service/560/drugmaterial`,
+    /** 新增材料字典 */
+    "postdrugmaterial": `${ip}/service/560/drugmaterial`
   }
   constructor(
     httpErrorHandler: HttpErrorHandler,
@@ -48,6 +50,12 @@ export class MaterialDictionaryService {
 
   putDrugmaterial(param: object): Observable<any> {
     return this.http.put(this.drugmateriallUrl['putdrugmaterial'] + `/${param['id']}`, param, httpOptions).pipe(
+      catchError(this.handleError('putdrugmaterial'))
+    )
+  }
+
+  postdrugmaterial(param: object): Observable<any> {
+    return this.http.post(this.drugmateriallUrl['putdrugmaterial'], param, httpOptions).pipe(
       catchError(this.handleError('putdrugmaterial'))
     )
   }

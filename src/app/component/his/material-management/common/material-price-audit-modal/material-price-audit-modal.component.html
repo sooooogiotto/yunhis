@@ -35,7 +35,7 @@
           <button type="button" nz-button nzType="primary">导出</button>
           <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button>
         </div>
-        <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <nz-table [nzNoResult]="" nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
           <thead>
             <tr>
               <th>材料名称</th>
@@ -52,7 +52,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let data of basicTable.data">
+            <tr *ngFor="dataSet">
               <td>
                 {{data.fph}}
               </td>

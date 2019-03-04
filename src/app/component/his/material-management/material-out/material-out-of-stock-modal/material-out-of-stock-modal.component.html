@@ -40,7 +40,7 @@
               <button nz-button nzType="primary">批量发放</button>
               <button class="orangePrimaryBtn" nz-button nzType="primary" style="margin-left:12px;">批量驳回</button>
             </div>
-            <nz-table [nzNoResult]="" nzSize="middle" #basicTable [nzData]="dataSet" nzBordered
+            <nz-table [nzNoResult]="" nzSize="middle" [nzData]="dataSet" nzBordered
               [nzShowPagination]="false">
               <thead>
                 <tr>
@@ -57,7 +57,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of basicTable.data">
+                <tr *ngFor="dataSet">
                   <td>
                     <label nz-checkbox></label>
                   </td>
@@ -110,7 +110,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let data of basicTable.data">
+                <tr *ngFor="dataSet">
                   <td>
                     <label nz-checkbox></label>
                   </td>
