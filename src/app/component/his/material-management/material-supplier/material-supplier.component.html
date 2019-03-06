@@ -1,71 +1,76 @@
 <div class="childrenContainer">
-    <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
-      <nz-form-item>
-        <nz-form-label>材料名称</nz-form-label>
-        <nz-form-control>
-          <input nz-input type="text" formControlName="ghs">
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-label>状态</nz-form-label>
-        <nz-form-control>
-          <nz-select style="width: 177px;" formControlName="zt">
-            <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
-          </nz-select>
-        </nz-form-control>
-      </nz-form-item>
-  
-      <nz-form-item>
-        <nz-form-control>
-          <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
-        </nz-form-control>
-      </nz-form-item>
-  
-      <nz-form-item style="float:right">
-        <nz-form-control>
-          <button type="button" nz-button nzType="primary" (click)="showAddModal()"><i nz-icon type="plus-circle"
-              theme="fill"></i>新建</button>
-        </nz-form-control>
-      </nz-form-item>
-    </form>
-    <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
-      <thead>
-        <tr>
-          <th>企业名称</th>
-          <th>企业地址</th>
-          <th>联系人</th>
-          <th>联系电话</th>
-          <th>邮箱</th>
-          <th>传真</th>
-          <th>状态</th>
-          <th>操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of dataSet">
-          <td>{{data.djh}}</td>
-          <td>{{data.rkrq}}</td>
-          <td>{{data.ghs}}</td>
-          <td>{{data.rkzl}}</td>
-          <td>{{data.zbje}}</td>
-          <td>{{data.lsje}}</td>
-          <td>
-            <div *ngIf="data.zt == '1'" class="status gray">启用</div>
-            <div *ngIf="data.zt == '2'" class="status gray">不启用</div>
-          </td>
-          <td>
-            <a (click)="showAddModal()">修改</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a (click)="showDetailModal()">查看</a>
-            <nz-divider nzType="vertical"></nz-divider>
-            <a>删除</a>
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
-    <app-material-add-manufactureronary [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
-    </app-material-add-manufactureronary>
-    <app-material-detail-manufactureronary [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
-    </app-material-detail-manufactureronary>
-    <app-page [page]="page" (changePage)="getTableList()"></app-page>
-  </div>
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm">
+    <nz-form-item>
+      <nz-form-label>企业名称</nz-form-label>
+      <nz-form-control>
+        <input nz-input type="text" formControlName="name">
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label>状态</nz-form-label>
+      <nz-form-control>
+        <nz-select style="width: 177px;" formControlName="state">
+          <nz-option nzValue="" nzLabel="全部" nzSelected></nz-option>
+          <nz-option nzValue="1" nzLabel="已启用" nzSelected></nz-option>
+          <nz-option nzValue="0" nzLabel="未启用" nzSelected></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button class="blueDefaultBtn" nz-button nzType="default" (click)="getsupplier()">查询</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item style="float:right">
+      <nz-form-control>
+        <button type="button" nz-button nzType="primary" (click)="showAddModal()"><i nz-icon type="plus-circle"
+            theme="fill"></i>新建</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+    <thead>
+      <tr>
+        <th>企业名称</th>
+        <th>企业地址</th>
+        <th>联系人</th>
+        <th>联系电话</th>
+        <th>邮箱</th>
+        <th>传真</th>
+        <th>状态</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of dataSet">
+        <td>{{data.name}}</td>
+        <td>{{data.companyaddr}}</td>
+        <td>{{data.contactpeople}}</td>
+        <td>{{data.contactphone}}</td>
+        <td>{{data.email}}</td>
+        <td>{{data.fax}}</td>
+        <td>
+          <div *ngIf="data.state == '1'" class="status gray">启用</div>
+          <div *ngIf="data.state == '0'" class="status gray">不启用</div>
+        </td>
+        <td>
+          <a (click)="showUpdateModal(data)">修改</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="showDetailModal(data)">查看</a>
+          <nz-divider nzType="vertical"></nz-divider>
+          <a (click)="showDeleteConfirm(data)">删除</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <app-material-add-supplier [isEdit]="isEdit" [supplier]="supplier"
+    [addIsVisible]="addIsVisible" (closeModal)="closeModal($event)">
+  </app-material-add-supplier>
+  <app-material-detail-supplier [supplier]="supplier" [detailIsVisible]="detailIsVisible"
+    (closeDetailModal)="closeDetailModal($event)">
+  </app-material-detail-supplier>
+  <app-delete-confirm [deleteIsVisible]="deleteIsVisible" (isDelete)="isDelete($event)"></app-delete-confirm>
+  <app-page [page]="page" (changePage)="getsupplier($event)"></app-page>
+</div>

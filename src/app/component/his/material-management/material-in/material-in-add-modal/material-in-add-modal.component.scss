@@ -22,3 +22,16 @@ nz-form-label {
 ::ng-deep .ant-modal-body .ant-table-wrapper {
   height: 350px;
 }
+
+nz-select {
+  width: 100%;
+}
+
+.inline-form-row {
+  label {
+    width: 5.5em !important;
+  }
+  .inlineFormGroup {
+    padding-left: 7em!important;
+  }
+}

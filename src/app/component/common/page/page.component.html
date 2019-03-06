@@ -1,5 +1,7 @@
 <nz-pagination class="customPageComponent" [nzShowTotal]="totalTemplate" [nzPageIndex]="page.curPage"
-  [nzTotal]="page.pageCount" [nzSize]="'small'" [nzPageSizeOptions]="pageSize" (nzPageIndexChange)="nzPageIndexChange($event)" nzShowSizeChanger nzShowQuickJumper>
+  [nzTotal]="page.pageCount" [nzSize]="'small'" [nzPageSizeOptions]="pagenum"
+  (nzPageIndexChange)="nzPageIndexChange($event)" (nzPageSizeChange)="nzPageSizeChange($event)" nzShowSizeChanger
+  nzShowQuickJumper>
 </nz-pagination>
 <br />
 <ng-template #totalTemplate>共&nbsp;{{page.pageCount}}&nbsp;条</ng-template>

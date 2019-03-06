@@ -15,12 +15,13 @@ export class MaterialDictionaryComponent implements OnInit {
   /** 数据对象 */
   drugmaterial: object;
   //drugmaterialClone: object;
-  manufactureronary: object[];
+  manufactureronary: Array<object>;
   /** 分页对象 */
   page: object = {
     curPage: 1,
-    pageCount: 0,
-    pageSize: 10
+    pagestart: 0,
+    pagenum: 10000,
+    pageCount: 0
   }
   /** 控制模态窗 */
   addIsVisible: boolean = false;
@@ -36,6 +37,38 @@ export class MaterialDictionaryComponent implements OnInit {
   })
   /** list数据 */
   dataSet: object[] = []
+
+  /** 获取材料字典List数据 */
+  getdrugmaterial(page: object): void {
+    for (let i in page) {
+      this.page[i] = page[i]
+    }
+    // this.conditionForm.patchValue({ status: '0' })
+    this.mdService.getDrugmaterialList(new HttpParams({ fromObject: Object.assign(this.conditionForm.value, this.page) })
+    ).subscribe(
+      data => {
+        if (data['data']) {
+          this.getdrugmaterialCount();
+          this.dataSet = data['data'];
+          //this.page['pageCount'] = this.dataSet.length;
+        } else {
+          if (this.page['pagestart'] !== 0) {
+            --this.page['curPage'];
+            this.page['pagestart'] = this.page['pagestart'] - +this.page['pagenum'];
+            this.getdrugmaterial(this.page);
+          } else {
+            this.dataSet = [];
+          }
+        }
+      }
+    )
+  }
+  getdrugmaterialCount(): void {
+    this.mdService.getDrugmaterialCount(new HttpParams({ fromObject: this.conditionForm.value })
+    ).subscribe(
+      data => (this.page['pageCount'] = data['count'])
+    )
+  }
   /** 弹出新入库弹出框 */
   showAddModal(): void {
     this.drugmaterial = {};
@@ -63,19 +96,7 @@ export class MaterialDictionaryComponent implements OnInit {
           /**后台是否有修改条数 */
           if (0 < +res['count']) {
             this.message.create('success', '操作成功！');
-            /**根据id匹配到现有表格的数据  */
-            this.dataSet.map((item, index) => {
-              if (item['id'] === this.drugmaterial['id']) {
-                /**手动遍历对象赋值  */
-                for (let i in this.dataSet[index]) {
-                  this.dataSet[index][i] = this.drugmaterial[i]
-                  /**是否等于生产厂商名字 */
-                  if (i === 'mname') {
-                    this.dataSet[index][i] = this.manufactureronary.find(m => this.dataSet[index]['manufacturerid'] === m['id'])['name']
-                  }
-                }
-              }
-            });
+            this.getdrugmaterial(this.page);
           } else {
             this.message.create('error', '操作失败！');
           }
@@ -86,7 +107,7 @@ export class MaterialDictionaryComponent implements OnInit {
           if (res) {
             this.message.create('success', '操作成功！');
             /**添加到当前的list数据中 */
-            this.dataSet.push(this.drugmaterial);
+            this.getdrugmaterial(this.page);
           } else {
             this.message.create('error', '操作失败！');
           }
@@ -95,12 +116,11 @@ export class MaterialDictionaryComponent implements OnInit {
     }
   }
   /** 弹出详情弹出框 */
-  showDetailModal(drugmaterial: object): void {  	
+  showDetailModal(drugmaterial: object): void {
     //查询详情接口
     this.mdService.getDrugmaterial(new HttpParams({ fromObject: { "id": drugmaterial['id'] } })
     ).subscribe(data => {
       this.detailIsVisible = true;
-      data['data'][0]['mname'] = this.manufactureronary.find(m => data['data'][0]['manufacturerid'] === m['id'])['name']
       this.drugmaterial = data['data'][0];
     })
   }
@@ -118,31 +138,14 @@ export class MaterialDictionaryComponent implements OnInit {
     this.deleteIsVisible = false;
     if (flag) this.putDrugmaterial(this.drugmaterial)
   }
-  /** 获取材料字典数据 */
-  getdrugmaterial(): void {
-    // this.conditionForm.patchValue({ status: '0' })
-
-    this.mdService.getDrugmaterialList(new HttpParams({ fromObject: this.conditionForm.value })
-    ).subscribe(
-      data => {
-        if (data['data']) {
-          data['data'] = (data['data'].filter((item: object) => item['status'] !== '0'))
-          data['data'].map((item: object) => item['mname'] = this.manufactureronary.find(m => item['manufacturerid'] === m['id'])['name'])
-          this.dataSet = data['data'];    
-          this.page['pageCount'] = this.dataSet.length;
-        } else {
-          this.dataSet = [];
-        }
-      }
-    )
-  }
   /** 删除(逻辑) */
   putDrugmaterial(data: object): void {
-    //data['status'] = '1';
+    data['status'] = '0';
     this.mdService.putDrugmaterial(data
     ).subscribe(res => {
       if (0 < +res['count']) {
         this.message.create('success', '删除成功！');
+        this.getdrugmaterial(this.page);
       }
     })
   }
@@ -155,14 +158,15 @@ export class MaterialDictionaryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.mmService.getManufacturerList(new HttpParams({ fromObject: this.conditionForm.value })
+    this.mmService.getManufactureronaryList(new HttpParams({ fromObject: Object.assign(this.conditionForm.value, this.page) })
     ).subscribe(
       data => {
+        /** 查询生厂商 */
         this.manufactureronary = data['data']
-        this.getdrugmaterial();
+        /** 手动设置查询行数 */
+        this.page['pagenum'] = 10;
+        this.getdrugmaterial(this.page);
       }
     )
   }
-
 }

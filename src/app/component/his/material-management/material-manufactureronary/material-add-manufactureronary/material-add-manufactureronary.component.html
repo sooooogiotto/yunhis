@@ -1,34 +1,34 @@
 <nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="addIsVisible" [nzTitle]="modalTitle"
-  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel(false)" nzWidth="1200">
   <ng-template #modalTitle>
     新建生产厂商
   </ng-template>
 
   <ng-template #modalContent>
-    <div class="materialAddDictionary">
+    <div class="materialAddDictionary" *ngIf="manufactureronary">
       <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
         <div nz-col nzSpan="6">
           <label>企业名称</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="manufactureronary.name">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>联系人</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="manufactureronary.contactpeople">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>联系电话</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="manufactureronary.contactphone">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>邮箱</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [(ngModel)]="manufactureronary.email">
           </div>
         </div>
       </div>
@@ -36,24 +36,23 @@
         <div nz-col nzSpan="6">
           <label>传真</label>
           <div class="inlineFormGroup">
-            <nz-select>
-              <nz-option nz-label="" nz-value=""></nz-option>
-            </nz-select>
+            <input nz-input [(ngModel)]="manufactureronary.fax">
           </div>
         </div>
         <div nz-col nzSpan="18">
           <label>企业地址</label>
-          <div class="inlineFormGroup">
-            <nz-select style="width:150px;">
-              <nz-option nz-label="" nz-value=""></nz-option>
+          <div class="inlineFormGroup" *ngIf="manufactureronary">
+            <nz-select style="width:150px;" [(ngModel)]="manufactureronary.province" (ngModelChange)="pChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of p"></nz-option>
             </nz-select>
-            <nz-select style="width:150px;margin-left:12px;">
-              <nz-option nz-label="" nz-value=""></nz-option>
+            <nz-select style="width:150px;margin-left:12px;" [(ngModel)]="manufactureronary.city"
+              (ngModelChange)="cChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of c[manufactureronary.province]"></nz-option>
             </nz-select>
-            <nz-select style="width:150px;margin-left:12px;">
-              <nz-option nz-label="" nz-value=""></nz-option>
+            <nz-select style="width:150px;margin-left:12px;" [(ngModel)]="manufactureronary.area">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of a[manufactureronary.city]"></nz-option>
             </nz-select>
-            <input nz-input style="width:305px;margin-left:12px;">
+            <input nz-input style="width:305px;margin-left:12px;" [(ngModel)]="manufactureronary.street">
           </div>
         </div>
       </div>
@@ -61,9 +60,9 @@
         <div nz-col nzSpan="6">
           <label>状态</label>
           <div class="inlineFormGroup">
-            <nz-radio-group>
-              <label nz-radio nzValue="A">启用</label>
-              <label nz-radio nzValue="B">不启用</label>
+            <nz-radio-group [(ngModel)]="manufactureronary.state">
+              <label nz-radio nzValue="1">启用</label>
+              <label nz-radio nzValue="0">不启用</label>
             </nz-radio-group>
           </div>
         </div>
@@ -72,7 +71,7 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <button nz-button nzType="primary" (click)="handleCancel()">保存</button>
-    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="handleCancel(true)">保存</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(false)">取消</button>
   </ng-template>
 </nz-modal>

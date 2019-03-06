@@ -50,7 +50,7 @@
         <td>{{data.code}}</td>
         <td>{{data.specifications}}</td>
         <td>{{data.licensenumber}}</td>
-        <td>{{data.mname}}</td>
+        <td>{{data.manufacturername}}</td>
         <td>{{data.originplace}}</td>
         <td>{{data.expenseaccount}}</td>
         <td>
@@ -74,5 +74,5 @@
     [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal($event)">
   </app-material-detail-dictionary>
   <app-delete-confirm [deleteIsVisible]="deleteIsVisible" (isDelete)="isDelete($event)"></app-delete-confirm>
-  <app-page [page]="page" (changePage)="getdrugmaterial()"></app-page>
+  <app-page [page]="page" (changePage)="getdrugmaterial($event)"></app-page>
 </div>

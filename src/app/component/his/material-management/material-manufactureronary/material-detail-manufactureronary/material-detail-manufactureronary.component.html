@@ -1,39 +1,39 @@
 <nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="detailIsVisible" [nzTitle]="modalTitle"
   [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel()" nzWidth="1200">
   <ng-template #modalTitle>
-    材料详情
+    生产商详情
   </ng-template>
 
   <ng-template #modalContent>
-    <table class="modalTbale" *ngIf="drugmaterial">
+    <table class="modalTbale" *ngIf="manufactureronary">
       <tr>
-        <th>材料名称</th>
-        <td></td>
-        <th>材料编码</th>
-        <td></td>
-        <th>批准文号</th>
-        <td></td>
+        <th>企业名称</th>
+        <td>{{manufactureronary.name}}</td>
+        <th>联系人</th>
+        <td>{{manufactureronary.contactpeople}}</td>
+        <th>联系电话</th>
+        <td>{{manufactureronary.contactphone}}</td>
       </tr>
       <tr>
-        <th>规格</th>
-        <td></td>
-        <th>单位</th>
-        <td></td>
-        <th>费用科目</th>
-        <td></td>
+        <th>邮箱</th>
+        <td>{{manufactureronary.email}}</td>
+        <th>传真</th>
+        <td>{{manufactureronary.fax}}</td>
+        <th>企业地址</th>
+        <td>{{manufactureronary.companyaddr}}</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <th>生产厂商</th>
-        <td></td>
+        <td>{{manufactureronary}}</td>
         <th>产地</th>
-        <td></td>
+        <td>{{manufactureronary}}</td>
         <th>拼音码</th>
-        <td></td>
-      </tr>
+        <td>{{manufactureronary}}</td>
+      </tr>-->
       <tr>
         <th>状态</th>
-        <td colspan="5"></td>
-      </tr>
+        <td colspan="5">{{manufactureronary.state}}</td>
+      </tr> 
     </table>
   </ng-template>
 

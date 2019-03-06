@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { StaticDataService } from 'src/app/static-data.service';
 @Component({
   selector: 'app-material-add-supplier',
   templateUrl: './material-add-supplier.component.html',
@@ -7,53 +7,41 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MaterialAddSupplierComponent implements OnInit {
   @Input() addIsVisible: boolean;
-  @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
-  /** 分页对象 */
-  page: object = {
-    curPage: 1,
-    pageCount: 50,
-    pageSize: 10
+  @Input() supplier: object;
+  @Input() isEdit: boolean;
+
+  @Output() closeModal: EventEmitter<boolean> = new EventEmitter;
+
+  p: string[];
+  c: object;
+  a: object;
+  constructor(private sdService: StaticDataService) {
+    this.p = [];
+    this.c = {};
+    this.a = {};
   }
-  /** confirm */
-  isCheck: boolean = false;
-  checkIsVisible: boolean = false;
-
-  dataSet: object = [
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    },
-    {
-      'fph': '22323232'
-    }
-  ]
-
-  constructor() { }
 
   ngOnInit() {
+    this.sdService.getPUA().subscribe(
+      data => {
+        this.p = data['p']
+        this.c = data['c']
+        this.a = data['a']
+      }
+    )
   }
-  handleCancel(): void {
+  handleCancel(flag: boolean): void {
     this.addIsVisible = false;
-    this.closeAddModal.emit(this.addIsVisible);
-  }
-  showConfirm(flag: boolean): void {
-    this.isCheck = flag;
-    this.checkIsVisible = true;
+    this.supplier['companyaddr'] = this.supplier['province'] + this.supplier['city'] + this.supplier['area'] + this.supplier['street'];
+    this.closeModal.emit(flag);
   }
 
-  closeConfirm(isVisible: boolean): void {
-    this.isCheck = isVisible;
-    this.checkIsVisible = isVisible;
+  pChange(value: string) {
+    this.supplier['city'] = this.c[value][0];
+    this.cChange(this.supplier['city']);
+  }
+
+  cChange(value: string) {
+    this.supplier['area'] = this.a[value][0];
   }
 }

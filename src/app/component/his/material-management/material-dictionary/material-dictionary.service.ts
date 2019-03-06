@@ -22,10 +22,12 @@ export class MaterialDictionaryService {
     /** 材料字典列表 */
     "drugmaterial/list": `${ip}/service/560/drugmaterial/list${this.fixedParam}`,
     /** 材料字典列表 */
+    "drugmaterial/count": `${ip}/service/560/drugmaterial/count${this.fixedParam}`,
+    /** 材料字典详情 */
     "drugmaterial": `${ip}/service/560/drugmaterial`,
-    /** 材料字典列表 */
+    /** 材料字典修改 */
     "putdrugmaterial": `${ip}/service/560/drugmaterial`,
-    /** 新增材料字典 */
+    /** 材料字典新增 */
     "postdrugmaterial": `${ip}/service/560/drugmaterial`
   }
   constructor(
@@ -38,6 +40,11 @@ export class MaterialDictionaryService {
 
   getDrugmaterialList(param: HttpParams): Observable<any> {
     return this.http.get(this.drugmateriallUrl['drugmaterial/list'], { params: param }).pipe(
+      catchError(this.handleError('getDrugmaterialList'))
+    )
+  }
+  getDrugmaterialCount(param: HttpParams): Observable<any> {
+    return this.http.get(this.drugmateriallUrl['drugmaterial/count'], { params: param }).pipe(
       catchError(this.handleError('getDrugmaterialList'))
     )
   }

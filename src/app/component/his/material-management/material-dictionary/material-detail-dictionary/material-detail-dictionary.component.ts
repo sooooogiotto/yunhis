@@ -10,15 +10,6 @@ export class MaterialDetailDictionaryComponent implements OnInit {
   @Input() drugmaterial: object;
   @Input() manufactureronary: object[];
   @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
-  /** 分页对象 */
-  page: object = {
-    curPage: 1,
-    pageCount: 50,
-    pageSize: 10
-  }
-  /** confirm */
-  isCheck: boolean = false;
-  checkIsVisible: boolean = false;
 
   constructor() { }
 
@@ -28,14 +19,5 @@ export class MaterialDetailDictionaryComponent implements OnInit {
   handleCancel(): void {
     this.detailIsVisible = false;
     this.closeDetailModal.emit(this.detailIsVisible);
-  }
-  showConfirm(flag: boolean): void {
-    this.isCheck = flag;
-    this.checkIsVisible = true;
-  }
-
-  closeConfirm(isVisible: boolean): void {
-    this.isCheck = isVisible;
-    this.checkIsVisible = isVisible;
   }
 }

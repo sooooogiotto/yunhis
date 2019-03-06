@@ -1,0 +1,287 @@
+{
+	"info": {
+		"_postman_id": "f5a68d00-3a02-4ffd-ace1-5bd1b3f940a9",
+		"name": "入库单接口",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "材料详情",
+			"item": [
+				{
+					"name": "新增或修改材料详情",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{godownentryid:6,items:[\n\t\t{\n\t\t\tinvno:发票号,\n\t\t\tdrugmaterialid:1,\n\t\t\tinvamount:10000,\n\t\t\tmspec:规格,\n\t\t\tmunit:单位,\n\t\t\tmcount:10,\n\t\t\tbidtotal:1000,\n\t\t\tbidprice:100,\n\t\t\tretailtotal:2000,\n\t\t\tretailprice:200,\n\t\t\texpiretime:2009-01-02 15:04:05,\n\t\t\tbatchno:TEST-01\n\t\t},\n\t\t{\n\t\t\tinvno:发票号1,\n\t\t\tdrugmaterialid:1,\n\t\t\tinvamount:100000,\n\t\t\tmspec:规格1,\n\t\t\tmunit:单位1,\n\t\t\tmcount:100,\n\t\t\tbidtotal:10000,\n\t\t\tbidprice:100,\n\t\t\tretailtotal:20000,\n\t\t\tretailprice:200,\n\t\t\texpiretime:2019-01-02 15:04:05,\n\t\t\tbatchno:TEST-02\n\t\t}\n\t\t]\n}"
+						},
+						"url": {
+							"raw": "http://114.215.237.162/service/560/gdentrydetails/replace?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
+							"protocol": "http",
+							"host": [
+								"114",
+								"215",
+								"237",
+								"162"
+							],
+							"path": [
+								"service",
+								"560",
+								"gdentrydetails",
+								"replace"
+							],
+							"query": [
+								{
+									"key": "site",
+									"value": "1%27"
+								},
+								{
+									"key": "appid",
+									"value": "18"
+								},
+								{
+									"key": "token",
+									"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "新增入库单",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": {
+						"billno": 2019030200001,
+						"supplierid": 2,
+						"originatorid": "发起人id",
+						"originatorname": "发起人姓名",
+						"auditorid": "确认人id",
+						"auditorname": "确认人姓名",
+						"depid": "科室id",
+						"depname": "科室名称",
+						"godowntype": 1,
+						"invamounttotal": 300,
+						"bidtotal": 200,
+						"retailtotal": 100,
+						"godownstate": 0,
+						"advice": ""
+					}
+				},
+				"url": {
+					"raw": "http://114.215.237.162/service/560/gdentry?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
+					"protocol": "http",
+					"host": [
+						"114",
+						"215",
+						"237",
+						"162"
+					],
+					"path": [
+						"service",
+						"560",
+						"gdentry"
+					],
+					"query": [
+						{
+							"key": "site",
+							"value": "1%27"
+						},
+						{
+							"key": "appid",
+							"value": "18"
+						},
+						{
+							"key": "token",
+							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取入库单",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://114.215.237.162/service/560/gdentry/list?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH&sid=1&status=1",
+					"protocol": "http",
+					"host": [
+						"114",
+						"215",
+						"237",
+						"162"
+					],
+					"path": [
+						"service",
+						"560",
+						"gdentry",
+						"list"
+					],
+					"query": [
+						{
+							"key": "site",
+							"value": "1%27"
+						},
+						{
+							"key": "appid",
+							"value": "18"
+						},
+						{
+							"key": "token",
+							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+						},
+						{
+							"key": "starttime",
+							"value": "2006-01-02 15:04:05",
+							"disabled": true
+						},
+						{
+							"key": "endtime",
+							"value": "2006-01-02 15:04:05",
+							"disabled": true
+						},
+						{
+							"key": "sid",
+							"value": "1"
+						},
+						{
+							"key": "gstate",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "gstates",
+							"value": "6",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "修改入库单",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{id:2,billno:2019030200001,supplierid:2,originatorid:发起人id,originatorname:发起人姓名,auditorid:确认人id,auditorname:确认人姓名,depid:科室id,depname:科室名称,godowntype:1,invamounttotal:300,bidtotal:200,retailtotal:100,godownstate:0,advice:\n\n}"
+				},
+				"url": {
+					"raw": "http://114.215.237.162/service/560/gdentry/1?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
+					"protocol": "http",
+					"host": [
+						"114",
+						"215",
+						"237",
+						"162"
+					],
+					"path": [
+						"service",
+						"560",
+						"gdentry",
+						"1"
+					],
+					"query": [
+						{
+							"key": "site",
+							"value": "1%27"
+						},
+						{
+							"key": "appid",
+							"value": "18"
+						},
+						{
+							"key": "token",
+							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取入库单及材料详情",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://114.215.237.162/service/560/gdentry/2?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
+					"protocol": "http",
+					"host": [
+						"114",
+						"215",
+						"237",
+						"162"
+					],
+					"path": [
+						"service",
+						"560",
+						"gdentry",
+						"2"
+					],
+					"query": [
+						{
+							"key": "site",
+							"value": "1%27"
+						},
+						{
+							"key": "appid",
+							"value": "18"
+						},
+						{
+							"key": "token",
+							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

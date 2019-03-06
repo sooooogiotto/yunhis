@@ -1,35 +1,42 @@
 <div class="childrenContainer">
-  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm" (ngSubmit)="onSubmit()">
+  <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm">
     <nz-form-item>
       <nz-form-label>入库日期</nz-form-label>
       <nz-form-control>
-        <nz-date-picker formControlName="rkrqs"></nz-date-picker>
+        <nz-date-picker formControlName="starttime"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
     <span class="formDateCenterSpan">至</span>
     <nz-form-item>
       <nz-form-control>
-        <nz-date-picker formControlName="rkrqe"></nz-date-picker>
+        <nz-date-picker formControlName="endtime"></nz-date-picker>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>供货商</nz-form-label>
       <nz-form-control>
-        <input nz-input type="text" formControlName="ghs">
+        <nz-select style="width: 177px;" formControlName="sid">
+          <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
+        </nz-select>
+        <!-- <input nz-input type="text" formControlName="ghs"> -->
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label>状态</nz-form-label>
       <nz-form-control>
-        <nz-select style="width: 177px;" formControlName="zt">
-          <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+        <nz-select style="width: 177px;" formControlName="godownstate">
+          <nz-option nzValue="" nzLabel="全部"></nz-option>
+          <nz-option nzValue="0" nzLabel="提交"></nz-option>
+          <nz-option nzValue="1" nzLabel="未审核"></nz-option>
+          <nz-option nzValue="2" nzLabel="已审核"></nz-option>
+          <nz-option nzValue="3" nzLabel="已驳回"></nz-option>
         </nz-select>
       </nz-form-control>
     </nz-form-item>
 
     <nz-form-item>
       <nz-form-control>
-        <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+        <button class="blueDefaultBtn" nz-button nzType="default" (click)="getMaterialList()">查询</button>
       </nz-form-control>
     </nz-form-item>
 
@@ -56,19 +63,27 @@
     </thead>
     <tbody>
       <tr *ngFor="let data of dataSet">
-        <td>{{data.djh}}</td>
-        <td>{{data.rkrq}}</td>
-        <td>{{data.ghs}}</td>
-        <td>{{data.rkzl}}</td>
-        <td>{{data.zbje}}</td>
-        <td>{{data.lsje}}</td>
-        <td>{{data.rkr}}</td>
+        <td>{{data.billno}}</td>
+        <td>{{data.godowntime}}</td>
+        <td>{{data.suppliername}}</td>
         <td>
-          <div *ngIf="data.zt == '1'" class="status gray">未审核</div>
-          <div *ngIf="data.zt == '1' || data.zt == '2'" class="status gray">未提交</div>
-          <div *ngIf="data.zt == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>驳回
+          {{data.godownstate == '0' ? '未知' : data.godownstate == '1' ? '采购入库' : data.godownstate == '2' ? '新增入库' : '第三方入库'}}
+        </td>
+        <td>{{data.bidtotal}}</td>
+        <td>{{data.retailtotal}}</td>
+        <td>{{data.originatorname}}</td>
+        <td>
+          <div *ngIf="data.godownstate == '0'" class="status gray">
+            已提交
           </div>
-          <div *ngIf="data.zt == '4'" class="status blue">通过</div>
+          <div *ngIf="data.godownstate == '1'" class="status gray">
+            未审核
+          </div>
+          <div *ngIf="data.godownstate == '2'" class="status blue">
+            已审核
+          </div>
+          <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>
+            已驳回</div>
         </td>
         <td>
           <a>修改</a>
@@ -78,7 +93,8 @@
       </tr>
     </tbody>
   </nz-table>
-  <app-material-in-add-modal [addIsVisible]="addIsVisible" (closeAddModal)="closeAddModal()">
+  <app-material-in-add-modal [materialIn]="materialIn" [addIsVisible]="addIsVisible"
+    (closeAddModal)="closeAddModal($event)">
   </app-material-in-add-modal>
   <app-material-in-detail-modal [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
   </app-material-in-detail-modal>

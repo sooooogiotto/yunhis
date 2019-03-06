@@ -28,6 +28,7 @@ export class CachingInterceptor implements HttpInterceptor {
     
     // 如果不能继续.
     if (!isCachable(req)) { return next.handle(req); }
+    if (isCachable(req)) { return next.handle(req); }
 
     const cachedResponse = this.cache.get(req);
     // 缓存然后刷新

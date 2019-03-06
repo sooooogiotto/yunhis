@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { StaticDataService } from 'src/app/static-data.service';
 
 @Component({
   selector: 'app-material-add-dictionary',
@@ -13,9 +14,12 @@ export class MaterialAddDictionaryComponent implements OnInit {
 
   @Output() closeModal: EventEmitter<boolean> = new EventEmitter;
 
-  constructor() { }
+  unitArr: string[];
+
+  constructor(private sdService: StaticDataService) { }
 
   ngOnInit() {
+    this.sdService.getUnitData().subscribe(data => this.unitArr = data)
   }
   handleCancel(flag: boolean): void {
     this.addIsVisible = false;

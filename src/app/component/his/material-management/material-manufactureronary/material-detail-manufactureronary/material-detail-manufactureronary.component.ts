@@ -6,21 +6,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./material-detail-manufactureronary.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
 })
 export class MaterialDetailManufactureronaryComponent implements OnInit {
-   
-  @Input() detailIsVisible: boolean;
-  @Input() manufacturer: object;
-  @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
-  /** 分页对象 */
-  page: object = {
-    curPage: 1,
-    pageCount: 50,
-    pageSize: 10
-  }
-  /** confirm */
-  isCheck: boolean = false;
-  checkIsVisible: boolean = false;
 
-  dataSet: object = []
+  @Input() detailIsVisible: boolean;
+  @Input() manufactureronary: object;
+  @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
 
   constructor() { }
 
@@ -30,14 +19,4 @@ export class MaterialDetailManufactureronaryComponent implements OnInit {
     this.detailIsVisible = false;
     this.closeDetailModal.emit(this.detailIsVisible);
   }
-  showConfirm(flag: boolean): void {
-    this.isCheck = flag;
-    this.checkIsVisible = true;
-  }
-
-  closeConfirm(isVisible: boolean): void {
-    this.isCheck = isVisible;
-    this.checkIsVisible = isVisible;
-  }
-
 }
