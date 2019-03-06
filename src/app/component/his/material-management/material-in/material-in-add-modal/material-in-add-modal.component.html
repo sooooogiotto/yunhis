@@ -1,5 +1,5 @@
 <nz-modal nzWrapClassName="vertical-center-modal" [(nzVisible)]="addIsVisible" [nzTitle]="modalTitle"
-  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel(false)" nzWidth="1200">
+  [nzContent]="modalContent" [nzFooter]="modalFooter" (nzOnCancel)="handleCancel(false)" nzWidth="1400">
   <ng-template #modalTitle>
     新入库
   </ng-template>
@@ -44,15 +44,15 @@
         <div nz-col nzSpan="6">
           <label>供货商</label>
           <div class="inlineFormGroup">
-            <nz-select *ngIf="supplier" [(ngModel)]="materialIn.supplierid" nzShowSearch>
-              <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplier"></nz-option>
+            <nz-select *ngIf="supplierList" [(ngModel)]="materialIn.supplierid" nzShowSearch>
+              <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
             </nz-select>
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>合计发票额</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true" [(ngModel)]="materialIn.invamounttotal">
+            <input nz-input [disabled]="true" [(ngModel)]="dataSet.invamounttotal">
           </div>
         </div>
         <div nz-col nzSpan="12">
@@ -80,10 +80,10 @@
             <th>规格</th>
             <th>单位</th>
             <th>数量</th>
-            <th>中标金额</th>
             <th>中标单价</th>
-            <th>零售金额</th>
+            <th>中标金额</th>
             <th>零售单价</th>
+            <th>零售金额</th>
             <th>有效期</th>
             <th>生产批号</th>
             <th>操作</th>
@@ -97,37 +97,42 @@
               </div>
             </td>
             <td>
-              <div class="tableInputDiv">
+              <div class="tableInputDiv" style="width:6em">
                 <input nz-input [(ngModel)]="data.invamount">
               </div>
             </td>
             <td>
               <div class="tableInputDiv">
-                <input nz-input [(ngModel)]="data.drugmaterialid">
+                <nz-select *ngIf="materialDictionaryList" [(ngModel)]="data.drugmaterialid"
+                  (ngModelChange)="onChangeMaterial($event, data)" nzShowSearch>
+                  <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of materialDictionaryList">
+                  </nz-option>
+                </nz-select>
+                <!-- <input nz-input [(ngModel)]="data.drugmaterialid"> -->
               </div>
             </td>
             <td>{{data.mspec}}</td>
             <td>{{data.munit}}</td>
             <td>
-              <div class="tableInputDiv" style="width:5em;">
-                <input nz-input [(ngModel)]="data.mcount">
+              <div class="tableInputDiv" style="width:6em;">
+                <input nz-input [(ngModel)]="data.mcount" type="number" min="0">
+              </div>
+            </td>
+            <td>
+              <div class="tableInputDiv" style="width:6em;">
+                <input nz-input [(ngModel)]="data.bidprice" type="number" min="0">
               </div>
             </td>
             <td>{{data.bidtotal}}</td>
             <td>
-              <div class="tableInputDiv" style="width:5em;">
-                <input nz-input [(ngModel)]="data.bidprice">
+              <div class="tableInputDiv" style="width:6em;">
+                <input nz-input [(ngModel)]="data.retailprice" type="number" min="0">
               </div>
             </td>
             <td>{{data.retailtotal}}</td>
             <td>
-              <div class="tableInputDiv" style="width:5em;">
-                <input nz-input [(ngModel)]="data.retailprice">
-              </div>
-            </td>
-            <td>
-              <div class="tableInputDiv" style="width:3em;">
-                <input nz-input [(ngModel)]="data.expiretime">
+              <div class="tableInputDiv" style="width:9em;">
+                <nz-date-picker [(ngModel)]="data.expiretime"></nz-date-picker>
               </div>
             </td>
             <td>
@@ -145,8 +150,8 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
-    <span class="bold" style="margin-right: 3rem;">零售金额合计 <span>8933元</span></span>
+    <span class="bold" *ngIf="dataSet" style="margin-right: 3rem;">中标金额合计 <span>{{dataSet.bidtotal}}元</span></span>
+    <span class="bold" *ngIf="dataSet" style="margin-right: 3rem;">零售金额合计 <span>{{dataSet.retailtotal}}元</span></span>
     <button nz-button nzType="primary" (click)="handleCancel(true)">确认</button>
     <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(true)"
       [nzLoading]="isConfirmLoading">暂存</button>

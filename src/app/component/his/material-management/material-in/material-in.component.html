@@ -15,7 +15,7 @@
     <nz-form-item>
       <nz-form-label>供货商</nz-form-label>
       <nz-form-control>
-        <nz-select style="width: 177px;" formControlName="sid">
+        <nz-select style="width: 177px;" formControlName="sid" nzShowSearch>
           <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
         </nz-select>
         <!-- <input nz-input type="text" formControlName="ghs"> -->
@@ -67,7 +67,7 @@
         <td>{{data.godowntime}}</td>
         <td>{{data.suppliername}}</td>
         <td>
-          {{data.godownstate == '0' ? '未知' : data.godownstate == '1' ? '采购入库' : data.godownstate == '2' ? '新增入库' : '第三方入库'}}
+          {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
         </td>
         <td>{{data.bidtotal}}</td>
         <td>{{data.retailtotal}}</td>
@@ -88,15 +88,16 @@
         <td>
           <a>修改</a>
           <nz-divider nzType="vertical"></nz-divider>
-          <a (click)="showDetailModal()">查看</a>
+          <a (click)="showDetailModal(data)">查看</a>
         </td>
       </tr>
     </tbody>
   </nz-table>
-  <app-material-in-add-modal [materialIn]="materialIn" [addIsVisible]="addIsVisible"
+  <app-material-in-add-modal [supplierList]="supplierList" [materialIn]="materialIn" [addIsVisible]="addIsVisible"
     (closeAddModal)="closeAddModal($event)">
   </app-material-in-add-modal>
-  <app-material-in-detail-modal [detailIsVisible]="detailIsVisible" (closeDetailModal)="closeDetailModal()">
+  <app-material-in-detail-modal [materialIn]="materialIn" [detailIsVisible]="detailIsVisible"
+    (closeDetailModal)="closeDetailModal($event)">
   </app-material-in-detail-modal>
-  <app-page [page]="page" (changePage)="getTableList()"></app-page>
+  <app-page [page]="page" (changePage)="getMaterialList($event)"></app-page>
 </div>

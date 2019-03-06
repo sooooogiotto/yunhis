@@ -5,30 +5,32 @@
   </ng-template>
 
   <ng-template #modalContent>
-    <div>
+    <div *ngIf="materialIn">
       <div class="modalTitle">
         <div class="titleTab"></div>基本信息
       </div>
       <table class="modalTbale">
         <tr>
           <th>单据号</th>
-          <td></td>
+          <td>{{materialIn.billno}}</td>
           <th>科室</th>
-          <td></td>
+          <td>{{materialIn.billno}}</td>
           <th>入库日期</th>
-          <td></td>
+          <td>{{materialIn.godowntime}}</td>
         </tr>
         <tr>
           <th>入库类别</th>
-          <td></td>
+          <td>
+            {{materialIn.godowntype == '0' ? '未知' : materialIn.godowntype == '1' ? '采购入库' : materialIn.godowntype == '2' ? '新增入库' : '第三方入库'}}
+          </td>
           <th>供货商</th>
-          <td></td>
+          <td>{{materialIn.suppliername}}</td>
           <th>合计发票额</th>
-          <td></td>
+          <td>{{materialIn.invamounttotal}}</td>
         </tr>
         <tr>
           <th>备注</th>
-          <td colspan="5"></td>
+          <td colspan="5">{{materialIn.advice}}</td>
         </tr>
       </table>
     </div>
@@ -49,40 +51,51 @@
             <th>规格</th>
             <th>单位</th>
             <th>数量</th>
-            <th>中标金额</th>
             <th>中标单价</th>
-            <th>零售金额</th>
+            <th>中标金额</th>
             <th>零售单价</th>
+            <th>零售金额</th>
             <th>有效期</th>
             <th>生产批号</th>
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let data of dataSet">
+        <tbody *ngIf="materialIn">
+          <tr *ngFor="let data of materialIn.details">
             <td>
-              {{data.fph}}
+              {{data.inv_no}}
             </td>
             <td>
+              {{data.inv_amount}}
             </td>
             <td>
+              {{data.drug_material_id}}
             </td>
             <td>
+              {{data.m_spec}}
             </td>
             <td>
+              {{data.m_unit}}
             </td>
             <td>
+              {{data.m_count}}
             </td>
             <td>
+              {{data.bid_price}}
             </td>
             <td>
+              {{data.bid_total}}
             </td>
             <td>
+              {{data.retail_price}}
             </td>
             <td>
+              {{data.retail_total}}
             </td>
             <td>
+              {{data.expire_time}}
             </td>
             <td>
+              {{data.batch_no}}
             </td>
           </tr>
         </tbody>
@@ -91,8 +104,8 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
-    <span class="bold" style="margin-right: 3rem;">中标金额合计 <span>8933元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">中标金额合计 <span>{{materialIn.bidtotal}}元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">零售金额合计 <span>{{materialIn.retailtotal}}元</span></span>
     <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">关闭</button>
   </ng-template>
 </nz-modal>

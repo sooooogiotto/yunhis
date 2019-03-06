@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class MaterialInDetailModalComponent implements OnInit {
   @Input() detailIsVisible: boolean;
+  @Input() materialIn: object;
   @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
 
   dataSet: object = [
@@ -22,8 +23,5 @@ export class MaterialInDetailModalComponent implements OnInit {
   handleCancel(): void {
     this.detailIsVisible = false;
     this.closeDetailModal.emit(this.detailIsVisible);
-  }
-  print(): void {
-    window.print();
   }
 }

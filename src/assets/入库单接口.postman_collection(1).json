@@ -22,7 +22,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{godownentryid:6,items:[\n\t\t{\n\t\t\tinvno:发票号,\n\t\t\tdrugmaterialid:1,\n\t\t\tinvamount:10000,\n\t\t\tmspec:规格,\n\t\t\tmunit:单位,\n\t\t\tmcount:10,\n\t\t\tbidtotal:1000,\n\t\t\tbidprice:100,\n\t\t\tretailtotal:2000,\n\t\t\tretailprice:200,\n\t\t\texpiretime:2009-01-02 15:04:05,\n\t\t\tbatchno:TEST-01\n\t\t},\n\t\t{\n\t\t\tinvno:发票号1,\n\t\t\tdrugmaterialid:1,\n\t\t\tinvamount:100000,\n\t\t\tmspec:规格1,\n\t\t\tmunit:单位1,\n\t\t\tmcount:100,\n\t\t\tbidtotal:10000,\n\t\t\tbidprice:100,\n\t\t\tretailtotal:20000,\n\t\t\tretailprice:200,\n\t\t\texpiretime:2019-01-02 15:04:05,\n\t\t\tbatchno:TEST-02\n\t\t}\n\t\t]\n}"
+							"raw": "{\n\t\"godownentryid\":\"6\",\n\t\"items\":[\n\t\t{\n\t\t\t\"invno\":\"发票号\",\n\t\t\t\"drugmaterialid\":\"1\",\n\t\t\t\"invamount\":\"10000\",\n\t\t\t\"mspec\":\"规格\",\n\t\t\t\"munit\":\"单位\",\n\t\t\t\"mcount\":\"10\",\n\t\t\t\"bidtotal\":\"1000\",\n\t\t\t\"bidprice\":\"100\",\n\t\t\t\"retailtotal\":\"2000\",\n\t\t\t\"retailprice\":\"200\",\n\t\t\t\"expiretime\":\"2009-01-02 15:04:05\",\n\t\t\t\"batchno\":\"TEST-01\"\n\t\t},\n\t\t{\n\t\t\t\"invno\":\"发票号1\",\n\t\t\t\"drugmaterialid\":\"1\",\n\t\t\t\"invamount\":\"100000\",\n\t\t\t\"mspec\":\"规格1\",\n\t\t\t\"munit\":\"单位1\",\n\t\t\t\"mcount\":\"100\",\n\t\t\t\"bidtotal\":\"10000\",\n\t\t\t\"bidprice\":\"100\",\n\t\t\t\"retailtotal\":\"20000\",\n\t\t\t\"retailprice\":\"200\",\n\t\t\t\"expiretime\":\"2019-01-02 15:04:05\",\n\t\t\t\"batchno\":\"TEST-02\"\n\t\t}\n\t\t]\n}"
 						},
 						"url": {
 							"raw": "http://114.215.237.162/service/560/gdentrydetails/replace?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
@@ -73,22 +73,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": {
-						"billno": 2019030200001,
-						"supplierid": 2,
-						"originatorid": "发起人id",
-						"originatorname": "发起人姓名",
-						"auditorid": "确认人id",
-						"auditorname": "确认人姓名",
-						"depid": "科室id",
-						"depname": "科室名称",
-						"godowntype": 1,
-						"invamounttotal": 300,
-						"bidtotal": 200,
-						"retailtotal": 100,
-						"godownstate": 0,
-						"advice": ""
-					}
+					"raw": "{\n\t\"billno\":\"2019030200001\",\n\t\"supplierid\":\"2\",\n\t\"originatorid\":\"发起人id\",\n\t\"originatorname\":\"发起人姓名\",\n\t\"auditorid\":\"确认人id\",\n\t\"auditorname\":\"确认人姓名\",\n\t\"depid\":\"科室id\",\n\t\"depname\":\"科室名称\",\n\t\"godowntype\":\"1\",\n\t\"invamounttotal\":\"300\",\n\t\"bidtotal\":\"200\",\n\t\"retailtotal\":\"100\",\n\t\"godownstate\":\"0\",\n\t\"advice\":\"\"\n\n}"
 				},
 				"url": {
 					"raw": "http://114.215.237.162/service/560/gdentry?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
@@ -132,7 +117,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://114.215.237.162/service/560/gdentry/list?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH&sid=1&status=1",
+					"raw": "http://114.215.237.162/service/560/gdentry/list?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH&godownstate=0&status=1",
 					"protocol": "http",
 					"host": [
 						"114",
@@ -162,21 +147,25 @@
 						{
 							"key": "starttime",
 							"value": "2006-01-02 15:04:05",
+							"description": "起始时间",
 							"disabled": true
 						},
 						{
 							"key": "endtime",
 							"value": "2006-01-02 15:04:05",
+							"description": "终止时间",
 							"disabled": true
 						},
 						{
 							"key": "sid",
-							"value": "1"
+							"value": "1",
+							"description": "供应商id",
+							"disabled": true
 						},
 						{
-							"key": "gstate",
-							"value": "1",
-							"disabled": true
+							"key": "godownstate",
+							"value": "0",
+							"description": "0:为提交 1：未审核 2：已审核 3：已驳回"
 						},
 						{
 							"key": "gstates",
@@ -185,7 +174,8 @@
 						},
 						{
 							"key": "status",
-							"value": "1"
+							"value": "1",
+							"description": "数据状态"
 						}
 					]
 				}
@@ -206,7 +196,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{id:2,billno:2019030200001,supplierid:2,originatorid:发起人id,originatorname:发起人姓名,auditorid:确认人id,auditorname:确认人姓名,depid:科室id,depname:科室名称,godowntype:1,invamounttotal:300,bidtotal:200,retailtotal:100,godownstate:0,advice:\n\n}"
+					"raw": "{\n\t\"id\":\"2\",\n\t\"billno\":\"2019030200001\",\n\t\"supplierid\":\"2\",\n\t\"originatorid\":\"发起人id\",\n\t\"originatorname\":\"发起人姓名\",\n\t\"auditorid\":\"确认人id\",\n\t\"auditorname\":\"确认人姓名\",\n\t\"depid\":\"科室id\",\n\t\"depname\":\"科室名称\",\n\t\"godowntype\":\"1\",\n\t\"invamounttotal\":\"300\",\n\t\"bidtotal\":\"200\",\n\t\"retailtotal\":\"100\",\n\t\"godownstate\":\"0\",\n\t\"advice\":\"\"\n\n}"
 				},
 				"url": {
 					"raw": "http://114.215.237.162/service/560/gdentry/1?site=1%27&appid=18&token=MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
@@ -268,15 +258,18 @@
 					"query": [
 						{
 							"key": "site",
-							"value": "1%27"
+							"value": "1%27",
+							"description": "租户id"
 						},
 						{
 							"key": "appid",
-							"value": "18"
+							"value": "18",
+							"description": "appid"
 						},
 						{
 							"key": "token",
-							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH"
+							"value": "MTU1MTI0ODMzN3xOd3dBTkRVelFVTkRTMWxFU1VSTFRWVlFOMU5JTmtsUVJUTlVVVlZZTlZSS05sWTFTMVF5TmtoUk5VazJObEpXUVRWRVNEY3pVMEU9fKEg6FD0LRIM1j-2MfRpDUYzKjSdr7XH9Sc2hbXOI-AH",
+							"description": "token"
 						}
 					]
 				}

@@ -68,12 +68,19 @@ export class MaterialInComponent implements OnInit {
   }
   /** 关闭新入库弹出框 */
   closeAddModal(flag: boolean): void {
+    if (flag) {
+      this.getMaterialList(this.page);
+    }
     this.addIsVisible = false;
-    
   }
   /** 弹出详情弹出框 */
-  showDetailModal(): void {
-    this.detailIsVisible = true;
+  showDetailModal(materialIn: object): void {
+    this.miService.getMaterialIn(new HttpParams({ fromObject: { "id": materialIn['id'] } })
+    ).subscribe(data => {
+      console.log(data);
+      this.materialIn = data['data'][0];
+      this.detailIsVisible = true;
+    })
   }
   /** 关闭详情弹出框 */
   closeDetailModal(isVisible: boolean): void {

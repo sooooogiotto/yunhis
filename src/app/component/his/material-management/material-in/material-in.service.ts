@@ -4,6 +4,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ip, ConfigService } from 'src/app/config.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { UtilsService } from 'src/app/utils.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -37,17 +38,22 @@ export class MaterialInService {
   constructor(
     httpErrorHandler: HttpErrorHandler,
     private http: HttpClient,
-    private configService: ConfigService
+    private configService: ConfigService,
+    private util: UtilsService
   ) {
     this.handleError = httpErrorHandler.createHandleError('MaterialDictionaryService');
   }
 
   getMaterialInList(param: HttpParams): Observable<any> {
+    param = param.set('starttime', this.util.dateToLocalString(param.get('starttime')));
+    param = param.set('endtime', this.util.dateToLocalString(param.get('endtime')));
     return this.http.get(this.materialInUrl['materialIn/list'], { params: param }).pipe(
       catchError(this.handleError('getMaterialInList'))
     )
   }
   getMaterialInCount(param: HttpParams): Observable<any> {
+    param = param.set('starttime', this.util.dateToLocalString(param.get('starttime')));
+    param = param.set('endtime', this.util.dateToLocalString(param.get('endtime')));
     return this.http.get(this.materialInUrl['materialIn/count'], { params: param }).pipe(
       catchError(this.handleError('getMaterialInList'))
     )
