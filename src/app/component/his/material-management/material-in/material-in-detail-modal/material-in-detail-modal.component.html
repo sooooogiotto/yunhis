@@ -34,7 +34,7 @@
         </tr>
       </table>
     </div>
-    <div>
+    <div *ngIf="materialIn">
       <div class="modalTitle">
         <div class="titleTab"></div>材料明细
       </div>
@@ -42,7 +42,7 @@
         <button type="button" nz-button nzType="primary">导出</button>
         <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button>
       </div>
-      <nz-table [nzNoResult]="" nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+      <nz-table *ngIf="materialIn.details" [nzNoResult]="" nzSize="middle" [nzData]="materialIn.details" nzBordered [nzShowPagination]="false">
         <thead>
           <tr>
             <th>发票号</th>
@@ -59,43 +59,43 @@
             <th>生产批号</th>
           </tr>
         </thead>
-        <tbody *ngIf="materialIn">
+        <tbody>
           <tr *ngFor="let data of materialIn.details">
             <td>
-              {{data.inv_no}}
+              {{data.invno}}
             </td>
             <td>
-              {{data.inv_amount}}
+              {{data.invamount}}
             </td>
             <td>
-              {{data.drug_material_id}}
+              {{data.name}}
             </td>
             <td>
-              {{data.m_spec}}
+              {{data.mspec}}
             </td>
             <td>
-              {{data.m_unit}}
+              {{data.munit}}
             </td>
             <td>
-              {{data.m_count}}
+              {{data.mcount}}
             </td>
             <td>
-              {{data.bid_price}}
+              {{data.bidprice}}
             </td>
             <td>
-              {{data.bid_total}}
+              {{data.bidtotal}}
             </td>
             <td>
-              {{data.retail_price}}
+              {{data.retailprice}}
             </td>
             <td>
-              {{data.retail_total}}
+              {{data.retailtotal}}
             </td>
             <td>
-              {{data.expire_time}}
+              {{data.expiretime}}
             </td>
             <td>
-              {{data.batch_no}}
+              {{data.batchno}}
             </td>
           </tr>
         </tbody>

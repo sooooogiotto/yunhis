@@ -15,11 +15,7 @@ export class MaterialInAddModalComponent implements OnInit {
   @Input() supplierList: object[];
   @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
 
-  dataSet: object = {
-    godownentryid: "",
-    items: []
-  }
-  materialInTotal: object;
+  dataSet: object;
   materialDictionaryList: object[];
 
   constructor(
@@ -28,7 +24,10 @@ export class MaterialInAddModalComponent implements OnInit {
     private mdService: MaterialDictionaryService,
     private util: UtilsService
   ) {
-    this.materialInTotal = {};
+    this.dataSet = {
+      godownentryid: "",
+      items: []
+    }
   }
 
   ngOnInit() {
@@ -38,26 +37,34 @@ export class MaterialInAddModalComponent implements OnInit {
   ngDoCheck(): void {
     //Called every time that the input properties of a component or a directive are checked. Use it to extend change detection by performing a custom check.
     //Add 'implements DoCheck' to the class.
-    if (this.dataSet) {
-      this.dataSet['bidtotal'] = 0;
-      this.dataSet['retailtotal'] = 0;
-      this.dataSet['invamounttotal'] = 0;
-      this.dataSet['items'].map((item: object) => {
-        //const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
-        //if (((!isNaN(+bid) && reg.test(bid)) || bid === '' || bid === '-') && ((!isNaN(+retail) && reg.test(retail)) || retail === '' || retail === '-')) {
-        item['bidtotal'] = +item['bidprice'] * +item['mcount']
-        item['retailtotal'] = +item['retailprice'] * +item['mcount']
-        //}
-        this.dataSet['bidtotal'] += +item['bidtotal'];
-        this.dataSet['retailtotal'] += +item['retailtotal'];
-        this.dataSet['invamounttotal'] += +item['invamount'];
-      })
+    if ((this.materialIn && this.materialIn != null)) {
+      if (this.materialIn['operaType'] !== 'detail') {
+        console.log(this.materialIn['operaType']);
+        if (this.materialIn['operaType'] === 'update') {
+          this.dataSet['items'] = this.materialIn['details'];
+        }
+
+        this.materialIn = Object.assign(this.materialIn, {
+          bidtotal: 0,
+          retailtotal: 0,
+          invamounttotal: 0
+        })
+        this.dataSet['items'] && this.dataSet['items'].map((item: object) => {
+          //const reg = /^-?(0|[1-9][0-9]*)(\.[0-9]*)?$/;
+          //if (((!isNaN(+bid) && reg.test(bid)) || bid === '' || bid === '-') && ((!isNaN(+retail) && reg.test(retail)) || retail === '' || retail === '-')) {
+          item['bidtotal'] = +item['bidprice'] * +item['mcount']
+          item['retailtotal'] = +item['retailprice'] * +item['mcount']
+          //}
+          this.materialIn['bidtotal'] += +item['bidtotal'];
+          this.materialIn['retailtotal'] += +item['retailtotal'];
+          this.materialIn['invamounttotal'] += +item['invamount'];
+        })
+      }
     }
   }
   handleCancel(flag: boolean): void {
     if (flag) {
-      this.miService.postmaterialIn(this.materialIn
-      ).subscribe(data => {
+      this.miService.postmaterialIn(this.materialIn).subscribe(data => {
         if (data['id']) {
           this.dataSet['godownentryid'] = data['id'];
           this.dataSet['items'].map((item: object) => item['expiretime'] = this.util.dateToLocalString(item['expiretime']))
@@ -78,6 +85,12 @@ export class MaterialInAddModalComponent implements OnInit {
         }
       })
     } else {
+      this.dataSet = {
+        godownentryid: "",
+        items: []
+      };
+      this.addMaterial();
+      this.materialIn = null;
       this.addIsVisible = false;
       this.closeAddModal.emit(flag);
     }
@@ -86,7 +99,7 @@ export class MaterialInAddModalComponent implements OnInit {
     if (e) {
       e.preventDefault();
     }
-    this.dataSet['items'].push({
+    this.dataSet['items'] === null ? this.dataSet['items'] = [] : this.dataSet['items'].push({
       invno: "",
       drugmaterialid: "",
       invamount: "",
@@ -98,7 +111,6 @@ export class MaterialInAddModalComponent implements OnInit {
       retailtotal: "",
       retailprice: "",
       expiretime: "",
-      createtime: "",
       remark: "",
       id: "",
       batchno: ""

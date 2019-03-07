@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-
+import { MaterialInService } from '../material-in.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-material-in-detail-modal',
   templateUrl: './material-in-detail-modal.component.html',
@@ -10,13 +11,9 @@ export class MaterialInDetailModalComponent implements OnInit {
   @Input() materialIn: object;
   @Output() closeDetailModal: EventEmitter<boolean> = new EventEmitter;
 
-  dataSet: object = [
-    {
-      'fph': '22323232'
-    }
-  ]
-
-  constructor() { }
+  constructor(
+    private miService: MaterialInService
+  ) { }
 
   ngOnInit() {
   }
