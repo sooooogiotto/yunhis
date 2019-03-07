@@ -16,6 +16,7 @@
       <nz-form-label>供货商</nz-form-label>
       <nz-form-control>
         <nz-select style="width: 177px;" formControlName="sid" nzShowSearch>
+          <nz-option nzLabel="全部" nzValue=""></nz-option>
           <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
         </nz-select>
         <!-- <input nz-input type="text" formControlName="ghs"> -->
@@ -47,18 +48,18 @@
       </nz-form-control>
     </nz-form-item>
   </form>
-  <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+  <nz-table nzSize="middle" [nzData]="dataSet" nzBordered [nzShowPagination]="false" [nzScroll]="{ y: '900px' }">
     <thead>
       <tr>
-        <th>单据号</th>
-        <th>入库日期</th>
-        <th>供货商</th>
-        <th>入库种类</th>
-        <th>中标金额</th>
-        <th>零售金额</th>
-        <th>入库人</th>
-        <th>状态</th>
-        <th>操作</th>
+        <th style="width:8em;">单据号</th>
+        <th style="width:8em;">入库日期</th>
+        <th style="width:8em;">供货商</th>
+        <th style="width:8em;">入库种类</th>
+        <th style="width:8em;">中标金额</th>
+        <th style="width:8em;">零售金额</th>
+        <th style="width:8em;">入库人</th>
+        <th style="width:8em;">状态</th>
+        <th style="width:8em;">操作</th>
       </tr>
     </thead>
     <tbody>
@@ -86,7 +87,7 @@
             已驳回</div>
         </td>
         <td>
-          <a>修改</a>
+          <a (click)="showAddModal(data)">修改</a>
           <nz-divider nzType="vertical"></nz-divider>
           <a (click)="showDetailModal(data)">查看</a>
         </td>

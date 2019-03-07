@@ -15,15 +15,26 @@ export class UtilsService {
     return year + month + day
   }
 
-  formatDate(date: any): string {
+  formatDate(date: any, type: string): string {
     let year = date.getFullYear();
     let month = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1);
     let day = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate());
-    return year + '-' + month + '-' + day
+    if (type === 'date') {
+      return year + '-' + month + '-' + day
+    } else {
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let seconds = date.getSeconds();
+      return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds
+    }
   }
 
   dateToLocalString(date: any): string {
-    return date !== '' && date !== null ? this.formatDate(date) : '';
+    return date !== '' ? date !== null && this.formatDate(new Date(date), 'date') : '';
+    //return date != '' ? date = new Date(date).toLocaleDateString() : '';
+  }
+  dateTimeToLocalString(date: any): string {
+    return date !== '' ? date !== null && this.formatDate(new Date(date), 'dateTime') : '';
     //return date != '' ? date = new Date(date).toLocaleDateString() : '';
   }
 }

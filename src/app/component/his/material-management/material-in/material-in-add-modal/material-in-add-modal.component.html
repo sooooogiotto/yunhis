@@ -25,7 +25,7 @@
         <div nz-col nzSpan="6">
           <label>入库日期</label>
           <div class="inlineFormGroup">
-            <nz-date-picker [(ngModel)]="materialIn.date" nz-date-picker [disabled]="true"></nz-date-picker>
+            <nz-date-picker [(ngModel)]="materialIn.godowntime" nz-date-picker [disabled]="true"></nz-date-picker>
           </div>
         </div>
         <div nz-col nzSpan="6">
@@ -52,7 +52,7 @@
         <div nz-col nzSpan="6">
           <label>合计发票额</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true" [(ngModel)]="dataSet.invamounttotal">
+            <input nz-input [disabled]="true" [(ngModel)]="materialIn.invamounttotal">
           </div>
         </div>
         <div nz-col nzSpan="12">
@@ -150,8 +150,10 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <span class="bold" *ngIf="dataSet" style="margin-right: 3rem;">中标金额合计 <span>{{dataSet.bidtotal}}元</span></span>
-    <span class="bold" *ngIf="dataSet" style="margin-right: 3rem;">零售金额合计 <span>{{dataSet.retailtotal}}元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">中标金额合计
+      <span>{{materialIn.bidtotal}}元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">零售金额合计
+      <span>{{materialIn.retailtotal}}元</span></span>
     <button nz-button nzType="primary" (click)="handleCancel(true)">确认</button>
     <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(true)"
       [nzLoading]="isConfirmLoading">暂存</button>
