@@ -88,9 +88,11 @@ export class HomePageComponent implements OnInit {
     const menu = this.menuList[this.currentIndex];
     // 跳转路由
     this.router.navigate([menu.url]);
+  /*  console.log(menu.url)*/
   }
 
   onClickMenuList(data: string) {
     this.router.navigate([data]);
+    console.log(data)
   }
 }

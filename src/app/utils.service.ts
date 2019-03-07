@@ -23,7 +23,7 @@ export class UtilsService {
   }
 
   dateToLocalString(date: any): string {
-    return date != '' ? this.formatDate(date) : '';
+    return date !== '' && date !== null ? this.formatDate(date) : '';
     //return date != '' ? date = new Date(date).toLocaleDateString() : '';
   }
 }

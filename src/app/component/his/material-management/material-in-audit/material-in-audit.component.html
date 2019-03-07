@@ -1,16 +1,19 @@
 <div class="childrenContainer">
   <nz-tabset>
-    <nz-tab nzTitle="待审核(12)">
-      <form nz-form [nzLayout]="'inline'" [formGroup]="auditConditionForm" (ngSubmit)="findAudit()">
+    <nz-tab nzTitle="{{'待审核(' + page.pageCount + ')'}}">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="auditConditionForm">
         <nz-form-item>
           <nz-form-label>供货商</nz-form-label>
           <nz-form-control>
-            <input nz-input type="text" formControlName="ghs">
+            <nz-select style="width: 177px;" formControlName="sid" nzShowSearch>
+              <nz-option nzLabel="全部" nzValue=""></nz-option>
+              <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
+            </nz-select>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-control>
-            <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+            <button class="blueDefaultBtn" nz-button nzType="default" (click)="findAudit()">查询</button>
           </nz-form-control>
         </nz-form-item>
       </form>
@@ -30,16 +33,27 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of dataSet">
-            <td>{{data.djh}}</td>
-            <td>{{data.rkrq}}</td>
-            <td>{{data.ghs}}</td>
-            <td>{{data.rkzl}}</td>
-            <td>{{data.zbje}}</td>
-            <td>{{data.lsje}}</td>
-            <td>{{data.rkr}}</td>
+            <td>{{data.billno}}</td>
+            <td>{{data.godowntime}}</td>
+            <td>{{data.suppliername}}</td>
             <td>
-              <div *ngIf="data.zt == '1'" class="status gray">未审核</div>
-              <div *ngIf="data.zt == '1' || data.zt == '2'" class="status gray">未提交</div>
+              {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
+            </td>
+            <td>{{data.bidtotal}}</td>
+            <td>{{data.retailtotal}}</td>
+            <td>{{data.originatorname}}</td>
+            <td>
+              <div *ngIf="data.godownstate == '0'" class="status gray">
+                已提交
+              </div>
+              <div *ngIf="data.godownstate == '1'" class="status gray">
+                未审核
+              </div>
+              <div *ngIf="data.godownstate == '2'" class="status blue">
+                已审核
+              </div>
+              <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>
+                已驳回</div>
             </td>
             <td>
               <a (click)="showAuditDialog()">审核</a>
@@ -47,44 +61,38 @@
           </tr>
         </tbody>
       </nz-table>
-      <app-page [page]="page" (changePage)="getTableList()"></app-page>
+      <app-page [page]="page" (changePage)="findAudit($event)"></app-page>
     </nz-tab>
     <nz-tab nzTitle="已审核">
-      <form nz-form [nzLayout]="'inline'" [formGroup]="auditedConditionForm" (ngSubmit)="findAudited()">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="auditedConditionForm">
         <nz-form-item>
           <nz-form-label>入库日期</nz-form-label>
           <nz-form-control>
-            <nz-date-picker formControlName="rkrqs"></nz-date-picker>
+            <nz-date-picker formControlName="starttime"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
         <span class="formDateCenterSpan">至</span>
         <nz-form-item>
           <nz-form-control>
-            <nz-date-picker formControlName="rkrqe"></nz-date-picker>
+            <nz-date-picker formControlName="endtime"></nz-date-picker>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
           <nz-form-label>供货商</nz-form-label>
           <nz-form-control>
-            <input nz-input type="text" formControlName="ghs">
-          </nz-form-control>
-        </nz-form-item>
-        <nz-form-item>
-          <nz-form-label>状态</nz-form-label>
-          <nz-form-control>
-            <nz-select style="width: 177px;" formControlName="zt">
-              <nz-option nzValue="全部" nzLabel="全部" nzSelected></nz-option>
+            <nz-select style="width: 177px;" formControlName="sid" nzShowSearch>
+              <nz-option nzLabel="全部" nzValue=""></nz-option>
+              <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>
-
         <nz-form-item>
           <nz-form-control>
-            <button class="blueDefaultBtn" nz-button nzType="default">查询</button>
+            <button class="blueDefaultBtn" nz-button nzType="default" (click)="findAudited()">查询</button>
           </nz-form-control>
         </nz-form-item>
       </form>
-      <nz-table #basicTable1 [nzData]="dataSet1" nzBordered [nzShowPagination]="false">
+      <nz-table [nzData]="dataSet1" nzBordered [nzShowPagination]="false">
         <thead>
           <tr>
             <th>单据号</th>
@@ -100,16 +108,27 @@
         </thead>
         <tbody>
           <tr *ngFor="let data of dataSet1">
-            <td>{{data.djh}}</td>
-            <td>{{data.rkrq}}</td>
-            <td>{{data.ghs}}</td>
-            <td>{{data.rkzl}}</td>
-            <td>{{data.zbje}}</td>
-            <td>{{data.lsje}}</td>
-            <td>{{data.rkr}}</td>
+            <td>{{data.billno}}</td>
+            <td>{{data.godowntime}}</td>
+            <td>{{data.suppliername}}</td>
             <td>
-              <div *ngIf="data.zt == '3'" class="status orange">驳回</div>
-              <div *ngIf="data.zt == '4'" class="status blue">通过</div>
+              {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
+            </td>
+            <td>{{data.bidtotal}}</td>
+            <td>{{data.retailtotal}}</td>
+            <td>{{data.originatorname}}</td>
+            <td>
+              <div *ngIf="data.godownstate == '0'" class="status gray">
+                已提交
+              </div>
+              <div *ngIf="data.godownstate == '1'" class="status gray">
+                未审核
+              </div>
+              <div *ngIf="data.godownstate == '2'" class="status blue">
+                已审核
+              </div>
+              <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right" nz-tooltip>
+                已驳回</div>
             </td>
             <td>
               <a>修改</a>
@@ -119,7 +138,7 @@
           </tr>
         </tbody>
       </nz-table>
-      <app-page [page]="page" (changePage)="getTableList()"></app-page>
+      <app-page [page]="paged" (changePage)="findAudited($event)"></app-page>
     </nz-tab>
   </nz-tabset>
   <app-material-in-audit-modal [auditIsVisible]="auditIsVisible" (closeModal)="closeModal()">

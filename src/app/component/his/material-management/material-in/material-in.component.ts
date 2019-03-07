@@ -63,7 +63,6 @@ export class MaterialInComponent implements OnInit {
     this.materialIn['billno'] = '20190305';
     //this.materialIn['date'] = this.utilsService.getDate();
     this.materialIn['date'] = new Date();
-
     this.addIsVisible = true;
   }
   /** 关闭新入库弹出框 */
