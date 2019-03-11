@@ -5,7 +5,7 @@
   </ng-template>
 
   <ng-template #modalContent>
-    <div *ngIf="materialIn">
+    <div *ngIf="controlObject">
       <div class="modalTitle">
         <div class="titleTab"></div>基本信息
       </div>
@@ -13,25 +13,25 @@
         <div nz-col nzSpan="6">
           <label>单据号</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true" [(ngModel)]="materialIn.billno">
+            <input nz-input [disabled]="true" [(ngModel)]="controlObject.billno">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>科室</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true" [(ngModel)]="materialIn.depid">
+            <input nz-input [disabled]="true" [(ngModel)]="controlObject.depid">
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>入库日期</label>
           <div class="inlineFormGroup">
-            <nz-date-picker [(ngModel)]="materialIn.godowntime" nz-date-picker [disabled]="true"></nz-date-picker>
+            <nz-date-picker [(ngModel)]="controlObject.godowntime" nz-date-picker [disabled]="true"></nz-date-picker>
           </div>
         </div>
         <div nz-col nzSpan="6">
           <label>入库类</label>
           <div class="inlineFormGroup">
-            <nz-select [(ngModel)]="materialIn.godowntype">
+            <nz-select [(ngModel)]="controlObject.godowntype">
               <nz-option nzLabel="未知" nzValue="0"></nz-option>
               <nz-option nzLabel="采购入库" nzValue="1"></nz-option>
               <nz-option nzLabel="新增入库" nzValue="2"></nz-option>
@@ -44,7 +44,9 @@
         <div nz-col nzSpan="6">
           <label>供货商</label>
           <div class="inlineFormGroup">
-            <nz-select *ngIf="supplierList" [(ngModel)]="materialIn.supplierid" nzShowSearch>
+            <nz-select [(ngModel)]="controlObject.supplierid" *ngIf="supplierList" nzShowSearch
+              (ngModelChange)="onFocus(0,'supplierid')"
+              [ngClass]="{'inValid': inValidObj.key == 0 && inValidObj.value == 'supplierid'}">
               <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of supplierList"></nz-option>
             </nz-select>
           </div>
@@ -52,13 +54,13 @@
         <div nz-col nzSpan="6">
           <label>合计发票额</label>
           <div class="inlineFormGroup">
-            <input nz-input [disabled]="true" [(ngModel)]="materialIn.invamounttotal">
+            <input nz-input [disabled]="true" [(ngModel)]="controlObject.invamounttotal">
           </div>
         </div>
         <div nz-col nzSpan="12">
           <label>备注</label>
           <div class="inlineFormGroup">
-            <input nz-input [(ngModel)]="materialIn.advice">
+            <input nz-input [(ngModel)]="controlObject.advice">
           </div>
         </div>
       </div>
@@ -71,7 +73,7 @@
         <button type="button" nz-button nzType="primary" (click)="addMaterial()"><i nz-icon type="plus-circle"
             theme="fill"></i>新增</button>
       </div>
-      <nz-table [nzNoResult]="" nzSize="middle" [nzData]="dataSet.items" nzBordered [nzShowPagination]="false">
+      <nz-table [nzNoResult]="" [nzData]="controlArray" nzSize="middle" nzBordered [nzShowPagination]="false">
         <thead>
           <tr>
             <th>发票号</th>
@@ -90,58 +92,71 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let data of dataSet.items;let i = index">
+          <tr *ngFor="let control of controlArray; let i = index;">
             <td>
               <div class="tableInputDiv">
-                <input nz-input [(ngModel)]="data.invno">
+                <input nz-input [(ngModel)]="control.invno"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'invno'}"
+                  (focus)="onFocus(i,'invno')">
               </div>
             </td>
             <td>
               <div class="tableInputDiv" style="width:6em">
-                <input nz-input [(ngModel)]="data.invamount">
+                <input nz-input [(ngModel)]="control.invamount"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'invamount'}"
+                  (ngModelChange)="onCalc()" (focus)="onFocus(i,'invamount')">
               </div>
             </td>
             <td>
               <div class="tableInputDiv">
-                <nz-select *ngIf="materialDictionaryList" [(ngModel)]="data.drugmaterialid"
-                  (ngModelChange)="onChangeMaterial($event, data)" nzShowSearch>
+                <nz-select *ngIf="materialDictionaryList" [(ngModel)]="control.drugmaterialid"
+                  (ngModelChange)="onFocus(i,'drugmaterialid')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'drugmaterialid'}"
+                  (ngModelChange)="onChangeMaterial($event, control)" nzShowSearch>
                   <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of materialDictionaryList">
                   </nz-option>
                 </nz-select>
-                <!-- <input nz-input [(ngModel)]="data.drugmaterialid"> -->
               </div>
             </td>
-            <td>{{data.mspec}}</td>
-            <td>{{data.munit}}</td>
+            <td>{{control.mspec}}</td>
+            <td>{{control.munit}}</td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="data.mcount" type="number" min="0">
+                <input nz-input [(ngModel)]="control.mcount" (focus)="onFocus(i,'mcount')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'mcount'}" type="number" min="0"
+                  (ngModelChange)="onCalc()">
               </div>
             </td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="data.bidprice" type="number" min="0">
+                <input nz-input [(ngModel)]="control.bidprice" (focus)="onFocus(i,'bidprice')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'bidprice'}" type="number" min="0"
+                  (ngModelChange)="onCalc()">
               </div>
             </td>
-            <td>{{data.bidtotal}}</td>
+            <td>{{control.bidtotal}}</td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="data.retailprice" type="number" min="0">
+                <input nz-input [(ngModel)]="control.retailprice" (focus)="onFocus(i,'retailprice')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'retailprice'}" type="number"
+                  min="0" (ngModelChange)="onCalc()">
               </div>
             </td>
-            <td>{{data.retailtotal}}</td>
+            <td>{{control.retailtotal}}</td>
             <td>
               <div class="tableInputDiv" style="width:9em;">
-                <nz-date-picker [(ngModel)]="data.expiretime"></nz-date-picker>
+                <nz-date-picker [(ngModel)]="control.expiretime" (ngModelChange)="onFocus(i,'expiretime')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'expiretime'}"></nz-date-picker>
               </div>
             </td>
             <td>
               <div class="tableInputDiv">
-                <input nz-input [(ngModel)]="data.batchno">
+                <input nz-input [(ngModel)]="control.batchno" (focus)="onFocus(i,'batchno')"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'batchno'}">
               </div>
             </td>
             <td>
-              <a (click)="deleteMaterial(data,$event)">删除</a>
+              <a (click)="deleteMaterial(control,$event)">删除</a>
             </td>
           </tr>
         </tbody>
@@ -150,10 +165,10 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">中标金额合计
-      <span>{{materialIn.bidtotal}}元</span></span>
-    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">零售金额合计
-      <span>{{materialIn.retailtotal}}元</span></span>
+    <span class="bold" style="margin-right: 3rem;">中标金额合计
+      <span>{{controlObject.bidtotal}}元</span></span>
+    <span class="bold" style="margin-right: 3rem;">零售金额合计
+      <span>{{controlObject.retailtotal}}元</span></span>
     <button nz-button nzType="primary" (click)="handleCancel(true)">确认</button>
     <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(true)"
       [nzLoading]="isConfirmLoading">暂存</button>

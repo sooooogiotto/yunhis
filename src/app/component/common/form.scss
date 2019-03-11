@@ -35,3 +35,17 @@ form {
     box-sizing: border-box;
   }
 }
+
+.inValid,
+.inValid ::ng-deep input,
+.inValid ::ng-deep .ant-select-selection {
+  border-color: #f5222d;
+  outline: 0;
+}
+.inValid:focus,
+.inValid:focus ::ng-deep input,
+.inValid:focus ::ng-deep .ant-select-selection {
+  border-color: #f5222d;
+  outline: 0;
+  box-shadow: 0 0 0 2px rgba(245, 34, 45, 0.2);
+}

@@ -13,6 +13,9 @@ import { MaterialDictionaryService } from '../material-dictionary/material-dicti
   styleUrls: ['./material-in.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
 })
 export class MaterialInComponent implements OnInit {
+  // new
+  materialInId: string;
+  // new
   materialIn: object;
   /** 分页对象 */
   page: object = {
@@ -60,20 +63,27 @@ export class MaterialInComponent implements OnInit {
     ).subscribe(data => this.page['pageCount'] = data['count'])
   }
   /** 弹出新入库弹出框 */
-  showAddModal(data: object | undefined): void {
+  showAddModal(data?: object | undefined): void {
+    // if (data) {
+    //   this.miService.getMaterialIn(new HttpParams({ fromObject: { id: data['id'] } })
+    //   ).subscribe(res => {
+    //     res['data'][0]['operaType'] = 'update';
+    //     this.materialIn = res['data'][0];
+    //     this.addIsVisible = true;
+    //   })
+    // } else {
+    //   this.materialIn = Object.assign({}, {
+    //     billno: '20190305',
+    //     godowntime: new Date(),
+    //     operaType: 'add'
+    //   })
+    //   this.addIsVisible = true;
+    // }
     if (data) {
-      this.miService.getMaterialIn(new HttpParams({ fromObject: { id: data['id'] } })
-      ).subscribe(res => {
-        res['data'][0]['operaType'] = 'update';
-        this.materialIn = res['data'][0];
-        this.addIsVisible = true;
-      })
+      this.materialInId = data['id'];
+      this.addIsVisible = true;
     } else {
-      this.materialIn = Object.assign({}, {
-        billno: '20190305',
-        godowntime: new Date(),
-        operaType: 'add'
-      })
+      this.materialInId = "add";
       this.addIsVisible = true;
     }
   }
@@ -82,6 +92,7 @@ export class MaterialInComponent implements OnInit {
     if (flag) {
       this.getMaterialList(this.page);
     }
+    this.materialInId = 'none';
     this.addIsVisible = false;
   }
   /** 弹出详情弹出框 */

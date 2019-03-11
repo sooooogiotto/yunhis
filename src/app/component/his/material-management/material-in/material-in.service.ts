@@ -3,7 +3,7 @@ import { HttpErrorHandler, HandleError } from "src/app/http-error-handler.servic
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { ip, ConfigService } from 'src/app/config.service';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { UtilsService } from 'src/app/utils.service';
 const httpOptions = {
   headers: new HttpHeaders({
@@ -61,17 +61,27 @@ export class MaterialInService {
 
   getMaterialIn(param: HttpParams): Observable<any> {
     return this.http.get(this.materialInUrl['materialIn'] + `/${param.get('id')}`).pipe(
+      tap(_ => {
+        if (new Date(_['data'][0]['godowntime']) < new Date('1970-01-01')) {
+          _['data'][0]['godowntime'] = '1970-01-01';
+        }
+      }),
       catchError(this.handleError('getMaterialIn'))
     )
   }
 
   putMaterialIn(param: object): Observable<any> {
+    delete param['createtime'];
+    delete param['godowntime'];
     return this.http.put(this.materialInUrl['putmaterialIn'] + `/${param['id']}`, param, httpOptions).pipe(
       catchError(this.handleError('putmaterialIn'))
     )
   }
 
   postmaterialIn(param: object): Observable<any> {
+    delete param['createtime'];
+    delete param['godowntime'];
+    delete param['id'];
     return this.http.post(this.materialInUrl['postmaterialIn'], param, httpOptions).pipe(
       catchError(this.handleError('postmaterialIn'))
     )
