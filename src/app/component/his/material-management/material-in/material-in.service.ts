@@ -33,7 +33,9 @@ export class MaterialInService {
     /** 入库单新增 */
     "postmaterialIn": `${ip}/service/560/gdentry`,
     /** 入库单List新增 */
-    "postmaterialInList": `${ip}/service/560/gdentrydetails/replace`
+    "postmaterialInList": `${ip}/service/560/gdentrydetails/replace`,
+    /** 入库单材料明细导出 */
+    "getmaterialInExcel": `${ip}/service/560/gdentrydetails/export`
   }
   constructor(
     httpErrorHandler: HttpErrorHandler,
@@ -44,23 +46,23 @@ export class MaterialInService {
     this.handleError = httpErrorHandler.createHandleError('MaterialDictionaryService');
   }
 
-  getMaterialInList(param: HttpParams): Observable<any> {
-    param = param.set('starttime', this.util.dateToLocalString(param.get('starttime')));
-    param = param.set('endtime', this.util.dateToLocalString(param.get('endtime')));
-    return this.http.get(this.materialInUrl['materialIn/list'], { params: param }).pipe(
+  getMaterialInList(params: HttpParams): Observable<any> {
+    params = params.set('starttime', this.util.dateToLocalString(params.get('starttime')));
+    params = params.set('endtime', this.util.dateToLocalString(params.get('endtime')));
+    return this.http.get(this.materialInUrl['materialIn/list'], { params }).pipe(
       catchError(this.handleError('getMaterialInList'))
     )
   }
-  getMaterialInCount(param: HttpParams): Observable<any> {
-    param = param.set('starttime', this.util.dateToLocalString(param.get('starttime')));
-    param = param.set('endtime', this.util.dateToLocalString(param.get('endtime')));
-    return this.http.get(this.materialInUrl['materialIn/count'], { params: param }).pipe(
+  getMaterialInCount(params: HttpParams): Observable<any> {
+    params = params.set('starttime', this.util.dateToLocalString(params.get('starttime')));
+    params = params.set('endtime', this.util.dateToLocalString(params.get('endtime')));
+    return this.http.get(this.materialInUrl['materialIn/count'], { params }).pipe(
       catchError(this.handleError('getMaterialInList'))
     )
   }
 
-  getMaterialIn(param: HttpParams): Observable<any> {
-    return this.http.get(this.materialInUrl['materialIn'] + `/${param.get('id')}`).pipe(
+  getMaterialIn(params: HttpParams): Observable<any> {
+    return this.http.get(this.materialInUrl['materialIn'] + `/${params.get('id')}`).pipe(
       tap(_ => {
         if (new Date(_['data'][0]['godowntime']) < new Date('1970-01-01')) {
           _['data'][0]['godowntime'] = '1970-01-01';
@@ -70,24 +72,29 @@ export class MaterialInService {
     )
   }
 
-  putMaterialIn(param: object): Observable<any> {
-    delete param['createtime'];
-    delete param['godowntime'];
-    return this.http.put(this.materialInUrl['putmaterialIn'] + `/${param['id']}`, param, httpOptions).pipe(
+  getmaterialInExcel(params: HttpParams): Observable<any> {
+    return this.http.get(this.materialInUrl['getmaterialInExcel'], { params }).pipe(
+      catchError(this.handleError('postmaterialInList'))
+    )
+  }
+  putMaterialIn(params: object): Observable<any> {
+    delete params['createtime'];
+    delete params['godowntime'];
+    return this.http.put(this.materialInUrl['putmaterialIn'] + `/${params['id']}`, params, httpOptions).pipe(
       catchError(this.handleError('putmaterialIn'))
     )
   }
 
-  postmaterialIn(param: object): Observable<any> {
-    delete param['createtime'];
-    delete param['godowntime'];
-    delete param['id'];
-    return this.http.post(this.materialInUrl['postmaterialIn'], param, httpOptions).pipe(
+  postmaterialIn(params: object): Observable<any> {
+    delete params['createtime'];
+    delete params['godowntime'];
+    delete params['id'];
+    return this.http.post(this.materialInUrl['postmaterialIn'], params, httpOptions).pipe(
       catchError(this.handleError('postmaterialIn'))
     )
   }
-  postmaterialInList(param: object): Observable<any> {
-    return this.http.post(this.materialInUrl['postmaterialInList'], param, httpOptions).pipe(
+  postmaterialInList(params: object): Observable<any> {
+    return this.http.post(this.materialInUrl['postmaterialInList'], params, httpOptions).pipe(
       catchError(this.handleError('postmaterialInList'))
     )
   }

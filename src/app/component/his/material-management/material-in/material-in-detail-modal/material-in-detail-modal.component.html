@@ -35,14 +35,22 @@
       </table>
     </div>
     <div *ngIf="materialIn">
+      <div #print class="displayNone">
+        <app-material-in-order [materialIn]="materialIn"></app-material-in-order>
+      </div>
       <div class="modalTitle">
         <div class="titleTab"></div>材料明细
       </div>
       <div style="margin-bottom: 0.8rem;">
-        <button type="button" nz-button nzType="primary">导出</button>
-        <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button>
+        <button type="button" nz-button nzType="primary" (click)="export()">导出</button>
+        <essence-ng2-print [mode]="'popup'" [popTitle]="'入库单打印'" [btnText]="'打印'"
+          [btnClass]="{'btn': true, 'btn-info': true}" [printHTML]="print" [printStyle]="printStyle"
+          [printCSS]="printCSS" (click)="beforePrint()" (printComplete)="printComplete()">
+        </essence-ng2-print>
+        <!-- <button type="button" nz-button nzType="primary" style="margin-left:12px;" (click)="print()">打印</button> -->
       </div>
-      <nz-table *ngIf="materialIn.details" [nzNoResult]="" nzSize="middle" [nzData]="materialIn.details" nzBordered [nzShowPagination]="false">
+      <nz-table *ngIf="materialIn.details" [nzNoResult]="" nzSize="middle" [nzData]="materialIn.details" nzBordered
+        [nzShowPagination]="false">
         <thead>
           <tr>
             <th>发票号</th>
@@ -104,8 +112,10 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">中标金额合计 <span>{{materialIn.bidtotal}}元</span></span>
-    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">零售金额合计 <span>{{materialIn.retailtotal}}元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">中标金额合计
+      <span>{{materialIn.bidtotal}}元</span></span>
+    <span class="bold" *ngIf="materialIn" style="margin-right: 3rem;">零售金额合计
+      <span>{{materialIn.retailtotal}}元</span></span>
     <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">关闭</button>
   </ng-template>
 </nz-modal>

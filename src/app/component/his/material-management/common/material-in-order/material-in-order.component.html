@@ -1,0 +1,66 @@
+<p class="title">
+  延华医院材料入库单
+</p>
+<table class="baseTable">
+  <tr>
+    <td>入库科室：内科</td>
+    <td>入库单号：{{materialIn.billno}}</td>
+  </tr>
+  <tr>
+    <td>入库日期：{{materialIn.godowntime}}</td>
+    <td>供货商：{{materialIn.suppliername}}</td>
+  </tr>
+</table>
+
+<table class="detailTable" *ngIf="materialIn">
+  <thead>
+    <tr>
+      <th>材料名称</th>
+      <th>规格</th>
+      <th>单位</th>
+      <th>数量</th>
+      <th>进价单位</th>
+      <th>进价总额</th>
+      <th>零售单价</th>
+      <th>零售总额</th>
+      <th>进销差</th>
+      <th>生产批号</th>
+      <th>产地</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of materialIn.details">
+      <td>{{data.name}}</td>
+      <td>{{data.mspec}}</td>
+      <td>{{data.munit}}</td>
+      <td>{{data.mcount}}</td>
+      <td>{{data.bidprice}}</td>
+      <td>{{data.bidtotal}}</td>
+      <td>{{data.retailprice}}</td>
+      <td>{{data.retailtotal}}</td>
+      <td></td>
+      <td>{{data.batchno}}</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>合计</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+      <td>{{materialIn.bidtotal}}</td>
+      <td>-</td>
+      <td>{{materialIn.retailtotal}}</td>
+      <td>-</td>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="personTable">
+  <td style="width:15%;">入库人：</td>
+  <td style="width:29%;"></td>
+  <td style="width:15%;">审核人：</td>
+  <td style="width:41%;"></td>
+</table>

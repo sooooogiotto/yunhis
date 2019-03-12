@@ -1,0 +1,38 @@
+::ng-deep .btn {
+  color: #fff;
+  background-color: #2881d4;
+  border-color: #2881d4;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  margin-left: 12px;
+  -webkit-appearance: button;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  outline: 0;
+  line-height: 1.499;
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  touch-action: manipulation;
+  cursor: pointer;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 0 15px;
+  font-size: 14px;
+  border-radius: 4px;
+  height: 32px;
+  user-select: none;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  position: relative;
+  overflow: visible;
+}
+::ng-deep .btn :hover {
+  text-decoration: none;
+  color: #fff;
+  background-color: #4f9fe0;
+  border-color: #4f9fe0;
+}
+
+.displayNone {
+  display: none;
+}

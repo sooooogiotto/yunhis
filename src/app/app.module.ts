@@ -11,7 +11,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** 本土化 */
 import { registerLocaleData } from '@angular/common';
 import zh from '@angular/common/locales/zh';
-registerLocaleData(zh);
 /** 拦截器、错误处理 */
 import { httpInterceptorProviders } from "./http-interceptors/index";
 import { RequestCache, RequestCacheWithMap } from './request-cache.service';
@@ -22,6 +21,8 @@ import { CookieService } from "ngx-cookie-service";
 import { CustomReuseStrategy } from './CustomReuseStrategy';
 import { RouteReuseStrategy } from '@angular/router';
 import { PageComponent } from './component/common/page/page.component';
+/** 打印 */
+import { EssenceNg2PrintModule } from "essence-ng2-print";
 /** hisComponent */
 import { HomePageComponent } from './component/common/home-page/home-page.component';
 import { LoginComponent } from './component/common/login/login.component';
@@ -61,6 +62,8 @@ import { MaterialAddSupplierComponent } from './component/his/material-managemen
 import { MaterialDetailSupplierComponent } from './component/his/material-management/material-supplier/material-detail-supplier/material-detail-supplier.component';
 import { MaterialCheckConfirmComponent } from './component/his/material-management/material-check/material-check-confirm/material-check-confirm.component';
 import { DeleteConfirmComponent } from './component/his/material-management/common/delete-confirm/delete-confirm.component';
+import { MaterialInOrderComponent } from './component/his/material-management/common/material-in-order/material-in-order.component';
+registerLocaleData(zh);
 
 @NgModule({
   declarations: [
@@ -103,7 +106,8 @@ import { DeleteConfirmComponent } from './component/his/material-management/comm
     MaterialAddSupplierComponent,
     MaterialDetailSupplierComponent,
     MaterialCheckConfirmComponent,
-    DeleteConfirmComponent
+    DeleteConfirmComponent,
+    MaterialInOrderComponent
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,8 @@ import { DeleteConfirmComponent } from './component/his/material-management/comm
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    EssenceNg2PrintModule
   ],
   providers: [
     HttpErrorHandler,

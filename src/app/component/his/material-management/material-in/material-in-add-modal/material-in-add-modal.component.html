@@ -102,17 +102,18 @@
             </td>
             <td>
               <div class="tableInputDiv" style="width:6em">
-                <input nz-input [(ngModel)]="control.invamount"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'invamount'}"
-                  (ngModelChange)="onCalc()" (focus)="onFocus(i,'invamount')">
+                <nz-input-number [(ngModel)]="control.invamount"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'invamount'}" [nzMin]="0"
+                  [nzPrecision]="precision" (ngModelChange)="onCalc()" (nzFocus)="onFocus(i,'invamount')">
+                </nz-input-number>
               </div>
             </td>
             <td>
               <div class="tableInputDiv">
                 <nz-select *ngIf="materialDictionaryList" [(ngModel)]="control.drugmaterialid"
-                  (ngModelChange)="onFocus(i,'drugmaterialid')"
                   [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'drugmaterialid'}"
-                  (ngModelChange)="onChangeMaterial($event, control)" nzShowSearch>
+                  (ngModelChange)="onFocus(i,'drugmaterialid')" (ngModelChange)="onChangeMaterial($event, control)"
+                  nzShowSearch>
                   <nz-option [nzLabel]="item.name" [nzValue]="item.id" *ngFor="let item of materialDictionaryList">
                   </nz-option>
                 </nz-select>
@@ -122,37 +123,43 @@
             <td>{{control.munit}}</td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="control.mcount" (focus)="onFocus(i,'mcount')"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'mcount'}" type="number" min="0"
-                  (ngModelChange)="onCalc()">
+                <nz-input-number [(ngModel)]="control.mcount"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'mcount'}" [nzMin]="0"
+                  [nzPrecision]="precision" (nzFocus)="onFocus(i,'mcount')" (ngModelChange)="onCalc()">
+                </nz-input-number>
               </div>
             </td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="control.bidprice" (focus)="onFocus(i,'bidprice')"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'bidprice'}" type="number" min="0"
-                  (ngModelChange)="onCalc()">
+                <nz-input-number [(ngModel)]="control.bidprice"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'bidprice'}" [nzMin]="0"
+                  [nzPrecision]="precision" (nzFocus)="onFocus(i,'bidprice')" (ngModelChange)="onCalc()">
+                </nz-input-number>
               </div>
             </td>
             <td>{{control.bidtotal}}</td>
             <td>
               <div class="tableInputDiv" style="width:6em;">
-                <input nz-input [(ngModel)]="control.retailprice" (focus)="onFocus(i,'retailprice')"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'retailprice'}" type="number"
-                  min="0" (ngModelChange)="onCalc()">
+                <nz-input-number [(ngModel)]="control.retailprice"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'retailprice'}" [nzMin]="0"
+                  [nzPrecision]="precision" (nzFocus)="onFocus(i,'retailprice')" (ngModelChange)="onCalc()">
+                </nz-input-number>
               </div>
             </td>
             <td>{{control.retailtotal}}</td>
             <td>
               <div class="tableInputDiv" style="width:9em;">
-                <nz-date-picker [(ngModel)]="control.expiretime" (ngModelChange)="onFocus(i,'expiretime')"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'expiretime'}"></nz-date-picker>
+                <nz-date-picker [(ngModel)]="control.expiretime"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'expiretime'}"
+                  (ngModelChange)="onFocus(i,'expiretime')">
+                </nz-date-picker>
               </div>
             </td>
             <td>
               <div class="tableInputDiv">
-                <input nz-input [(ngModel)]="control.batchno" (focus)="onFocus(i,'batchno')"
-                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'batchno'}">
+                <input nz-input [(ngModel)]="control.batchno"
+                  [ngClass]="{'inValid': inValidObj.key == i && inValidObj.value == 'batchno'}"
+                  (focus)="onFocus(i,'batchno')">
               </div>
             </td>
             <td>

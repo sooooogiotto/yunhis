@@ -1,0 +1,26 @@
+* {
+  font-size: 14px;
+}
+table {
+  width: 100%;
+  color: red;
+}
+.baseTable tr td {
+  text-align: left;
+  width: 50%;
+}
+
+.detailTable {
+  border-collapse: collapse;
+}
+.detailTable tr th {
+  background-color: rgba(242, 242, 242, 1);
+}
+.detailTable tr td {
+}
+.detailTable tr th,
+.detailTable tr td {
+  border: 1px solid rgba(228, 228, 228, 1);
+  text-align: left;
+  padding: 5px 0 5px 5px;
+}

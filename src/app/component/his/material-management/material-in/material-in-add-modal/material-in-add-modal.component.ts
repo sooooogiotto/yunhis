@@ -20,6 +20,7 @@ export class MaterialInAddModalComponent implements OnInit {
   @Input() supplierList: object[];
   @Output() closeAddModal: EventEmitter<boolean> = new EventEmitter;
 
+  precision: number = 2;
   controlObject: object = {
     billno: "",
     depid: "",
@@ -93,11 +94,11 @@ export class MaterialInAddModalComponent implements OnInit {
     this.controlObject['retailtotal'] = 0;
     this.controlObject['invamounttotal'] = 0;
     this.controlArray.map(c => {
-      c['bidtotal'] = +c['bidprice'] * +c['mcount']
-      c['retailtotal'] = +c['retailprice'] * +c['mcount']
-      this.controlObject['bidtotal'] += +c['bidtotal'];
-      this.controlObject['retailtotal'] += +c['retailtotal'];
-      this.controlObject['invamounttotal'] += +c['invamount'];
+      c['bidtotal'] = this.util.calcSum(+c['bidprice'] * +c['mcount'], this.precision);
+      c['retailtotal'] = this.util.calcSum(+c['retailprice'] * +c['mcount'], this.precision);
+      this.controlObject['bidtotal'] = this.util.calcSum(+this.controlObject['bidtotal'] + c['bidtotal'], this.precision);;
+      this.controlObject['retailtotal'] = this.util.calcSum(+this.controlObject['retailtotal'] + c['retailtotal'], this.precision);;
+      this.controlObject['invamounttotal'] = this.util.calcSum(+this.controlObject['invamounttotal'] + c['invamount'], this.precision);;
     })
   }
   handleCancel(flag: boolean): void {
