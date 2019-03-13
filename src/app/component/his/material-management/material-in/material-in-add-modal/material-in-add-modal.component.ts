@@ -10,7 +10,7 @@ import { ValidatorService } from 'src/app/validator.service';
 @Component({
   selector: 'app-material-in-add-modal',
   templateUrl: './material-in-add-modal.component.html',
-  styleUrls: ['./material-in-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-in-add-modal.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialInAddModalComponent implements OnInit {
   // new

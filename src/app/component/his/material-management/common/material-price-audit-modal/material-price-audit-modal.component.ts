@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-material-price-audit-modal',
   templateUrl: './material-price-audit-modal.component.html',
-  styleUrls: ['./material-price-audit-modal.component.scss', '../../material-check/material-check-add-modal/material-check-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-price-audit-modal.component.scss', '../../material-check/material-check-add-modal/material-check-add-modal.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialPriceAuditModalComponent implements OnInit {
   @Input() isVisible: boolean = false

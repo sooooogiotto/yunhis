@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-material-apply-add-modal',
   templateUrl: './material-apply-add-modal.component.html',
-  styleUrls: ['./material-apply-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-apply-add-modal.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialApplyAddModalComponent implements OnInit {
   @Input() addIsVisible: boolean;

@@ -63,6 +63,8 @@ import { MaterialDetailSupplierComponent } from './component/his/material-manage
 import { MaterialCheckConfirmComponent } from './component/his/material-management/material-check/material-check-confirm/material-check-confirm.component';
 import { DeleteConfirmComponent } from './component/his/material-management/common/delete-confirm/delete-confirm.component';
 import { MaterialInOrderComponent } from './component/his/material-management/common/material-in-order/material-in-order.component';
+import { InfectionFillInComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in.component';
+import { InfectionFillInRecordCardComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in-record-card/infection-fill-in-record-card.component';
 registerLocaleData(zh);
 
 @NgModule({
@@ -107,7 +109,9 @@ registerLocaleData(zh);
     MaterialDetailSupplierComponent,
     MaterialCheckConfirmComponent,
     DeleteConfirmComponent,
-    MaterialInOrderComponent
+    MaterialInOrderComponent,
+    InfectionFillInComponent,
+    InfectionFillInRecordCardComponent
   ],
   imports: [
     BrowserModule,

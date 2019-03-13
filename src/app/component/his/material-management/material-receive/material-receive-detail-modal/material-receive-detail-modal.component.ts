@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-material-receive-detail-modal',
   templateUrl: './material-receive-detail-modal.component.html',
-  styleUrls: ['./material-receive-detail-modal.component.scss', '../../material-in/material-in-add-modal/material-in-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-receive-detail-modal.component.scss', '../../material-in/material-in-add-modal/material-in-add-modal.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialReceiveDetailModalComponent implements OnInit {
   @Input() detailIsVisible: boolean;

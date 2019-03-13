@@ -31,7 +31,9 @@ import { MaterialDictionaryComponent } from "./component/his/material-management
 import { MaterialManufactureronaryComponent } from "./component/his/material-management/material-manufactureronary/material-manufactureronary.component";
 /** 供应商维护 */
 import { MaterialSupplierComponent } from "./component/his/material-management/material-supplier/material-supplier.component";
-
+/** 材料管理模块 End*/
+/** 传染病管理模块 */
+import { InfectionFillInComponent } from "./component/his/infection-management/infection-fill-in/infection-fill-in.component";
 
 const routes: Routes = [
   {
@@ -99,6 +101,12 @@ const routes: Routes = [
       }, {
         path: 'MaterialSupplierComponent', component: MaterialSupplierComponent, data: {
           title: '供应商维护',
+          isRemove: true
+        }
+      },
+      {
+        path: 'InfectionFillInComponent', component: InfectionFillInComponent, data: {
+          title: '传染病填报',
           isRemove: true
         }
       }

@@ -4,7 +4,7 @@ import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-material-in-detail-modal',
   templateUrl: './material-in-detail-modal.component.html',
-  styleUrls: ['./material-in-detail-modal.component.scss', '../material-in-add-modal/material-in-add-modal.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-in-detail-modal.component.scss', '../material-in-add-modal/material-in-add-modal.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialInDetailModalComponent implements OnInit {
   @Input() detailIsVisible: boolean;

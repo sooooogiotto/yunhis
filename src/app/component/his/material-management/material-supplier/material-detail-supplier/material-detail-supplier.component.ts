@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-material-detail-supplier',
   templateUrl: './material-detail-supplier.component.html',
-  styleUrls: ['./material-detail-supplier.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-detail-supplier.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialDetailSupplierComponent implements OnInit {
 

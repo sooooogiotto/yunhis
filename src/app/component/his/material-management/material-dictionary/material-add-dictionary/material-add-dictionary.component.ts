@@ -4,7 +4,7 @@ import { StaticDataService } from 'src/app/static-data.service';
 @Component({
   selector: 'app-material-add-dictionary',
   templateUrl: './material-add-dictionary.component.html',
-  styleUrls: ['./material-add-dictionary.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-add-dictionary.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialAddDictionaryComponent implements OnInit {
   @Input() addIsVisible: boolean;

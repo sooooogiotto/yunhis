@@ -3,7 +3,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-material-detail-manufactureronary',
   templateUrl: './material-detail-manufactureronary.component.html',
-  styleUrls: ['./material-detail-manufactureronary.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-detail-manufactureronary.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialDetailManufactureronaryComponent implements OnInit {
 

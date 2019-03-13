@@ -3,7 +3,7 @@ import { StaticDataService } from 'src/app/static-data.service';
 @Component({
   selector: 'app-material-add-manufactureronary',
   templateUrl: './material-add-manufactureronary.component.html',
-  styleUrls: ['./material-add-manufactureronary.component.scss', '../../../../common/modal.scss', '../../../../common/inline-form.scss', '../../../../common/form.scss']
+  styleUrls: ['./material-add-manufactureronary.component.scss', '../../../../common/modal.scss',  '../../../../common/form.scss']
 })
 export class MaterialAddManufactureronaryComponent implements OnInit {
   @Input() addIsVisible: boolean;

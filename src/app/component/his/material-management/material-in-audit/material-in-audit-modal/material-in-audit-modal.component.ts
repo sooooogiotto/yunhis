@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     '../../material-in/material-in-add-modal/material-in-add-modal.component.scss',
     '../../material-in/material-in-detail-modal/material-in-detail-modal.component.scss',
     '../../../../common/modal.scss',
-    '../../../../common/inline-form.scss',
+    
     '../../../../common/form.scss'
   ]
 })

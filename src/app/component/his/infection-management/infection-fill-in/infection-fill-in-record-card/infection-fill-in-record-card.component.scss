@@ -1,0 +1,80 @@
+.modalContent {
+  nz-select {
+    width: 100%;
+  }
+  nz-date-picker {
+    width: 100%;
+  }
+
+  ::ng-deep .ant-collapse-header {
+    font-weight: bold;
+  }
+  nz-date-picker ::ng-deep .ant-calendar-picker {
+    width: 100%;
+  }
+  .title {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .modalTitle {
+    margin-top: 20px;
+    font-size: 17px;
+  }
+  .gray {
+    color: #999999;
+  }
+  .red {
+    color: red;
+  }
+  .baseInfo {
+    background-color: rgba(242, 242, 242, 1);
+    height: 45px;
+    line-height: 45px;
+    color: #666;
+    padding-left: 20px;
+    margin-bottom: 20px;
+  }
+  .name {
+    color: #1270c7;
+    font-weight: bold;
+    margin-right: 20px;
+  }
+
+  .address {
+    nz-select {
+      width: 15.66%;
+      margin-right: 1%;
+    }
+    input {
+      width: 50.01%;
+    }
+  }
+
+  .personGroup {
+    li {
+      width: 16.66%;
+    }
+  }
+  .inline-form-row {
+    label {
+      width: 7em;
+    }
+    .inlineFormGroup {
+      padding-left: 8.5em;
+    }
+  }
+  .personGroup {
+    list-style: none;
+    li {
+      float: left;
+      width: 16.66%;
+    }
+    margin-bottom: 15px;
+  }
+
+  .panelToggle {
+    float: right;
+    margin-right: 20px;
+  }
+}
