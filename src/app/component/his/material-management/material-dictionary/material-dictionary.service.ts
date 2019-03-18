@@ -1,10 +1,10 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpParams, HttpClient, HttpHeaders } from '@angular/common/http';
-import { ConfigService, ip } from "src/app/config.service";
-
-import { HttpErrorHandler, HandleError } from "../../../../http-error-handler.service";
 import { catchError } from 'rxjs/operators';
+import { ConfigService, ip } from "src/app/config.service";
+import { HandleError, HttpErrorHandler } from "../../../../http-error-handler.service";
+
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -16,13 +16,11 @@ const httpOptions = {
 export class MaterialDictionaryService {
   private handleError: HandleError;
 
-  fixedParam: string = `?site=${this.configService.config.site}&appid=${this.configService.config.appid}&token=${this.configService.config.token}`
-
   drugmateriallUrl = {
     /** 材料字典列表 */
-    "drugmaterial/list": `${ip}/service/560/drugmaterial/list${this.fixedParam}`,
+    "drugmaterial/list": `${ip}/service/560/drugmaterial/list${this.configService.fixedParam}`,
     /** 材料字典列表 */
-    "drugmaterial/count": `${ip}/service/560/drugmaterial/count${this.fixedParam}`,
+    "drugmaterial/count": `${ip}/service/560/drugmaterial/count${this.configService.fixedParam}`,
     /** 材料字典详情 */
     "drugmaterial": `${ip}/service/560/drugmaterial`,
     /** 材料字典修改 */

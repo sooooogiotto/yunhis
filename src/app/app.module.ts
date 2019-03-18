@@ -65,6 +65,10 @@ import { DeleteConfirmComponent } from './component/his/material-management/comm
 import { MaterialInOrderComponent } from './component/his/material-management/common/material-in-order/material-in-order.component';
 import { InfectionFillInComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in.component';
 import { InfectionFillInRecordCardComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in-record-card/infection-fill-in-record-card.component';
+import { InfectionFillInBCardComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in-b-card/infection-fill-in-b-card.component';
+import { InfectionFillInHivCardComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in-hiv-card/infection-fill-in-hiv-card.component';
+import { ConfirmComponent } from './component/common/confirm/confirm.component';
+import { InfectionFillInPrintComponent } from './component/his/infection-management/common/infection-fill-in-print/infection-fill-in-print.component';
 registerLocaleData(zh);
 
 @NgModule({
@@ -111,7 +115,11 @@ registerLocaleData(zh);
     DeleteConfirmComponent,
     MaterialInOrderComponent,
     InfectionFillInComponent,
-    InfectionFillInRecordCardComponent
+    InfectionFillInRecordCardComponent,
+    InfectionFillInBCardComponent,
+    InfectionFillInHivCardComponent,
+    ConfirmComponent,
+    InfectionFillInPrintComponent
   ],
   imports: [
     BrowserModule,

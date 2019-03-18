@@ -1,0 +1,62 @@
+<nz-modal [(nzVisible)]="bIsVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()" nzWidth="1000">
+  <ng-template #modalTitle>
+    填写传染病报告卡
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="modalContent">
+      <nz-divider></nz-divider>
+      <h2 class="title">乙肝病例附卡</h2>
+      <div class="content">
+        <span class="gray">HBsAg阳性时间</span>
+        <nz-radio-group>
+          <label nz-radio nzValue="0">&gt;6个月</label>
+          <label nz-radio nzValue="1">6个月内由阴性转为阳性</label>
+          <label nz-radio nzValue="2">既往未检测或结果不详</label>
+        </nz-radio-group>
+      </div>
+      <div class="content">
+        <span class="gray">首次出现乙肝症状和体征时间</span>
+        <nz-date-picker style="margin-right: 15px;"></nz-date-picker>
+        <label nz-checkbox>不详</label>
+      </div>
+      <div class="content">
+        <span class="gray">本次ALT</span>
+        <input nz-input style="width: 191px;margin-right: 15px;">
+        U/L
+      </div>
+      <div class="content">
+        <span class="gray">抗-HBc IgM1：1000检测结果</span>
+        <nz-radio-group>
+          <label nz-radio nzValue="0">阴性</label>
+          <label nz-radio nzValue="1">阳性</label>
+          <label nz-radio nzValue="2">未测</label>
+        </nz-radio-group>
+      </div>
+      <div class="content">
+        <span class="gray">肝穿刺检测结果</span>
+        <nz-radio-group>
+          <label nz-radio nzValue="0">急性病变</label>
+          <label nz-radio nzValue="1">慢性病变</label>
+          <label nz-radio nzValue="2">未测</label>
+        </nz-radio-group>
+      </div>
+      <div class="content">
+        <span class="gray">恢复期血清HBsAg阴转，抗-HBs阳转</span>
+        <nz-radio-group>
+          <label nz-radio nzValue="0">是</label>
+          <label nz-radio nzValue="1">否</label>
+          <label nz-radio nzValue="2">未测</label>
+        </nz-radio-group>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button class="greenPrimaryBtn left" nz-button nzType="primary" (click)="handleCancel('record')">返回上一页</button>
+    <button *ngIf="!isInfectionHiv" nz-button nzType="primary" (click)="handleCancel('submit')">提交</button>
+    <button class="greenPrimaryBtn" *ngIf="isInfectionHiv" nz-button nzType="primary" (click)="handleCancel('hiv')">继续填写艾滋性病附卡</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(false)">取消</button>
+  </ng-template>
+</nz-modal>

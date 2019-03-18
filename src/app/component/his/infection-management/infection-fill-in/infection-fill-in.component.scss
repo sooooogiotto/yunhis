@@ -5,3 +5,9 @@
 .childrenContainer ::ng-deep .ant-tabs-bar {
   padding-left: 1.6rem;
 }
+.fillin ::ng-deep table button {
+  border: none;
+  background: transparent;
+  color: #2881d4;
+  outline: 0;
+}

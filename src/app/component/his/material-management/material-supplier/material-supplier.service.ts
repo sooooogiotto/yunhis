@@ -1,9 +1,9 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { HttpErrorHandler, HandleError } from "src/app/http-error-handler.service";
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { ip, ConfigService } from 'src/app/config.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ConfigService, ip } from 'src/app/config.service';
+import { HandleError, HttpErrorHandler } from "src/app/http-error-handler.service";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -16,13 +16,12 @@ export class MaterialSupplierService {
 
   private handleError: HandleError;
 
-  fixedParam: string = `?site=${this.configService.config.site}&appid=${this.configService.config.appid}&token=${this.configService.config.token}`
 
   supplierUrl = {
     /** 生产商列表 */
-    "supplier/list": `${ip}/service/560/supplier/list${this.fixedParam}`,
+    "supplier/list": `${ip}/service/560/supplier/list${this.configService.fixedParam}`,
     /** 生产商列表 */
-    "supplier/count": `${ip}/service/560/supplier/count${this.fixedParam}`,
+    "supplier/count": `${ip}/service/560/supplier/count${this.configService.fixedParam}`,
     /** 生产商详情 */
     "supplier": `${ip}/service/560/supplier`,
     /** 生产商修改 */

@@ -7,7 +7,9 @@ import { HttpParams, HttpClient } from '@angular/common/http';
   styleUrls: ['./infection-fill-in.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
 })
 export class InfectionFillInComponent implements OnInit {
-
+  printBtnBoolean: boolean;
+  printStyle: string;
+  printCSS: string[];
   /** 分页对象 */
   page: object = {
     curPage: 1,
@@ -21,8 +23,16 @@ export class InfectionFillInComponent implements OnInit {
     pagestart: 0,
     pagenum: 10
   }
+  /**  */
+  isInfectionSecond: boolean = false;
+  isInfectionHiv: boolean = false;
+  /** Confirm内容 */
+  confirmContent: string = "确定要提交吗?"
   /** 弹出框开关 */
   recordIsVisible: boolean = false;
+  bIsVisible: boolean = false;
+  hivIsVisible: boolean = false;
+  confirmIsVisible: boolean = false;
   /** 构造form表单对象 */
   auditConditionForm: FormGroup = this.fb.group({
     sid: [''],
@@ -64,14 +74,92 @@ export class InfectionFillInComponent implements OnInit {
     this.recordIsVisible = true;
   }
   /** 关闭审核弹出框 */
-  closeRecordCard(isVisible: boolean): void {
-    this.recordIsVisible = false
+  closeCard(isVisible: object): void {
+    this.recordIsVisible = false;
+    this.bIsVisible = false;
+    this.hivIsVisible = false;
+    if (isVisible['submit']) {
+      this.confirmIsVisible = true;
+      this.recordIsVisible = !!isVisible['recordIsVisible'];
+      this.bIsVisible = !!isVisible['bIsVisible'];
+      this.hivIsVisible = !!isVisible['hivIsVisible'];
+    } else if (isVisible['recordIsVisible']) {
+      this.recordIsVisible = isVisible['recordIsVisible']
+    } else if (isVisible['bIsVisible']) {
+      this.bIsVisible = isVisible['bIsVisible']
+    } else if (isVisible['hivIsVisible']) {
+      this.hivIsVisible = isVisible['hivIsVisible']
+    }
+    this.isInfectionHiv = isVisible['isInfectionHiv']
+    this.isInfectionSecond = isVisible['isInfectionSecond']
   }
 
+  closeConfirm(flag: boolean): void {
+    this.confirmIsVisible = false;
+    if (flag) {
+
+    }
+  }
 
   constructor(
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.printStyle = this.printStyle =
+      `
+      * {
+        font-size:12px;
+      }
+      .title{
+        text-align:center;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .titleTab{
+        background: #2881d4;
+        width: 4px;
+        height: 1em;
+        border-radius: 1rem;
+        display: inline-block;
+        margin-right: 4px;
+        position: relative;
+        top: 2px;
+      }
+      table {
+        width: 100%;
+        color: #333;
+      }
+      .baseTable tr td {
+        text-align: left;
+        width: 50%;
+      }
+      
+      .detailTable {
+        border-collapse: collapse;
+      }
+      .detailTable tr th {
+        background-color: rgba(242, 242, 242, 1);
+      }
+      .detailTable tr th,
+      .detailTable tr td{
+        border: 1px solid rgba(228, 228, 228, 1);
+        text-align:left;
+        padding: 8px 0 8px 10px;
+        font-weight:400;
+      }
+      .baseTable,
+      .detailTable,
+      .personTable{
+        margin-top:20px;
+      }
+    `
+  }
+
+  printComplete() {
+    this.printBtnBoolean = true;
+  }
+  beforePrint() {
+    this.printBtnBoolean = false;
+  }
 
   ngOnInit() {
     this.page['pagenum'] = 10000;

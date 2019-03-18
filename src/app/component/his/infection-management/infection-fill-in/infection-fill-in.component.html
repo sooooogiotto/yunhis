@@ -1,4 +1,4 @@
-<div class="childrenContainer">
+<div class="childrenContainer fillin">
   <nz-tabset>
     <nz-tab nzTitle="{{'待填报(' + page.pageCount + ')'}}">
       <form nz-form [nzLayout]="'inline'" [formGroup]="auditConditionForm">
@@ -54,7 +54,13 @@
             <td>
               <a (click)="showRecordCard(data)">填报</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>打印</a>
+              <essence-ng2-print [mode]="'popup'" [popTitle]="'入库单打印'" [btnText]="'打印'" [btnClass]="{'a': true }"
+                [printHTML]="print" [printStyle]="printStyle" [printCSS]="printCSS" (click)="beforePrint()"
+                (printComplete)="printComplete()">
+              </essence-ng2-print>
+              <div #print>
+                <app-infection-fill-in-print></app-infection-fill-in-print>
+              </div>
             </td>
           </tr>
         </tbody>
@@ -130,7 +136,6 @@
             <td>
               <a>查看</a>
               <nz-divider nzType="vertical"></nz-divider>
-              <a>打印</a>
             </td>
           </tr>
         </tbody>
@@ -138,8 +143,16 @@
       <app-page [page]="paged" (changePage)="findAudited($event)"></app-page>
     </nz-tab>
   </nz-tabset>
-  <app-infection-fill-in-record-card [infectionId]="infectionId" [recordIsVisible]="recordIsVisible"
-    (closeRecordCard)="closeRecordCard($event)">
+  <app-infection-fill-in-record-card [isInfectionSecond]="isInfectionSecond" [isInfectionHiv]="isInfectionHiv"
+    [infectionId]="infectionId" [recordIsVisible]="recordIsVisible" (closeCard)="closeCard($event)">
   </app-infection-fill-in-record-card>
+  <app-infection-fill-in-b-card [isInfectionSecond]="isInfectionSecond" [isInfectionHiv]="isInfectionHiv"
+    [infectionId]="infectionId" [bIsVisible]="bIsVisible" (closeCard)="closeCard($event)">
+  </app-infection-fill-in-b-card>
+  <app-infection-fill-in-hiv-card [isInfectionSecond]="isInfectionSecond" [isInfectionHiv]="isInfectionHiv"
+    [infectionId]="infectionId" [hivIsVisible]="hivIsVisible" (closeCard)="closeCard($event)">
+  </app-infection-fill-in-hiv-card>
+  <app-confirm [confirmContent]="confirmContent" [confirmIsVisible]="confirmIsVisible"
+    (closeConfirm)="closeConfirm($event)"></app-confirm>
 
 </div>

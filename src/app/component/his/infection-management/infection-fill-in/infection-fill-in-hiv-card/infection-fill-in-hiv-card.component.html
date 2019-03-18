@@ -1,0 +1,186 @@
+<nz-modal [(nzVisible)]="hivIsVisible" [nzTitle]="modalTitle" [nzContent]="modalContent" [nzFooter]="modalFooter"
+  (nzOnCancel)="handleCancel()" nzWidth="1200">
+  <ng-template #modalTitle>
+    填写传染病报告卡
+  </ng-template>
+
+  <ng-template #modalContent>
+    <div class="modalContent">
+      <nz-divider></nz-divider>
+      <h2 class="title">艾滋病及性病附卡</h2>
+
+      <div class="modalTitle">
+        <div class="titleTab"></div>患者基本信息
+      </div>
+      <div class="baseInfo">
+        <span class="name">张小飞</span>男
+        <nz-divider nzType="vertical"></nz-divider>12岁
+        <nz-divider nzType="vertical"></nz-divider>身份证号 3708830229330022
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="8">
+          <label><span class="red">*</span>患儿家长姓名</label>
+          <div class="inlineFormGroup">
+            <input nz-input>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <label>民族</label>
+          <div class="inlineFormGroup">
+            <nz-select>
+              <nz-option></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <label>婚姻状况</label>
+          <div class="inlineFormGroup">
+            <nz-select>
+              <nz-option [nzLabel]="data" [nzValue]="data" *ngFor="let data of personMarriage"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="8">
+          <label>文化程度</label>
+          <div class="inlineFormGroup">
+            <nz-select>
+              <nz-option [nzLabel]="data" [nzValue]="data" *ngFor="let data of personCulture"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+        <div nz-col nzSpan="8">
+          <label>户籍所在地</label>
+          <div class="inlineFormGroup">
+            <nz-select>
+              <nz-option [nzLabel]="data" [nzValue]="data" *ngFor="let data of personFrom"></nz-option>
+            </nz-select>
+          </div>
+        </div>
+      </div>
+      <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="24">
+          <label><span class="red">*</span>户籍地址</label>
+          <div class="inlineFormGroup address">
+            <nz-select [(ngModel)]="infection.province" (ngModelChange)="pChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of p"></nz-option>
+            </nz-select>
+            <nz-select [(ngModel)]="infection.city" (ngModelChange)="cChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of c[infection.province]"></nz-option>
+            </nz-select>
+            <nz-select [(ngModel)]="infection.area">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of a[infection.city]"></nz-option>
+            </nz-select>
+            <input nz-input [(ngModel)]="infection.street">
+          </div>
+        </div>
+      </div>
+
+      <div class="modalTitle">
+        <div class="titleTab"></div>疾病名称 <span class="red">*</span>
+      </div>
+      <nz-checkbox-group [(ngModel)]="diseaseName"></nz-checkbox-group>
+
+      <div class="modalTitle">
+        <div class="titleTab"></div>接触史
+      </div>
+      <div class="meetContent">
+        <label nz-checkbox></label>注射毒品史（在您记忆中有<input nz-input class="number">人与您共用过注射器？）
+      </div>
+      <div class="meetContent">
+        <label nz-checkbox></label>非婚异性性接触史（在您记忆中有<input nz-input class="number">人与您有过非婚性行为？）<label
+          nz-checkbox>商业</label><label nz-checkbox>非商业</label>
+      </div>
+      <div class="meetContent">
+        <label nz-checkbox></label>配偶/固定性伴阳性
+      </div>
+      <div class="meetContent">
+        <label nz-checkbox></label>男男性行为史（在您记忆中有<input nz-input class="number">人与您有过同性性行为？）
+      </div>
+      <div class="meetContent">
+        <nz-checkbox-group [(ngModel)]="meetHistory"></nz-checkbox-group>
+      </div>
+      <div class="meetContent">
+        <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+          <div nz-col nzSpan="24">
+            <label style="width: 2em;">其他</label>
+            <div class="inlineFormGroup" style="padding-left:3em;">
+              <input nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modalTitle">
+        <div class="titleTab"></div>性病史
+      </div>
+      <nz-radio-group>
+        <label nz-radio>有</label>
+        <label nz-radio>无</label>
+        <label nz-radio>不详</label>
+      </nz-radio-group>
+      <div class="modalTitle">
+        <div class="titleTab"></div>最可能的感染途径
+      </div>
+      <nz-radio-group>
+        <label class="mutiRadio" nz-radio [nzValue]="data" *ngFor="let data of infectionRoute">{{data}}</label>
+      </nz-radio-group>
+      <div class="modalTitle">
+        <div class="titleTab"></div>检测样本来源
+      </div>
+      <nz-radio-group>
+        <label nz-radio [nzValue]="data" *ngFor="let data of sampleSources">{{data}}</label>
+      </nz-radio-group>
+      <div class="modalTitle">
+        <div class="titleTab"></div>实验室检测结论
+      </div>
+      <nz-radio-group>
+        <label nz-radio>确认检测阳性</label>
+        <label nz-radio>替代策略检测阳性</label>
+      </nz-radio-group>
+      <div class="mt10" nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+        <div nz-col nzSpan="10">
+          <label style="width:14em">确认(替代策略)检测阳性日期</label>
+          <div class="inlineFormGroup" style="padding-left:15.5em">
+            <nz-date-picker></nz-date-picker>
+          </div>
+        </div>
+        <div nz-col nzSpan="10">
+          <label style="width:14em">确认(替代策略)检测单位</label>
+          <div class="inlineFormGroup" style="padding-left:15.5em">
+            <input nz-input>
+          </div>
+        </div>
+      </div>
+      <div class="modalTitle">
+        <div class="titleTab"></div>确诊信息
+      </div>
+      <div>
+        <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+          <div nz-col nzSpan="8">
+            <label>艾滋病确诊日期</label>
+            <div class="inlineFormGroup">
+              <nz-date-picker></nz-date-picker>
+            </div>
+          </div>
+        </div>
+        <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
+          <div nz-col nzSpan="24">
+            <label>其他</label>
+            <div class="inlineFormGroup">
+              <input nz-input>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <ng-template #modalFooter>
+    <button class="greenPrimaryBtn fl" nz-button nzType="primary" (click)="handleCancel('b')">返回上一页</button>
+    <button nz-button nzType="primary" (click)="handleCancel('submit')">提交</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(false)">取消</button>
+  </ng-template>
+</nz-modal>

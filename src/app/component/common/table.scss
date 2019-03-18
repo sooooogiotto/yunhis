@@ -1,4 +1,4 @@
-.status {
+table .status {
   border-radius: 1em;
   float: left;
   font-size: 12px;
@@ -9,19 +9,19 @@
   margin-left: 0.5rem;
 }
 
-.gray {
+table .gray {
   background: rgba(115, 128, 152, 1);
   color: #fff;
 }
-.orange {
+table .orange {
   background: rgba(255, 153, 0, 1);
   color: #fff;
 }
-.green {
+table .green {
   background: rgba(26, 188, 156, 1);
   color: #fff;
 }
-.blue {
+table .blue {
   background: #2881d4;
   color: #fff;
 }

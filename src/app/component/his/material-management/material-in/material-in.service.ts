@@ -1,9 +1,9 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { HttpErrorHandler, HandleError } from "src/app/http-error-handler.service";
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { ip, ConfigService } from 'src/app/config.service';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { ConfigService, ip } from 'src/app/config.service';
+import { HandleError, HttpErrorHandler } from "src/app/http-error-handler.service";
 import { UtilsService } from 'src/app/utils.service';
 const httpOptions = {
   headers: new HttpHeaders({
@@ -17,15 +17,13 @@ export class MaterialInService {
 
   private handleError: HandleError;
 
-  fixedParam: string = `?site=${this.configService.config.site}&appid=${this.configService.config.appid}&token=${this.configService.config.token}`
-
   materialInUrl = {
     /** 入库列表 */
-    "materialIn/list": `${ip}/service/560/gdentry/list${this.fixedParam}`,
+    "materialIn/list": `${ip}/service/560/gdentry/list${this.configService.fixedParam}`,
     /** 入库列表条数 */
-    "materialIn/count": `${ip}/service/560/gdentry/count${this.fixedParam}`,
+    "materialIn/count": `${ip}/service/560/gdentry/count${this.configService.fixedParam}`,
     /** 入库列表导出 */
-    "materialIn/export": `${ip}/service/560/gdentry/export${this.fixedParam}`,
+    "materialIn/export": `${ip}/service/560/gdentry/export${this.configService.fixedParam}`,
     /** 入库详情 */
     "materialIn": `${ip}/service/560/gdentry`,
     /** 入库单修改 */

@@ -1,9 +1,9 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { HttpErrorHandler, HandleError } from "src/app/http-error-handler.service";
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { ip, ConfigService } from 'src/app/config.service';
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ConfigService, ip } from 'src/app/config.service';
+import { HandleError, HttpErrorHandler } from "src/app/http-error-handler.service";
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -16,13 +16,11 @@ export class MaterialManufactureronaryService {
 
   private handleError: HandleError;
 
-  fixedParam: string = `?site=${this.configService.config.site}&appid=${this.configService.config.appid}&token=${this.configService.config.token}`
-
   manufactureronaryUrl = {
     /** 生产商列表 */
-    "manufactureronary/list": `${ip}/service/560/manufacturer/list${this.fixedParam}`,
+    "manufactureronary/list": `${ip}/service/560/manufacturer/list${this.configService.fixedParam}`,
     /** 生产商列表 */
-    "manufactureronary/count": `${ip}/service/560/manufacturer/count${this.fixedParam}`,
+    "manufactureronary/count": `${ip}/service/560/manufacturer/count${this.configService.fixedParam}`,
     /** 生产商详情 */
     "manufactureronary": `${ip}/service/560/manufacturer`,
     /** 生产商修改 */

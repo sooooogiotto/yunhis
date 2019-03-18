@@ -11,14 +11,18 @@
       <div>
         <span class="gray">卡片编号</span> 201903030022
         <span class="gray" style="margin-left:25px;margin-right:10px;">报卡类别</span>
-        <label nz-radio>初次报告</label>
-        <label nz-radio>订正报告</label>
+        <nz-radio-group [(ngModel)]="isRevised">
+          <label nz-radio nzValue="0">初次报告</label>
+          <label nz-radio nzValue="1">订正报告</label>
+        </nz-radio-group>
       </div>
+
       <div class="modalTitle">
         <div class="titleTab"></div>患者基本信息
       </div>
       <div class="baseInfo">
-        <span class="name">张小飞</span>男<nz-divider nzType="vertical"></nz-divider>12岁
+        <span class="name">张小飞</span>男
+        <nz-divider nzType="vertical"></nz-divider>12岁
         <nz-divider nzType="vertical"></nz-divider>身份证号 3708830229330022
       </div>
       <div nz-row nzJustify="space-between" [nzGutter]="24" class="inline-form-row">
@@ -31,7 +35,9 @@
         <div nz-col nzSpan="8">
           <label><span class="red">*</span>病人属于</label>
           <div class="inlineFormGroup">
-            <nz-select></nz-select>
+            <nz-select>
+              <nz-option [nzLabel]="data" [nzValue]="data" *ngFor="let data of personFrom"></nz-option>
+            </nz-select>
           </div>
         </div>
         <div nz-col nzSpan="8">
@@ -53,35 +59,40 @@
         <div nz-col nzSpan="24">
           <label><span class="red">*</span>现住地址</label>
           <div class="inlineFormGroup address">
-            <nz-select></nz-select>
-            <nz-select></nz-select>
-            <nz-select></nz-select>
-            <input nz-input>
+            <nz-select [(ngModel)]="infection.province" (ngModelChange)="pChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of p"></nz-option>
+            </nz-select>
+            <nz-select [(ngModel)]="infection.city" (ngModelChange)="cChange($event)">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of c[infection.province]"></nz-option>
+            </nz-select>
+            <nz-select [(ngModel)]="infection.area">
+              <nz-option [nzLabel]="item" [nzValue]="item" *ngFor="let item of a[infection.city]"></nz-option>
+            </nz-select>
+            <input nz-input [(ngModel)]="infection.street">
           </div>
         </div>
       </div>
+
       <div class="modalTitle">
         <div class="titleTab"></div>人群分类 <span class="red">*</span>
       </div>
-      <ul class="personGroup">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
+      <nz-checkbox-group [(ngModel)]="personGroup"></nz-checkbox-group>
 
       <div class="modalTitle">
         <div class="titleTab"></div>病例分类
       </div>
-      <div>(1)<label nz-radio style="margin-left:15px;">疑似病例</label>
-        <label nz-radio>临床诊断病例</label>
-        <label nz-radio>确诊病例</label>
-        <label nz-radio>病原携带者</label>
+      <div>(1)<nz-radio-group [(ngModel)]="infection.caseGroup1" style="margin-left:15px;">
+          <label nz-radio nzValue="疑似病例">疑似病例</label>
+          <label nz-radio nzValue="临床诊断病例">临床诊断病例</label>
+          <label nz-radio nzValue="确诊病例">确诊病例</label>
+          <label nz-radio nzValue="病原携带者">病原携带者</label>
+        </nz-radio-group>
+
       </div>
-      <div>(2)<label nz-radio style="margin-left:15px;">急性</label>
-        <label nz-radio>慢性(乙型肝炎、吸血虫、丙肝)</label>
+      <div>(2)<nz-radio-group [(ngModel)]="infection.caseGroup2 " style="margin-left:15px;">
+          <label nz-radio nzValue="急性">急性</label>
+          <label nz-radio nzValue="慢性(乙型肝炎、吸血虫、丙肝)">慢性(乙型肝炎、吸血虫、丙肝)</label>
+        </nz-radio-group>
       </div>
 
 
@@ -99,7 +110,7 @@
               <i nz-icon type="down" theme="outline"></i>
             </a>
           </ng-template>
-          <p>{{panel.name}} content</p>
+          <nz-checkbox-group [(ngModel)]="panel.data" (ngModelChange)="checkSecondeHiv($event)"></nz-checkbox-group>
         </nz-collapse-panel>
       </nz-collapse>
 
@@ -132,19 +143,19 @@
         <div nz-col nzSpan="8">
           <label>订正病名</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [disabled]="!isRevised === '1'">
           </div>
         </div>
         <div nz-col nzSpan="8">
           <label>报告单位</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [disabled]="true">
           </div>
         </div>
         <div nz-col nzSpan="8">
           <label>报告医生</label>
           <div class="inlineFormGroup">
-            <input nz-input>
+            <input nz-input [disabled]="true">
           </div>
         </div>
       </div>
@@ -167,7 +178,13 @@
   </ng-template>
 
   <ng-template #modalFooter>
-    <button nz-button nzType="default" (click)="back()">驳回</button>
-    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel()">取消</button>
+    <span class="gray mr10" *ngIf="isInfectionSecond || isInfectionHiv">乙肝、艾滋病和其他性病需要额外填写附卡</span>
+    <button class="greenPrimaryBtn" *ngIf="isInfectionSecond" nz-button nzType="primary"
+      (click)="handleCancel('b')">继续填写乙肝附卡</button>
+    <button class="greenPrimaryBtn" *ngIf="!isInfectionSecond && isInfectionHiv" nz-button nzType="primary"
+      (click)="handleCancel('hiv')">继续填写艾滋性病附卡</button>
+    <button *ngIf="!isInfectionSecond && !isInfectionHiv" nz-button nzType="primary"
+      (click)="handleCancel('submit')">提交</button>
+    <button class="blueDefaultBtn" nz-button nzType="default" (click)="handleCancel(false)">取消</button>
   </ng-template>
 </nz-modal>
