@@ -2,15 +2,15 @@
   <nz-header>
     <i nz-icon type="bars" theme="outline" class="slideMenuIcon" (click)="isCollapsed=!isCollapsed"></i>
     <div class="logo">
-      <!-- <img class="logoImg" src="../../../../assets/images/u13.png" alt="">
+      <!-- <img class="logoImg" src="src/assets/images/u13.png" alt="">
       <div class="logoTitle">延华医院HIS系统</div>
       <div class="logoDes">Hospital Information System Of YANHUA HOSPITAL</div> -->
-      <img class="logoImg" src="../../../../assets/images/logo.jpg" alt="">
+      <img class="logoImg" src="./assets/images/logo.jpg" alt="">
     </div>
     <div class="userModule">
       <i nz-icon type="bell" theme="fill"></i>
       <i nz-icon type="lock" theme="fill"></i>
-      <img src="../../../../assets/images/photo.png" class="userImg" alt="">
+      <img src="./assets/images/photo.png" class="userImg" alt="">
       <div class="userDetail">
         <span>朱军·呼吸内科</span>
         <i nz-icon type="caret-down" theme="fill"></i>
@@ -43,12 +43,13 @@
           <span title><i nz-icon type="pic-left" theme="outline"></i><span class="nav-text">传染病管理</span></span>
           <ul>
             <li nz-menu-item> <a (click)="onClickMenuList('home/InfectionFillInComponent')">传染病填报</a></li>
+            <li nz-menu-item> <a (click)="onClickMenuList('home/InfectionAuditComponent')">传染病审核</a></li>
           </ul>
         </li>
       </ul>
     </nz-sider>
     <div *ngIf="menuList.length == 0" style="margin: auto;width:240px;">
-      <div><img src="../../../../assets/images/none.png" alt="" style="width:240px;"></div>
+      <div><img src="./assets/images/none.png" alt="" style="width:240px;"></div>
       <div style="text-align:center;font-size: 18px">什么也没有，请点击左侧菜单进行操作</div>
     </div>
     <nz-layout style="padding: 8px 12px;" *ngIf="menuList.length != 0">

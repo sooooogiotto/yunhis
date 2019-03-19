@@ -9,7 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /** 本土化 */
-import { registerLocaleData } from '@angular/common';
+import { registerLocaleData, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import zh from '@angular/common/locales/zh';
 /** 拦截器、错误处理 */
 import { httpInterceptorProviders } from "./http-interceptors/index";
@@ -23,6 +23,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { PageComponent } from './component/common/page/page.component';
 /** 打印 */
 import { EssenceNg2PrintModule } from "essence-ng2-print";
+
 /** hisComponent */
 import { HomePageComponent } from './component/common/home-page/home-page.component';
 import { LoginComponent } from './component/common/login/login.component';
@@ -69,6 +70,8 @@ import { InfectionFillInBCardComponent } from './component/his/infection-managem
 import { InfectionFillInHivCardComponent } from './component/his/infection-management/infection-fill-in/infection-fill-in-hiv-card/infection-fill-in-hiv-card.component';
 import { ConfirmComponent } from './component/common/confirm/confirm.component';
 import { InfectionFillInPrintComponent } from './component/his/infection-management/common/infection-fill-in-print/infection-fill-in-print.component';
+import { InfectionDetailComponent } from './component/his/infection-management/common/infection-detail/infection-detail.component';
+import { InfectionAuditComponent } from './component/his/infection-management/infection-audit/infection-audit.component';
 registerLocaleData(zh);
 
 @NgModule({
@@ -119,7 +122,9 @@ registerLocaleData(zh);
     InfectionFillInBCardComponent,
     InfectionFillInHivCardComponent,
     ConfirmComponent,
-    InfectionFillInPrintComponent
+    InfectionFillInPrintComponent,
+    InfectionDetailComponent,
+    InfectionAuditComponent
   ],
   imports: [
     BrowserModule,
@@ -137,7 +142,9 @@ registerLocaleData(zh);
     CookieService,
     { provide: NZ_I18N, useValue: zh_CN },
     { provide: RequestCache, useClass: RequestCacheWithMap },
-    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
+    { provide: RouteReuseStrategy, useClass: CustomReuseStrategy },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

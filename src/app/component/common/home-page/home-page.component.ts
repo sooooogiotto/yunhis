@@ -22,7 +22,6 @@ export class HomePageComponent implements OnInit {
   currentIndex = -1;
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute) {
-
     // 路由事件
     this.router.events
       .pipe(
@@ -48,7 +47,7 @@ export class HomePageComponent implements OnInit {
         menu.url = this.router.url
         const url = menu.url;
         const exitMenu = this.menuList.find(info => info.url === url);
-        if (!exitMenu && menu.url !== '/home') {// 如果不存在那么不添加，
+        if (!exitMenu && menu.url !== '/home' && menu.url !== '/') {// 如果不存在那么不添加，
           this.menuList.push(menu);
         }
         this.currentIndex = this.menuList.findIndex(p => p.url === url);
@@ -88,7 +87,7 @@ export class HomePageComponent implements OnInit {
     const menu = this.menuList[this.currentIndex];
     // 跳转路由
     this.router.navigate([menu.url]);
-  /*  console.log(menu.url)*/
+    /*  console.log(menu.url)*/
   }
 
   onClickMenuList(data: string) {

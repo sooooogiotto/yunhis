@@ -35,14 +35,18 @@ import { MaterialSupplierComponent } from "./component/his/material-management/m
 /** 传染病管理模块 */
 import { InfectionFillInComponent } from "./component/his/infection-management/infection-fill-in/infection-fill-in.component";
 
+import { InfectionAuditComponent } from "./component/his/infection-management/infection-audit/infection-audit.component";
+
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
     path: 'home', component: HomePageComponent, children: [
       {
         path: 'MaterialInComponent', component: MaterialInComponent, data: {
           title: '材料入库',
           isRemove: true
-        }
+        },
+        loadChildren: 'materialInComponent'
       }, {
         path: 'MaterialOutComponent', component: MaterialOutComponent, data: {
           title: '材料出库',
@@ -109,6 +113,13 @@ const routes: Routes = [
           title: '传染病填报',
           isRemove: true
         }
+      },
+      {
+        path: 'InfectionAuditComponent', component: InfectionAuditComponent, data: {
+          title: '传染病审核',
+          isRemove: true
+        },
+        loadChildren: 'InfectionAuditComponent'
       }
     ]
   }, {
@@ -177,8 +188,19 @@ const routes: Routes = [
       isRemove: true
     }
   },
-  { path: 'login', component: LoginComponent },
-
+  {
+    path: 'InfectionFillInComponent', component: InfectionFillInComponent, data: {
+      title: '传染病填报',
+      isRemove: true
+    }
+  },
+  {
+    path: 'InfectionAuditComponent', component: InfectionAuditComponent, data: {
+      title: '传染病审核',
+      isRemove: true
+    }
+  },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

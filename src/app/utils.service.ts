@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   /** 获取当前时间组装成字符串(不带符号) */
   getDate(): string {

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { HttpParams, HttpClient } from '@angular/common/http';
+import { InfectionFillInService } from './infection-fill-in.service';
 @Component({
   selector: 'app-infection-fill-in',
   templateUrl: './infection-fill-in.component.html',
-  styleUrls: ['./infection-fill-in.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
+  styleUrls: ['./infection-fill-in.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss'],
+  providers: [InfectionFillInService]
 })
 export class InfectionFillInComponent implements OnInit {
   printBtnBoolean: boolean;
@@ -33,11 +35,12 @@ export class InfectionFillInComponent implements OnInit {
   bIsVisible: boolean = false;
   hivIsVisible: boolean = false;
   confirmIsVisible: boolean = false;
+  detailIsVisible: boolean = false;
   /** 构造form表单对象 */
   auditConditionForm: FormGroup = this.fb.group({
-    sid: [''],
-    godownstate: 0,
-    status: 1
+    beginDate: [""],
+    endDate: [""],
+    flag: '1'
   })
   auditedConditionForm: FormGroup = this.fb.group({
     starttime: [''],
@@ -47,20 +50,76 @@ export class InfectionFillInComponent implements OnInit {
     status: 1
   })
   /** 静态数据 */
-  dataSet: object = [{
-    billno: 1,
-    id: 1
-  }];
+  dataSet: object[] = [];
   dataSet1: object = [{
     billno: 1
   }]
   supplierList: [];
   infectionId: string;
-  /** 表单提交时 */
-  findAudit(page: object): void {
 
+  constructor(
+    private fb: FormBuilder,
+    private IniService: InfectionFillInService
+  ) {
+    this.printStyle = this.printStyle =
+      `
+      * {
+        font-size:12px;
+      }
+      .title{
+        text-align:center;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      .titledesc {
+        width: 50%;
+        margin: 0 auto 20px auto;
+        text-align: center;
+      }
+      .titleTab{
+        background: #2881d4;
+        width: 4px;
+        height: 1em;
+        border-radius: 1rem;
+        display: inline-block;
+        margin-right: 4px;
+        position: relative;
+        top: 2px;
+      }
+      .modalTitle {
+        margin: 5px 0 5px 0;
+      }
+      table {
+        width: 100%;
+        color: #333;
+      }
+      span {
+        color: #999;
+        margin-right: 3px;
+      }
+      td {
+        text-align: left;
+      }
+      .firstTable td {
+        width: 25%;
+      }
+      .secondTable td {
+        width: 50%;
+      }
+      .thirdTable td {
+        width:33%;
+      }
+    `
   }
-  getMaterialInCount(): void {
+  /** 表单提交时 */
+  getQueryReport(page?: object): void {
+    this.IniService.getQueryReport(new HttpParams({
+      fromObject: Object.assign(this.auditConditionForm.value, Object.assign(this.page, page))
+    })
+    ).subscribe(data => {
+      console.log(data);
+      this.dataSet = data['data']['records'];
+    })
   }
   /** 表单提交时 */
   findAudited(page: object): void {
@@ -72,6 +131,10 @@ export class InfectionFillInComponent implements OnInit {
   showRecordCard(data: object): void {
     this.infectionId = data['id']
     this.recordIsVisible = true;
+  }
+  /** 弹出查看框 */
+  showDetail(): void {
+    this.detailIsVisible = true;
   }
   /** 关闭审核弹出框 */
   closeCard(isVisible: object): void {
@@ -93,7 +156,11 @@ export class InfectionFillInComponent implements OnInit {
     this.isInfectionHiv = isVisible['isInfectionHiv']
     this.isInfectionSecond = isVisible['isInfectionSecond']
   }
-
+  /** 关闭详情弹出框 */
+  closeDetail(flag: boolean): void {
+    this.detailIsVisible = flag;
+  }
+  /** 关闭确认框 */
   closeConfirm(flag: boolean): void {
     this.confirmIsVisible = false;
     if (flag) {
@@ -101,58 +168,6 @@ export class InfectionFillInComponent implements OnInit {
     }
   }
 
-  constructor(
-    private fb: FormBuilder
-  ) {
-    this.printStyle = this.printStyle =
-      `
-      * {
-        font-size:12px;
-      }
-      .title{
-        text-align:center;
-        font-weight: bold;
-        font-size: 16px;
-      }
-      .titleTab{
-        background: #2881d4;
-        width: 4px;
-        height: 1em;
-        border-radius: 1rem;
-        display: inline-block;
-        margin-right: 4px;
-        position: relative;
-        top: 2px;
-      }
-      table {
-        width: 100%;
-        color: #333;
-      }
-      .baseTable tr td {
-        text-align: left;
-        width: 50%;
-      }
-      
-      .detailTable {
-        border-collapse: collapse;
-      }
-      .detailTable tr th {
-        background-color: rgba(242, 242, 242, 1);
-      }
-      .detailTable tr th,
-      .detailTable tr td{
-        border: 1px solid rgba(228, 228, 228, 1);
-        text-align:left;
-        padding: 8px 0 8px 10px;
-        font-weight:400;
-      }
-      .baseTable,
-      .detailTable,
-      .personTable{
-        margin-top:20px;
-      }
-    `
-  }
 
   printComplete() {
     this.printBtnBoolean = true;
@@ -162,8 +177,6 @@ export class InfectionFillInComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.page['pagenum'] = 10000;
-
+    this.getQueryReport()
   }
-
 }
