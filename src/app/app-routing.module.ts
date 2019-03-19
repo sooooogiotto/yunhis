@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
 /** common模块 */
 import { HomePageComponent } from "./component/common/home-page/home-page.component";
 import { LoginComponent } from "./component/common/login/login.component";
@@ -35,172 +35,113 @@ import { MaterialSupplierComponent } from "./component/his/material-management/m
 /** 传染病管理模块 */
 import { InfectionFillInComponent } from "./component/his/infection-management/infection-fill-in/infection-fill-in.component";
 
-import { InfectionAuditComponent } from "./component/his/infection-management/infection-audit/infection-audit.component";
+import { HomeModule } from './component/common/home/home.module';
+//import { HomePageModule } from './component/common/home-page/home-page.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'home', component: HomePageComponent, children: [
-      {
-        path: 'MaterialInComponent', component: MaterialInComponent, data: {
-          title: '材料入库',
-          isRemove: true
-        },
-        loadChildren: 'materialInComponent'
-      }, {
-        path: 'MaterialOutComponent', component: MaterialOutComponent, data: {
-          title: '材料出库',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialInAuditComponent', component: MaterialInAuditComponent, data: {
-          title: '材料入库审核',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialPriceComponent', component: MaterialPriceComponent, data: {
-          title: '材料调价',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialPriceAuditComponent', component: MaterialPriceAuditComponent, data: {
-          title: '材料调价审核',
-          isRemove: true
-        }
-      }, {
-        path: 'InventoryManagementComponent', component: InventoryManagementComponent, data: {
-          title: '库存管理',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialReceiveComponent', component: MaterialReceiveComponent, data: {
-          title: '材料领取确认',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialApplyComponent', component: MaterialApplyComponent, data: {
-          title: '材料申领',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialCheckComponent', component: MaterialCheckComponent, data: {
-          title: '材料盘点',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialCheckAuditComponent', component: MaterialCheckAuditComponent, data: {
-          title: '材料盘点审核',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialDictionaryComponent', component: MaterialDictionaryComponent, data: {
-          title: '材料字典',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialManufactureronaryComponent', component: MaterialManufactureronaryComponent, data: {
-          title: '生产厂商维护',
-          isRemove: true
-        }
-      }, {
-        path: 'MaterialSupplierComponent', component: MaterialSupplierComponent, data: {
-          title: '供应商维护',
-          isRemove: true
-        }
-      },
-      {
-        path: 'InfectionFillInComponent', component: InfectionFillInComponent, data: {
-          title: '传染病填报',
-          isRemove: true
-        }
-      },
-      {
-        path: 'InfectionAuditComponent', component: InfectionAuditComponent, data: {
-          title: '传染病审核',
-          isRemove: true
-        },
-        loadChildren: 'InfectionAuditComponent'
-      }
-    ]
-  }, {
-    path: 'MaterialInComponent', component: MaterialInComponent, data: {
-      title: '材料入库',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialOutComponent', component: MaterialOutComponent, data: {
-      title: '材料出库',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialInAuditComponent', component: MaterialInAuditComponent, data: {
-      title: '材料入库审核',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialPriceComponent', component: MaterialPriceComponent, data: {
-      title: '材料调价',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialPriceAuditComponent', component: MaterialPriceAuditComponent, data: {
-      title: '材料调价审核',
-      isRemove: true
-    }
-  }, {
-    path: 'InventoryManagementComponent', component: InventoryManagementComponent, data: {
-      title: '库存管理',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialReceiveComponent', component: MaterialReceiveComponent, data: {
-      title: '材料领取确认',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialApplyComponent', component: MaterialApplyComponent, data: {
-      title: '材料申领',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialCheckComponent', component: MaterialCheckComponent, data: {
-      title: '材料盘点',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialCheckAuditComponent', component: MaterialCheckAuditComponent, data: {
-      title: '材料盘点审核',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialDictionaryComponent', component: MaterialDictionaryComponent, data: {
-      title: '材料字典',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialManufactureronaryComponent', component: MaterialManufactureronaryComponent, data: {
-      title: '生产厂商维护',
-      isRemove: true
-    }
-  }, {
-    path: 'MaterialSupplierComponent', component: MaterialSupplierComponent, data: {
-      title: '供应商维护',
-      isRemove: true
-    }
+    path: 'home',
+    loadChildren: './component/common/home/home.module#HomeModule'
   },
   {
-    path: 'InfectionFillInComponent', component: InfectionFillInComponent, data: {
+    path: 'InfectionFillInComponent', loadChildren: './component/his/infection-management/infection-fillin/infection-fillin.module#InfectionFillinModule', data: {
       title: '传染病填报',
       isRemove: true
     }
   },
   {
-    path: 'InfectionAuditComponent', component: InfectionAuditComponent, data: {
+    path: 'InfectionAuditComponent', loadChildren: './component/his/infection-management/infection-audit/infection-audit.module#InfectionAuditModule', data: {
       title: '传染病审核',
       isRemove: true
     }
   },
-  { path: 'login', component: LoginComponent }
+  {
+    path: '',
+    redirectTo: 'InfectionFillInComponent',
+    pathMatch: 'full'
+  }
+  // { path: '', redirectTo: 'home', pathMatch: 'full' },
+  // {
+  //   path: 'home', component: HomePageComponent, children: []
+  // }, {
+  //   path: 'MaterialInComponent', component: MaterialInComponent, data: {
+  //     title: '材料入库',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialOutComponent', component: MaterialOutComponent, data: {
+  //     title: '材料出库',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialInAuditComponent', component: MaterialInAuditComponent, data: {
+  //     title: '材料入库审核',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialPriceComponent', component: MaterialPriceComponent, data: {
+  //     title: '材料调价',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialPriceAuditComponent', component: MaterialPriceAuditComponent, data: {
+  //     title: '材料调价审核',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'InventoryManagementComponent', component: InventoryManagementComponent, data: {
+  //     title: '库存管理',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialReceiveComponent', component: MaterialReceiveComponent, data: {
+  //     title: '材料领取确认',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialApplyComponent', component: MaterialApplyComponent, data: {
+  //     title: '材料申领',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialCheckComponent', component: MaterialCheckComponent, data: {
+  //     title: '材料盘点',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialCheckAuditComponent', component: MaterialCheckAuditComponent, data: {
+  //     title: '材料盘点审核',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialDictionaryComponent', component: MaterialDictionaryComponent, data: {
+  //     title: '材料字典',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialManufactureronaryComponent', component: MaterialManufactureronaryComponent, data: {
+  //     title: '生产厂商维护',
+  //     isRemove: true
+  //   }
+  // }, {
+  //   path: 'MaterialSupplierComponent', component: MaterialSupplierComponent, data: {
+  //     title: '供应商维护',
+  //     isRemove: true
+  //   }
+  // },
+  // {
+  //   path: 'InfectionFillInComponent', component: InfectionFillInComponent, data: {
+  //     title: '传染病填报',
+  //     isRemove: true
+  //   }
+  // },
+  // {
+  //   path: 'InfectionAuditComponent', component: InfectionAuditComponent, data: {
+  //     title: '传染病审核',
+  //     isRemove: true
+  //   }
+  // },
+  // { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

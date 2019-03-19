@@ -1,0 +1,233 @@
+<div class="childrenContainer fillin">
+  <nz-tabset>
+    <nz-tab nzTitle="{{'待审核(' + page.pageCount + ')'}}">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm1">
+        <nz-form-item>
+          <nz-form-label>诊断时间</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>来源</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 177px;"></nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default" (click)="findAudit()">查询</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <nz-table [nzData]="dataSet" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>年龄</th>
+            <th>诊断</th>
+            <th>诊断时间</th>
+            <th>诊断医生</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataSet">
+            <td>{{data.billno}}</td>
+            <td>{{data.godowntime}}</td>
+            <td>{{data.suppliername}}</td>
+            <td>
+              {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
+            </td>
+            <td>{{data.bidtotal}}</td>
+            <td>{{data.retailtotal}}</td>
+            <td>
+              <div *ngIf="data.godownstate == '0'" class="status gray">
+                待填报
+              </div>
+              <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right"
+                nz-tooltip>
+                被驳回</div>
+            </td>
+            <td>
+              <a (click)="showRecordCard(data)">填报</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <essence-ng2-print [mode]="'popup'" [popTitle]="'打印'" [btnText]="'打印'" [btnClass]="{'a': true }"
+                [printHTML]="print" [printStyle]="printStyle" [printCSS]="printCSS" (click)="beforePrint()"
+                (printComplete)="printComplete()">
+              </essence-ng2-print>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <app-page [page]="page" (changePage)="findAudit($event)"></app-page>
+    </nz-tab>
+    <nz-tab nzTitle="{{'已审核(' + page.pageCount + ')'}}">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm2">
+        <nz-form-item>
+          <nz-form-label>诊断时间</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>来源</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 177px;"></nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default" (click)="findAudited()">查询</button>
+            <button nz-button nzType="primary" (click)="findAudited()">导出</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <nz-table [nzData]="dataSet1" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>单据号</th>
+            <th>入库日期</th>
+            <th>供货商</th>
+            <th>入库种类</th>
+            <th>中标金额</th>
+            <th>零售金额</th>
+            <th>入库人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataSet1">
+            <td>{{data.billno}}</td>
+            <td>{{data.godowntime}}</td>
+            <td>{{data.suppliername}}</td>
+            <td>
+              {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
+            </td>
+            <td>{{data.bidtotal}}</td>
+            <td>{{data.retailtotal}}</td>
+            <td>{{data.originatorname}}</td>
+            <td>
+              <div *ngIf="data.godownstate == '1'" class="status gray">
+                待审核
+              </div>
+              <div *ngIf="data.godownstate == '2'" class="status blue">
+                通过
+              </div>
+              <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right"
+                nz-tooltip>
+                被驳回</div>
+            </td>
+            <td>
+              <a (click)="showDetail()">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <essence-ng2-print [mode]="'popup'" [popTitle]="'打印'" [btnText]="'打印'" [btnClass]="{'a': true }"
+                [printHTML]="print" [printStyle]="printStyle" [printCSS]="printCSS" (click)="beforePrint()"
+                (printComplete)="printComplete()">
+              </essence-ng2-print>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <app-page [page]="paged" (changePage)="findAudited($event)"></app-page>
+    </nz-tab>
+    <nz-tab nzTitle="{{'科室未填报(' + page.pageCount + ')'}}">
+      <form nz-form [nzLayout]="'inline'" [formGroup]="conditionForm3">
+        <nz-form-item>
+          <nz-form-label>诊断时间</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <span class="formDateCenterSpan">至</span>
+        <nz-form-item>
+          <nz-form-control>
+            <nz-date-picker></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label>来源</nz-form-label>
+          <nz-form-control>
+            <nz-select style="width: 177px;"></nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control>
+            <button class="blueDefaultBtn" nz-button nzType="default" (click)="findAudited()">查询</button>
+            <button nz-button nzType="primary" (click)="findAudited()">导出</button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+      <nz-table [nzData]="dataSet2" nzBordered [nzShowPagination]="false">
+        <thead>
+          <tr>
+            <th>单据号</th>
+            <th>入库日期</th>
+            <th>供货商</th>
+            <th>入库种类</th>
+            <th>中标金额</th>
+            <th>零售金额</th>
+            <th>入库人</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of dataSet2">
+            <td>{{data.billno}}</td>
+            <td>{{data.godowntime}}</td>
+            <td>{{data.suppliername}}</td>
+            <td>
+              {{data.godowntype == '0' ? '未知' : data.godowntype == '1' ? '采购入库' : data.godowntype == '2' ? '新增入库' : '第三方入库'}}
+            </td>
+            <td>{{data.bidtotal}}</td>
+            <td>{{data.retailtotal}}</td>
+            <td>{{data.originatorname}}</td>
+            <td>
+              <div *ngIf="data.godownstate == '1'" class="status gray">
+                待审核
+              </div>
+              <div *ngIf="data.godownstate == '2'" class="status blue">
+                通过
+              </div>
+              <div *ngIf="data.godownstate == '3'" class="status orange" nzTitle="驳回原因: 不通过" nzPlacement="right"
+                nz-tooltip>
+                被驳回</div>
+            </td>
+            <td>
+              <a (click)="showDetail()">查看</a>
+              <nz-divider nzType="vertical"></nz-divider>
+              <essence-ng2-print [mode]="'popup'" [popTitle]="'打印'" [btnText]="'打印'" [btnClass]="{'a': true }"
+                [printHTML]="print" [printStyle]="printStyle" [printCSS]="printCSS" (click)="beforePrint()"
+                (printComplete)="printComplete()">
+              </essence-ng2-print>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+      <app-page [page]="paged" (changePage)="findAudited($event)"></app-page>
+    </nz-tab>
+  </nz-tabset>
+  <app-infection-detail [infectionId]="infectionId" [detailIsVisible]="detailIsVisible"
+    (closeDetail)="closeDetail($event)"></app-infection-detail>
+  <!--<app-confirm [confirmContent]="confirmContent" [confirmIsVisible]="confirmIsVisible"
+    (closeConfirm)="closeConfirm($event)"></app-confirm>
+   <div #print>
+    <app-infection-print></app-infection-print>
+  </div> -->
+</div>

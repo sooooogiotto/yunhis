@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-infection-audit',
   templateUrl: './infection-audit.component.html',
-  styleUrls: ['./infection-audit.component.scss', '../../../common/form.scss', '../../../common/table.scss', '../../../common/page.scss']
+  styleUrls: ['./infection-audit.component.scss', '../../../../common/form.scss', '../../../../common/table.scss', '../../../../common/page.scss']
 })
 export class InfectionAuditComponent implements OnInit {
   printBtnBoolean: boolean;
